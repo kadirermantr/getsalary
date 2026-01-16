@@ -1,24 +1,23 @@
 import { useState } from 'react';
-import { Link, useParams, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ThemeToggle } from '../ui/ThemeToggle';
 import { LanguageSwitch } from '../ui/LanguageSwitch';
 
 export function Header() {
   const { t } = useTranslation();
-  const { lang = 'tr' } = useParams();
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { path: `/${lang}`, label: t('nav.home') },
-    { path: `/${lang}/dashboard`, label: t('nav.dashboard') },
-    { path: `/${lang}/about`, label: t('nav.about') },
+    { path: '/', label: t('nav.home') },
+    { path: '/dashboard', label: t('nav.dashboard') },
+    { path: '/about', label: t('nav.about') },
   ];
 
   const isActive = (path) => {
-    if (path === `/${lang}`) {
-      return location.pathname === path;
+    if (path === '/') {
+      return location.pathname === '/';
     }
     return location.pathname.startsWith(path);
   };
@@ -28,7 +27,7 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to={`/${lang}`} className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2">
             <span className="font-mono text-xl font-bold text-[var(--accent)]">
               getSalary()
             </span>

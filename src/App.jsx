@@ -37,14 +37,7 @@ function App() {
         <DataProvider>
           <FilterProvider>
             <Routes>
-          {/* Redirect root to default language */}
-          <Route path="/" element={<Navigate to="/tr" replace />} />
-
-          {/* Language-prefixed routes */}
-          <Route path="/:lang/*" element={<AppLayout />} />
-
-          {/* Catch-all for invalid routes */}
-          <Route path="*" element={<Navigate to="/tr" replace />} />
+              <Route path="/*" element={<AppLayout />} />
             </Routes>
           </FilterProvider>
         </DataProvider>
