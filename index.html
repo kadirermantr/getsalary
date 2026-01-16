@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary Meta Tags -->
+    <title>getSalary() - Yazılım Sektörü Maaş Analizi</title>
+    <meta name="title" content="getSalary() - Yazılım Sektörü Maaş Analizi" />
+    <meta name="description" content="Türkiye yazılım sektöründeki maaş trendlerini keşfedin. 5 yıllık veri, binlerce katılımcı. Track. Compare. Grow." />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://getsalary.dev/" />
+    <meta property="og:title" content="getSalary() - Yazılım Sektörü Maaş Analizi" />
+    <meta property="og:description" content="Türkiye yazılım sektöründeki maaş trendlerini keşfedin. 5 yıllık veri, binlerce katılımcı." />
+    <meta property="og:image" content="https://getsalary.dev/og-image.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://getsalary.dev/" />
+    <meta property="twitter:title" content="getSalary() - Yazılım Sektörü Maaş Analizi" />
+    <meta property="twitter:description" content="Türkiye yazılım sektöründeki maaş trendlerini keşfedin. 5 yıllık veri, binlerce katılımcı." />
+    <meta property="twitter:image" content="https://getsalary.dev/og-image.png" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+    <!-- Theme color -->
+    <meta name="theme-color" content="#3b82f6" />
+
+    <!-- Prevent flash of unstyled content for dark mode -->
+    <script>
+      (function() {
+        const theme = localStorage.getItem('theme');
+        if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

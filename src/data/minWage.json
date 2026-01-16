@@ -1,0 +1,14 @@
+{
+  "data": [
+    { "year": 2021, "period": 1, "net": 2825.90, "gross": 3577.50 },
+    { "year": 2022, "period": 1, "net": 4253.40, "gross": 5004.00 },
+    { "year": 2022, "period": 2, "net": 5500.35, "gross": 6471.00 },
+    { "year": 2023, "period": 1, "net": 8506.80, "gross": 10008.00 },
+    { "year": 2023, "period": 2, "net": 11402.32, "gross": 13414.50 },
+    { "year": 2024, "period": 1, "net": 17002.12, "gross": 20002.50 },
+    { "year": 2025, "period": 1, "net": 22104.67, "gross": 26005.50 },
+    { "year": 2026, "period": 1, "net": 28075.50, "gross": 33003.00 }
+  ],
+  "source": "Çalışma ve Sosyal Güvenlik Bakanlığı, Resmi Gazete",
+  "lastUpdated": "2026-01-01"
+}
