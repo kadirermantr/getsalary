@@ -3,7 +3,7 @@ export function PageContainer({ children, className = '', size = 'default' }) {
 
   return (
     <div className="min-h-screen bg-[var(--bg-primary)]">
-      <div className={`${maxWidthClass} mx-auto px-4 sm:px-6 lg:px-8 py-12 ${className}`}>
+      <div className={`${maxWidthClass} mx-auto px-4 sm:px-6 lg:px-8 py-8 ${className}`}>
         {children}
       </div>
     </div>

@@ -16,7 +16,7 @@ import { formatSalary, formatNumber } from '../utils/calculations';
 
 export function Dashboard() {
   const { t } = useTranslation();
-  const { getYearStats, dataSources } = useData();
+  const { getYearStats } = useData();
   const { filters, activeFilterCount } = useFilters();
 
   const currentStats = getYearStats(filters.year, filters);
@@ -104,21 +104,6 @@ export function Dashboard() {
               </div>
             </div>
 
-            {/* Data Source Attribution */}
-            <div className="mt-8 p-4 bg-[var(--bg-secondary)] rounded-xl">
-              <p className="text-sm text-[var(--text-secondary)] text-center">
-                {t('footer.dataSource')}:{' '}
-                <a
-                  href="https://www.linkedin.com/in/oncekiyazilimci/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[var(--accent)]"
-                >
-                  @oncekiyazilimci
-                </a>
-                {' '}{t('dashboard.surveyTitle')} {filters.year} - {formatNumber(dataSources[filters.year]?.participants)} {t('dashboard.participants').toLowerCase()}
-              </p>
-            </div>
           </main>
         </div>
       </div>

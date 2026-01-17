@@ -13,7 +13,7 @@ import { useData } from '../../context/DataContext';
 import { useFilters } from '../../context/FilterContext';
 import { CHART_COLOR_ARRAY } from '../../data/config';
 import { formatSalary } from '../../utils/calculations';
-import { Card } from '../ui/Card';
+import { Card, ChartIcons } from '../ui/Card';
 
 export function SalaryByExperience({ year }) {
   const { t } = useTranslation();
@@ -22,7 +22,7 @@ export function SalaryByExperience({ year }) {
 
   if (loading) {
     return (
-      <Card title={t('charts.salaryByExperience')} icon="📈">
+      <Card title={t('charts.salaryByExperience')} icon={ChartIcons.experience}>
         <div className="h-64 flex items-center justify-center">
           <p className="text-[var(--text-secondary)]">{t('common.loading')}</p>
         </div>
@@ -33,7 +33,7 @@ export function SalaryByExperience({ year }) {
   const stats = getYearStats(year, filters);
   if (!stats?.byExperience) {
     return (
-      <Card title={t('charts.salaryByExperience')} icon="📈">
+      <Card title={t('charts.salaryByExperience')} icon={ChartIcons.experience}>
         <div className="h-64 flex items-center justify-center">
           <p className="text-[var(--text-secondary)]">{t('common.noData')}</p>
         </div>
@@ -74,7 +74,7 @@ export function SalaryByExperience({ year }) {
   };
 
   return (
-    <Card title={t('charts.salaryByExperience')} icon="📈">
+    <Card title={t('charts.salaryByExperience')} icon={ChartIcons.experience}>
       <div className="h-72">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>

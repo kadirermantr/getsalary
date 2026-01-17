@@ -17,19 +17,14 @@ export function About() {
     <PageContainer size="narrow">
       <PageHeader title={t('about.title')} />
 
-      {/* Mission */}
-      <section className="mb-12">
-        <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-4">
-          {t('about.mission')}
-        </h2>
-        <p className="text-[var(--text-secondary)] leading-relaxed">
-          {t('about.missionDesc')}
-        </p>
-      </section>
+      {/* Mission Text */}
+      <p className="text-[var(--text-secondary)] leading-relaxed mb-8">
+        {t('about.missionDesc')}
+      </p>
 
       {/* Data Sources */}
       <section className="mb-12">
-        <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-4">
+        <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-3">
           {t('about.dataSources')}
         </h2>
         <p className="text-[var(--text-secondary)] mb-6">
@@ -88,7 +83,7 @@ export function About() {
 
       {/* Methodology */}
       <section className="mb-12">
-        <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-4">
+        <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-3">
           {t('about.methodology')}
         </h2>
         <div className="space-y-4 text-[var(--text-secondary)]">
@@ -104,7 +99,7 @@ export function About() {
 
       {/* Tech Stack */}
       <section className="mb-12">
-        <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-4">
+        <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-3">
           Tech Stack
         </h2>
         <div className="flex flex-wrap gap-2">
@@ -121,7 +116,7 @@ export function About() {
 
       {/* Developer */}
       <section className="mb-12">
-        <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-4">
+        <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-3">
           {t('about.developer')}
         </h2>
         <p className="text-[var(--text-secondary)]">

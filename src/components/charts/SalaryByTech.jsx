@@ -11,7 +11,7 @@ import {
 } from 'recharts';
 import { CHART_COLOR_ARRAY } from '../../data/config';
 import { formatSalary } from '../../utils/calculations';
-import { Card } from '../ui/Card';
+import { Card, ChartIcons } from '../ui/Card';
 
 // Sample technology salary data (will be replaced with real data)
 const sampleTechData = {
@@ -76,7 +76,7 @@ export function SalaryByTech({ year }) {
   };
 
   return (
-    <Card title={t('charts.salaryByTech')} icon="⚡">
+    <Card title={t('charts.salaryByTech')} icon={ChartIcons.tech}>
       <div className="h-72">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} layout="vertical" margin={{ left: 10, right: 20 }}>

@@ -5,7 +5,7 @@ const resources = {
   tr: {
     translation: {
       nav: {
-        home: 'Ana Sayfa',
+        home: 'Anasayfa',
         dashboard: 'Dashboard',
         about: 'Hakkında',
       },
@@ -94,6 +94,7 @@ const resources = {
       },
       about: {
         title: 'Hakkında',
+        subtitle: 'Şeffaflık için açık kaynak.',
         description: 'getSalary, Türkiye yazılım sektöründeki maaş verilerini analiz eden açık kaynak bir projedir.',
         dataSources: 'Veri Kaynakları',
         methodology: 'Metodoloji',
@@ -222,6 +223,7 @@ const resources = {
       },
       about: {
         title: 'About',
+        subtitle: 'Open source for transparency.',
         description: 'getSalary is an open-source project analyzing salary data in the Turkish software industry.',
         dataSources: 'Data Sources',
         methodology: 'Methodology',
