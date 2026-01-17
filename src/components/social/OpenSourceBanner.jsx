@@ -5,9 +5,6 @@ export function OpenSourceBanner({ className = '' }) {
 
   return (
     <div className={`relative bg-gradient-to-r from-[var(--accent)]/10 to-purple-500/10 rounded-2xl p-8 border border-[var(--accent)]/20 overflow-hidden ${className}`}>
-      {/* Background code */}
-      <span className="absolute -right-4 -top-4 text-[var(--accent)]/5 text-8xl font-mono font-bold pointer-events-none">{'{ }'}</span>
-
       <div className="relative text-center">
         <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-3">
           {t('home.openSourceTitle')}

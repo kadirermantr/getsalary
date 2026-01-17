@@ -61,10 +61,10 @@ export function MinWageMultiplier() {
           {t('charts.multiplier')}: {item?.multiplier}x
         </p>
         <p className="text-sm text-[var(--text-secondary)]">
-          {t('charts.median')}: {item?.medianSalary?.toLocaleString('tr-TR')} TL
+          {t('charts.median')}: ₺{item?.medianSalary?.toLocaleString('tr-TR')}
         </p>
         <p className="text-sm text-[var(--text-secondary)]">
-          {t('charts.minWage')}: {item?.minWage?.toLocaleString('tr-TR')} TL
+          {t('charts.minWage')}: ₺{item?.minWage?.toLocaleString('tr-TR')}
         </p>
       </div>
     );
@@ -72,7 +72,7 @@ export function MinWageMultiplier() {
 
   return (
     <Card title={t('charts.minWageMultiplier')} icon={ChartIcons.multiplier}>
-      <div className="h-72 cursor-pointer">
+      <div className="h-72">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={data} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="var(--bg-secondary)" />

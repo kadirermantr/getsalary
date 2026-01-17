@@ -13,7 +13,7 @@ const resources = {
       hero: {
         title: 'Yazılım Sektörü Maaş Analizi',
         subtitle: 'return insights;',
-        description: 'Türkiye yazılım sektöründeki maaş trendlerini keşfedin. Binlerce katılımcı, açık kaynak.',
+        description: 'Türkiye yazılım sektöründeki maaş trendlerini keşfedin.',
         cta: "Dashboard'u Keşfet",
         codeComment: 'Türkiye yazılım sektörü maaş verileri',
         stats: {
@@ -203,7 +203,7 @@ const resources = {
       hero: {
         title: 'Software Industry Salary Analysis',
         subtitle: 'return insights;',
-        description: "Explore salary trends in Türkiye's software industry. Thousands of participants, open source.",
+        description: "Explore salary trends in Türkiye's software industry.",
         cta: 'Explore Dashboard',
         codeComment: "Türkiye's software industry salary data",
         stats: {

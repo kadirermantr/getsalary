@@ -18,7 +18,7 @@ export function About() {
         />
 
         {/* Methodology */}
-        <section className="mb-8">
+        <section className="mb-12">
           <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-4">
             {t('about.methodology')}
           </h2>
@@ -34,7 +34,7 @@ export function About() {
         </section>
 
         {/* FAQ */}
-        <section className="mb-8">
+        <section className="mb-12">
           <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-4">
             {t('about.faq')}
           </h2>
@@ -44,7 +44,7 @@ export function About() {
         </section>
 
         {/* Tech Stack */}
-        <section className="mb-8">
+        <section className="mb-12">
           <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-4">
             Tech Stack
           </h2>

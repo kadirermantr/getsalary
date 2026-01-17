@@ -14,11 +14,11 @@ import {
 import { useData } from '../../context/DataContext';
 import { useFilters } from '../../context/FilterContext';
 import { YEARS, CHART_COLOR_ARRAY } from '../../data/config';
-import { formatSalary, calculateGrowthRate } from '../../utils/calculations';
+import { formatSalary, calculateGrowthRate, formatPercentage } from '../../utils/calculations';
 import { Card, ChartIcons } from '../ui/Card';
 
 export function YearComparison() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { getYearStats, loading } = useData();
   const { filters } = useFilters();
 
@@ -94,8 +94,7 @@ export function YearComparison() {
         ))}
         {item && (
           <p className={`text-sm font-medium mt-1 ${growthColor}`}>
-            {t('yearComparison.growth')}: {item.growth >= 0 ? '+' : ''}
-            {item.growth.toFixed(1)}%
+            {t('yearComparison.growth')}: {formatPercentage(item.growth, 1, i18n.language)}
           </p>
         )}
       </div>
@@ -110,9 +109,6 @@ export function YearComparison() {
       {/* Year Selectors */}
       <div className="flex flex-wrap items-center gap-4 mb-4">
         <div className="flex items-center gap-2">
-          <label className="text-sm text-[var(--text-secondary)]">
-            {t('yearComparison.selectYear1')}:
-          </label>
           <select
             value={year1}
             onChange={(e) => setYear1(Number(e.target.value))}
@@ -126,12 +122,9 @@ export function YearComparison() {
           </select>
         </div>
 
-        <span className="text-[var(--text-secondary)]">vs</span>
+        <span className="text-sm text-[var(--text-secondary)]">vs</span>
 
         <div className="flex items-center gap-2">
-          <label className="text-sm text-[var(--text-secondary)]">
-            {t('yearComparison.selectYear2')}:
-          </label>
           <select
             value={year2}
             onChange={(e) => setYear2(Number(e.target.value))}
@@ -147,14 +140,13 @@ export function YearComparison() {
 
         {/* Overall Growth Badge */}
         <div
-          className={`ml-auto px-3 py-1 rounded-full text-sm font-medium ${
+          className={`px-3 py-1 rounded-full text-sm font-medium ${
             overallGrowth >= 0
               ? 'bg-green-500/10 text-green-500'
               : 'bg-red-500/10 text-red-500'
           }`}
         >
-          {t('charts.median')}: {overallGrowth >= 0 ? '+' : ''}
-          {overallGrowth.toFixed(1)}%
+          {t('charts.median')}: {formatPercentage(overallGrowth, 1, i18n.language)}
         </div>
       </div>
 

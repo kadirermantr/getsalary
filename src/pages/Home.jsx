@@ -80,16 +80,6 @@ export function Home() {
 
   return (
     <div className="min-h-[calc(100vh-4rem)] relative">
-      {/* Floating Code Elements - Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none select-none">
-        <span className="absolute top-20 left-[10%] text-[var(--accent)]/10 text-6xl font-mono font-bold">{'{ }'}</span>
-        <span className="absolute top-40 right-[15%] text-purple-500/10 text-5xl font-mono font-bold">{'( )'}</span>
-        <span className="absolute top-[60%] left-[5%] text-emerald-500/10 text-4xl font-mono font-bold">{'=>'}</span>
-        <span className="absolute top-[70%] right-[10%] text-amber-500/10 text-5xl font-mono font-bold">{'</>'}</span>
-        <span className="absolute top-[30%] left-[80%] text-[var(--accent)]/10 text-3xl font-mono">{'const'}</span>
-        <span className="absolute top-[50%] left-[3%] text-purple-500/10 text-3xl font-mono">{'return'}</span>
-      </div>
-
       {/* Hero Section */}
       <section className="relative">
         {/* Dot Grid Pattern */}

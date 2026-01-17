@@ -218,9 +218,16 @@ export function formatNumber(value, locale = 'tr-TR') {
  * Format percentage
  * @param {number} value - Percentage value
  * @param {number} decimals - Number of decimal places
+ * @param {string} locale - Locale string (tr or en)
  * @returns {string} Formatted percentage string
  */
-export function formatPercentage(value, decimals = 1) {
-  if (!value || isNaN(value)) return '—';
-  return `${value >= 0 ? '+' : ''}${value.toFixed(decimals)}%`;
+export function formatPercentage(value, decimals = 1, locale = 'tr') {
+  if (value === null || value === undefined || isNaN(value)) return '—';
+  const absNum = Math.abs(value).toFixed(decimals);
+  const sign = value >= 0 ? '+' : '-';
+  // Turkish: +%51.2 or -%51.2, English: +51.2% or -51.2%
+  if (locale === 'tr') {
+    return `${sign}%${absNum}`;
+  }
+  return `${sign}${absNum}%`;
 }

@@ -17,7 +17,7 @@ import { formatSalary, formatPercentage } from '../../utils/calculations';
 import { Card, ChartIcons } from '../ui/Card';
 
 export function InflationComparison() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { getYearStats, loading } = useData();
   const { filters } = useFilters();
 
@@ -79,13 +79,13 @@ export function InflationComparison() {
       <div className="bg-[var(--bg-primary)] border border-[var(--bg-secondary)] rounded-lg p-3 shadow-lg">
         <p className="font-semibold text-[var(--text-primary)] mb-2">{label}</p>
         <p className="text-sm" style={{ color: CHART_COLOR_ARRAY[1] }}>
-          {t('charts.salaryGrowth')}: {formatPercentage(item?.salaryGrowth)}
+          {t('charts.salaryGrowth')}: {formatPercentage(item?.salaryGrowth, 1, i18n.language)}
         </p>
         <p className="text-sm" style={{ color: CHART_COLOR_ARRAY[3] }}>
-          {t('charts.inflation')}: {formatPercentage(item?.inflation)}
+          {t('charts.inflation')}: {formatPercentage(item?.inflation, 1, i18n.language)}
         </p>
         <p className="text-sm font-semibold" style={{ color: item?.realGrowth >= 0 ? CHART_COLOR_ARRAY[1] : CHART_COLOR_ARRAY[3] }}>
-          {t('charts.realGrowth')}: {formatPercentage(item?.realGrowth)}
+          {t('charts.realGrowth')}: {formatPercentage(item?.realGrowth, 1, i18n.language)}
         </p>
         <p className="text-sm text-[var(--text-secondary)] mt-1">
           {t('charts.median')}: {formatSalary(item?.medianSalary)}
@@ -96,7 +96,7 @@ export function InflationComparison() {
 
   return (
     <Card title={t('charts.inflationComparison')} icon={ChartIcons.inflation}>
-      <div className="h-72 cursor-pointer">
+      <div className="h-72">
         <ResponsiveContainer width="100%" height="100%">
           <ComposedChart data={data} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="var(--bg-secondary)" />

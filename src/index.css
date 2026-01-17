@@ -63,10 +63,18 @@ html {
   border: none;
 }
 
-/* Recharts cursor pointer */
+/* Recharts styles */
 .recharts-wrapper,
 .recharts-surface {
   cursor: pointer !important;
+  outline: none !important;
+}
+
+.recharts-wrapper:focus,
+.recharts-wrapper:focus-visible,
+.recharts-surface:focus,
+.recharts-surface:focus-visible {
+  outline: none !important;
 }
 
 /* Shimmer animation for skeletons */

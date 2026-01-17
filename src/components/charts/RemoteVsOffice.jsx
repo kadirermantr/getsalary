@@ -92,7 +92,7 @@ export function RemoteVsOffice({ year }) {
 
   return (
     <Card title={t('charts.remoteVsOffice')} icon={ChartIcons.remote}>
-      <div className="h-72 cursor-pointer">
+      <div className="h-72">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="var(--bg-secondary)" />

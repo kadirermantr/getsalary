@@ -77,7 +77,7 @@ export function SalaryByTech({ year }) {
 
   return (
     <Card title={t('charts.salaryByTech')} icon={ChartIcons.tech}>
-      <div className="h-72 cursor-pointer">
+      <div className="h-72">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} layout="vertical" margin={{ left: 10, right: 20 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="var(--bg-secondary)" />
