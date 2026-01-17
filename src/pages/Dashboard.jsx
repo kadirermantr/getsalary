@@ -23,14 +23,16 @@ export function Dashboard() {
 
   return (
     <PageContainer>
-      <PageHeader title="Dashboard" description={t('hero.description')}>
-        <div className="flex justify-center mt-4">
+      <div className="relative">
+        <div className="absolute right-0 top-0">
           <ShareButtons
+            compact
             title={`getSalary - ${filters.year} ${t('dashboard.shareTitle')}`}
             description={t('dashboard.shareDescription', { year: filters.year })}
           />
         </div>
-      </PageHeader>
+        <PageHeader title="Dashboard" description={t('hero.description')} />
+      </div>
 
         {/* Filter Panel */}
         <FilterPanel />
