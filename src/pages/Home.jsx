@@ -2,6 +2,29 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { OpenSourceBanner } from '../components/social/OpenSourceBanner';
 
+function FeatureCard({ icon, title, desc, color = 'accent' }) {
+  const hoverColors = {
+    accent: 'group-hover:text-[var(--accent)]',
+    green: 'group-hover:text-emerald-500',
+    purple: 'group-hover:text-purple-500',
+    amber: 'group-hover:text-amber-500',
+  };
+
+  return (
+    <div
+      className="group bg-[var(--bg-secondary)] p-6 rounded-xl border border-[var(--border)] hover:border-[var(--accent)]/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[var(--accent)]/5 text-center"
+    >
+      <div className={`mb-4 text-[var(--text-secondary)] transition-colors ${hoverColors[color]} flex justify-center`}>
+        {icon}
+      </div>
+      <h3 className="font-semibold text-[var(--text-primary)] mb-2 font-mono">
+        {title}
+      </h3>
+      <p className="text-sm text-[var(--text-secondary)]">{desc}</p>
+    </div>
+  );
+}
+
 export function Home() {
   const { t } = useTranslation();
 
@@ -20,7 +43,7 @@ export function Home() {
       ),
       title: t('home.byPosition'),
       desc: t('home.byPositionDesc'),
-      color: 'group-hover:text-emerald-500',
+      color: 'green',
     },
     {
       icon: (
@@ -30,7 +53,7 @@ export function Home() {
       ),
       title: t('home.byExperience'),
       desc: t('home.byExperienceDesc'),
-      color: 'group-hover:text-[var(--accent)]',
+      color: 'accent',
     },
     {
       icon: (
@@ -41,17 +64,17 @@ export function Home() {
       ),
       title: t('home.byCity'),
       desc: t('home.byCityDesc'),
-      color: 'group-hover:text-purple-500',
+      color: 'purple',
     },
     {
       icon: (
         <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0 0 12 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 0 1-2.031.352 5.988 5.988 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971Z" />
         </svg>
       ),
       title: t('home.byMinWage'),
       desc: t('home.byMinWageDesc'),
-      color: 'group-hover:text-amber-500',
+      color: 'amber',
     },
   ];
 
@@ -152,18 +175,13 @@ export function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((feature, index) => (
-              <div
+              <FeatureCard
                 key={index}
-                className="group bg-[var(--bg-secondary)] p-6 rounded-xl border border-[var(--border)] hover:border-[var(--accent)]/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[var(--accent)]/5 text-center"
-              >
-                <div className={`mb-4 text-[var(--text-secondary)] transition-colors ${feature.color} flex justify-center`}>
-                  {feature.icon}
-                </div>
-                <h3 className="font-semibold text-[var(--text-primary)] mb-2 font-mono">
-                  {feature.title}
-                </h3>
-                <p className="text-sm text-[var(--text-secondary)]">{feature.desc}</p>
-              </div>
+                icon={feature.icon}
+                title={feature.title}
+                desc={feature.desc}
+                color={feature.color}
+              />
             ))}
           </div>
 
