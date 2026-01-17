@@ -9,6 +9,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import { useData } from '../../context/DataContext';
+import { useFilters } from '../../context/FilterContext';
 import { CHART_COLOR_ARRAY } from '../../data/config';
 import { formatSalary } from '../../utils/calculations';
 import { Card } from '../ui/Card';
@@ -16,6 +17,7 @@ import { Card } from '../ui/Card';
 export function SalaryByCity({ year }) {
   const { t } = useTranslation();
   const { getYearStats, loading } = useData();
+  const { filters } = useFilters();
 
   if (loading) {
     return (
@@ -27,7 +29,7 @@ export function SalaryByCity({ year }) {
     );
   }
 
-  const stats = getYearStats(year);
+  const stats = getYearStats(year, filters);
   if (!stats?.byCity) {
     return (
       <Card title={t('charts.salaryByCity')} icon="🏙️">

@@ -11,12 +11,14 @@ import {
   ReferenceLine,
 } from 'recharts';
 import { useData } from '../../context/DataContext';
-import { CHART_COLOR_ARRAY } from '../../data/config';
+import { useFilters } from '../../context/FilterContext';
+import { CHART_COLOR_ARRAY, YEARS } from '../../data/config';
 import { Card } from '../ui/Card';
 
 export function MinWageMultiplier() {
   const { t } = useTranslation();
-  const { allYearsStats, loading } = useData();
+  const { getYearStats, loading } = useData();
+  const { filters } = useFilters();
 
   if (loading) {
     return (
@@ -27,6 +29,8 @@ export function MinWageMultiplier() {
       </Card>
     );
   }
+
+  const allYearsStats = YEARS.map((year) => getYearStats(year, filters)).filter(Boolean);
 
   if (!allYearsStats || allYearsStats.length === 0) {
     return (

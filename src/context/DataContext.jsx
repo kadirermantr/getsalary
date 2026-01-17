@@ -52,9 +52,40 @@ export function DataProvider({ children }) {
     return yearEntries[yearEntries.length - 1].net;
   };
 
-  // Calculate statistics for a specific year
-  const getYearStats = (year) => {
-    const data = surveyData[year] || [];
+  // Filter data based on filters (direct value comparison)
+  const filterData = (data, filters = {}) => {
+    return data.filter((item) => {
+      // Position filter
+      if (filters.position && filters.position !== 'all') {
+        if (item.position !== filters.position) return false;
+      }
+
+      // Experience filter
+      if (filters.experience && filters.experience !== 'all') {
+        if (item.experienceLevel !== filters.experience) return false;
+      }
+
+      // City filter
+      if (filters.city && filters.city !== 'all') {
+        if (item.city !== filters.city) return false;
+      }
+
+      // Work mode filter
+      if (filters.workMode && filters.workMode !== 'all') {
+        if (item.workMode !== filters.workMode) return false;
+      }
+
+      return true;
+    });
+  };
+
+  // Calculate statistics for a specific year with optional filters
+  const getYearStats = (year, filters = {}) => {
+    const rawData = surveyData[year] || [];
+    if (rawData.length === 0) return null;
+
+    const data = filterData(rawData, filters);
+    console.log(`Year ${year}: ${rawData.length} raw, ${data.length} filtered`, filters);
     if (data.length === 0) return null;
 
     const salaries = data.map((d) => d.salary).filter((s) => s > 0);
@@ -62,7 +93,8 @@ export function DataProvider({ children }) {
 
     return {
       year,
-      participants: DATA_SOURCES[year]?.participants || data.length,
+      participants: DATA_SOURCES[year]?.participants || rawData.length,
+      filteredCount: data.length,
       medianSalary: calculateMedian(salaries),
       averageSalary: calculateAverage(salaries),
       minWage,
@@ -81,6 +113,17 @@ export function DataProvider({ children }) {
     return YEARS.map((year) => getYearStats(year)).filter(Boolean);
   }, [surveyData]);
 
+  // Get unique values for filters from all data
+  const getUniqueValues = (field) => {
+    const allValues = new Set();
+    Object.values(surveyData).forEach((yearData) => {
+      yearData.forEach((item) => {
+        if (item[field]) allValues.add(item[field]);
+      });
+    });
+    return Array.from(allValues).sort();
+  };
+
   const value = {
     surveyData,
     loading,
@@ -90,6 +133,7 @@ export function DataProvider({ children }) {
     getLatestMinWage,
     getYearStats,
     allYearsStats,
+    getUniqueValues,
     years: YEARS,
     latestYear: LATEST_YEAR,
     dataSources: DATA_SOURCES,
@@ -129,7 +173,7 @@ function generateSampleData() {
     const yearData = [];
     const participantCount = DATA_SOURCES[year]?.participants || 1000;
 
-    for (let i = 0; i < Math.min(participantCount, 500); i++) {
+    for (let i = 0; i < participantCount; i++) {
       const expLevel = experienceLevels[Math.floor(Math.random() * experienceLevels.length)];
       const expKey = expLevel === 'Junior' ? 'junior' : expLevel === 'Mid-Level' ? 'mid' : 'senior';
       const baseSalary = baseSalaries[year]?.[expKey] || 10000;
@@ -152,6 +196,7 @@ function generateSampleData() {
     }
 
     data[year] = yearData;
+    console.log(`Generated ${yearData.length} records for ${year}`);
   });
 
   return data;

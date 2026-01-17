@@ -14,6 +14,7 @@ const resources = {
         subtitle: 'return insights;',
         description: 'Türkiye yazılım sektöründeki maaş trendlerini keşfedin. Binlerce katılımcı, açık kaynak.',
         cta: "Dashboard'u Keşfet",
+        codeComment: 'Türkiye yazılım sektörü maaş verileri',
         stats: {
           years: 'Yıllık Veri',
           participants: 'Katılımcı',
@@ -70,6 +71,7 @@ const resources = {
         surveyTitle: 'Yazılım Sektörü Maaş Anketi',
         shareTitle: 'Yazılım Sektörü Maaş Analizi',
         shareDescription: 'Türkiye yazılım sektöründe {{year}} yılı maaş trendlerini keşfedin.',
+        description: 'Türkiye yazılım sektöründeki maaş trendlerini keşfedin.',
       },
       home: {
         featuresTitle: 'Neler Analiz Edebilirsin?',
@@ -98,7 +100,10 @@ const resources = {
         contact: 'İletişim',
         mission: 'Misyonumuz',
         missionDesc: 'getSalary, Türkiye yazılım sektöründe maaş şeffaflığını artırmayı hedefleyen açık kaynak bir projedir. Amacımız, yazılımcıların kariyer kararlarını verirken doğru verilere erişebilmelerini sağlamaktır.',
-        dataSourcesDesc: 'Verilerimiz, @oncekiyazilimci tarafından yıllık olarak düzenlenen Yazılım Sektörü Maaş Anketinden gelmektedir.',
+        dataSourcesDesc: {
+          prefix: 'Verilerimiz, ',
+          suffix: ' tarafından yıllık olarak düzenlenen Yazılım Sektörü Maaş Anketinden gelmektedir.',
+        },
         year: 'Yıl',
         participants: 'Katılımcı',
         source: 'Kaynak',
@@ -108,6 +113,11 @@ const resources = {
           minWage: 'Yıllık asgari ücret verileriyle karşılaştırma',
           inflation: 'TÜİK TÜFE verileriyle enflasyon düzeltmesi',
           segmentation: 'Pozisyon, deneyim, şehir ve çalışma moduna göre segmentasyon',
+        },
+        developer: 'Geliştirici',
+        developerDesc: {
+          prefix: 'Bu proje ',
+          suffix: ' tarafından geliştirilmektedir.',
         },
         contribute: 'Katkıda Bulun',
         contributeDesc: 'Bu proje açık kaynaklıdır. Hata bildirimi, özellik önerisi veya kod katkısı yapabilirsin.',
@@ -132,6 +142,7 @@ const resources = {
         subtitle: 'return insights;',
         description: "Explore salary trends in Türkiye's software industry. Thousands of participants, open source.",
         cta: 'Explore Dashboard',
+        codeComment: "Türkiye's software industry salary data",
         stats: {
           years: 'Years of Data',
           participants: 'Participants',
@@ -188,6 +199,7 @@ const resources = {
         surveyTitle: 'Software Industry Salary Survey',
         shareTitle: 'Software Industry Salary Insights',
         shareDescription: "Explore {{year}} salary trends in Türkiye's software industry.",
+        description: "Explore salary trends in Türkiye's software industry.",
       },
       home: {
         featuresTitle: 'What Can You Analyze?',
@@ -216,7 +228,10 @@ const resources = {
         contact: 'Contact',
         mission: 'Our Mission',
         missionDesc: 'getSalary is an open-source project aiming to increase salary transparency in the Turkish software industry. Our goal is to provide developers with accurate data to make informed career decisions.',
-        dataSourcesDesc: 'Our data comes from the annual Software Industry Salary Survey conducted by @oncekiyazilimci.',
+        dataSourcesDesc: {
+          prefix: 'Our data comes from the annual Software Industry Salary Survey conducted by ',
+          suffix: '.',
+        },
         year: 'Year',
         participants: 'Participants',
         source: 'Source',
@@ -226,6 +241,11 @@ const resources = {
           minWage: 'Comparison with annual minimum wage data',
           inflation: 'Inflation adjustment using TURKSTAT CPI data',
           segmentation: 'Segmentation by position, experience, city, and work mode',
+        },
+        developer: 'Developer',
+        developerDesc: {
+          prefix: 'This project is developed by ',
+          suffix: '.',
         },
         contribute: 'Contribute',
         contributeDesc: 'This project is open source. You can report bugs, suggest features, or contribute code.',
