@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { motion, AnimatePresence } from 'framer-motion';
 
 function FAQItem({ question, answer, isOpen, onClick }) {
   return (
@@ -10,7 +11,7 @@ function FAQItem({ question, answer, isOpen, onClick }) {
       >
         <span className="font-medium text-[var(--text-primary)] pr-4">{question}</span>
         <svg
-          className={`w-5 h-5 text-[var(--text-secondary)] flex-shrink-0 transition-transform duration-200 ${
+          className={`w-5 h-5 text-[var(--text-secondary)] flex-shrink-0 transition-transform duration-300 ${
             isOpen ? 'rotate-180' : ''
           }`}
           fill="none"
@@ -20,13 +21,23 @@ function FAQItem({ question, answer, isOpen, onClick }) {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
       </button>
-      {isOpen && (
-        <div className="px-4 pb-5">
-          <p className="text-[var(--text-secondary)] text-sm leading-relaxed">
-            {answer}
-          </p>
-        </div>
-      )}
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="overflow-hidden"
+          >
+            <div className="px-4 pb-5">
+              <p className="text-[var(--text-secondary)] text-sm leading-relaxed">
+                {answer}
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
