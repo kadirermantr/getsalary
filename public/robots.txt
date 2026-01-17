@@ -1,0 +1,9 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://getsalary.dev/sitemap.xml
+
+# Block assets directory from indexing
+Disallow: /assets/

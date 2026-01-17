@@ -7,6 +7,7 @@ const resources = {
       nav: {
         home: 'Anasayfa',
         dashboard: 'Dashboard',
+        calculator: 'Hesapla',
         about: 'Hakkında',
       },
       hero: {
@@ -93,6 +94,25 @@ const resources = {
         aboveMedian: 'Medyanın üzerinde, iyi bir seviyedesin.',
         belowMedian: 'Medyanın altında, ancak çeyrekten yukarıdasın.',
         bottom25: 'Alt %25\'lik dilimdesin. Maaş görüşmesi düşünebilirsin.',
+        pageDescription: 'Maaşını gir, sektördeki yerini öğren. Pozisyon, deneyim ve şehre göre tahmini maaş aralığını hesapla.',
+      },
+      yearComparison: {
+        title: 'Yıl Karşılaştırması',
+        selectYear1: 'İlk Yıl',
+        selectYear2: 'İkinci Yıl',
+        growth: 'Değişim',
+      },
+      prediction: {
+        title: 'Maaş Tahmini',
+        estimatedRange: 'Tahmini Aralık',
+        confidence: 'Güven Oranı',
+        selectFilters: 'Tahmini görmek için filtre seçin.',
+        insufficientData: 'Yeterli veri yok. Daha geniş filtreler deneyin.',
+      },
+      export: {
+        downloadPdf: 'PDF İndir',
+        generating: 'Oluşturuluyor...',
+        generatedAt: 'Oluşturulma tarihi',
       },
       dashboard: {
         participants: 'Katılımcı',
@@ -175,6 +195,7 @@ const resources = {
       nav: {
         home: 'Home',
         dashboard: 'Dashboard',
+        calculator: 'Calculate',
         about: 'About',
       },
       hero: {
@@ -261,6 +282,25 @@ const resources = {
         aboveMedian: "Above median, you're at a good level.",
         belowMedian: 'Below median, but above the first quartile.',
         bottom25: "You're in the bottom 25%. Consider negotiating your salary.",
+        pageDescription: 'Enter your salary to see where you stand. Calculate estimated salary range by position, experience, and city.',
+      },
+      yearComparison: {
+        title: 'Year Comparison',
+        selectYear1: 'First Year',
+        selectYear2: 'Second Year',
+        growth: 'Change',
+      },
+      prediction: {
+        title: 'Salary Prediction',
+        estimatedRange: 'Estimated Range',
+        confidence: 'Confidence',
+        selectFilters: 'Select filters to see prediction.',
+        insufficientData: 'Insufficient data. Try broader filters.',
+      },
+      export: {
+        downloadPdf: 'Download PDF',
+        generating: 'Generating...',
+        generatedAt: 'Generated at',
       },
       dashboard: {
         participants: 'Participants',

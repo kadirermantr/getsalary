@@ -1,5 +1,7 @@
-export function Skeleton({ className = '', variant = 'text' }) {
-  const baseClasses = 'animate-pulse bg-[var(--bg-secondary)]';
+export function Skeleton({ className = '', variant = 'text', shimmer = true }) {
+  const baseClasses = shimmer
+    ? 'skeleton-shimmer'
+    : 'animate-pulse bg-[var(--bg-secondary)]';
 
   const variants = {
     text: 'h-4 rounded',
@@ -9,9 +11,7 @@ export function Skeleton({ className = '', variant = 'text' }) {
     card: 'rounded-xl',
   };
 
-  return (
-    <div className={`${baseClasses} ${variants[variant]} ${className}`} />
-  );
+  return <div className={`${baseClasses} ${variants[variant]} ${className}`} />;
 }
 
 export function StatCardSkeleton() {

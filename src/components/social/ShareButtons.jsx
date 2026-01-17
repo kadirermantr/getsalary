@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'sonner';
 
 export function ShareButtons({ title, description, url, compact = false }) {
   const { t } = useTranslation();
@@ -19,9 +20,11 @@ export function ShareButtons({ title, description, url, compact = false }) {
     try {
       await navigator.clipboard.writeText(shareUrl);
       setCopied(true);
+      toast.success(t('common.copied'));
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       console.error('Failed to copy:', err);
+      toast.error(t('common.error'));
     }
   };
 

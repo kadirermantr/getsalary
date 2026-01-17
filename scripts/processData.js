@@ -193,11 +193,14 @@ function normalizeCompanyType(company) {
 function normalizeCity(city) {
   if (!city) return 'Diğer';
 
-  const lower = city.toLowerCase();
+  // Use toLocaleLowerCase for proper Turkish character handling
+  const lower = city.toLocaleLowerCase('tr-TR');
 
-  if (lower.includes('istanbul') || lower.includes('İstanbul')) return 'İstanbul';
+  // İstanbul check - handle both İ and I variants
+  if (lower.includes('istanbul') || lower.includes('i̇stanbul') || city.includes('İstanbul')) return 'İstanbul';
   if (lower.includes('ankara')) return 'Ankara';
-  if (lower.includes('izmir') || lower.includes('İzmir')) return 'İzmir';
+  // İzmir check - handle both İ and I variants
+  if (lower.includes('izmir') || lower.includes('i̇zmir') || city.includes('İzmir')) return 'İzmir';
   if (lower.includes('bursa')) return 'Bursa';
   if (lower.includes('antalya')) return 'Antalya';
   if (lower.includes('yurt dışı') || lower.includes('ingiltere') || lower.includes('almanya') || city.startsWith('*')) return 'Yurtdışı';

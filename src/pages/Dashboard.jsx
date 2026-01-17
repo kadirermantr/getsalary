@@ -10,7 +10,7 @@ import { MinWageMultiplier } from '../components/charts/MinWageMultiplier';
 import { SalaryByCity } from '../components/charts/SalaryByCity';
 import { RemoteVsOffice } from '../components/charts/RemoteVsOffice';
 import { SalaryByCompanyType } from '../components/charts/SalaryByCompanyType';
-import { SalaryCalculator } from '../components/calculator/SalaryCalculator';
+import { YearComparison } from '../components/charts/YearComparison';
 import { AnimatedCounter, AnimatedSalary, AnimatedMultiplier } from '../components/ui/AnimatedCounter';
 
 function StatCard({ value, label, subValue, icon, color = 'accent' }) {
@@ -155,14 +155,14 @@ export function Dashboard() {
                     <SalaryByCompanyType year={filters.year} />
                   </div>
 
-                  {/* Row 4: Min Wage Trend (full) - Yıllık trend */}
+                  {/* Row 4: Min Wage Trend + Year Comparison */}
                   <div className="md:col-span-2 lg:col-span-4">
                     <MinWageMultiplier />
                   </div>
 
-                  {/* Row 5: Salary Calculator (full) */}
+                  {/* Row 5: Year Comparison (full) */}
                   <div className="md:col-span-2 lg:col-span-4">
-                    <SalaryCalculator />
+                    <YearComparison />
                   </div>
                 </div>
               </div>

@@ -1,5 +1,6 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import confetti from 'canvas-confetti';
 import { useData } from '../../context/DataContext';
 import { useFilters } from '../../context/FilterContext';
 import { Card, ChartIcons } from '../ui/Card';
@@ -9,6 +10,7 @@ export function SalaryCalculator() {
   const { getYearStats } = useData();
   const { filters } = useFilters();
   const [salary, setSalary] = useState('');
+  const confettiTriggered = useRef(false);
 
   const stats = getYearStats(filters.year, filters);
 
@@ -60,6 +62,46 @@ export function SalaryCalculator() {
     if (p >= 25) return t('calculator.belowMedian');
     return t('calculator.bottom25');
   };
+
+  // Trigger confetti for top 10%
+  useEffect(() => {
+    if (percentile >= 90 && !confettiTriggered.current) {
+      confettiTriggered.current = true;
+
+      // Fire confetti burst
+      const duration = 2000;
+      const animationEnd = Date.now() + duration;
+      const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 9999 };
+
+      const randomInRange = (min, max) => Math.random() * (max - min) + min;
+
+      const interval = setInterval(() => {
+        const timeLeft = animationEnd - Date.now();
+        if (timeLeft <= 0) {
+          clearInterval(interval);
+          return;
+        }
+
+        const particleCount = 50 * (timeLeft / duration);
+
+        confetti({
+          ...defaults,
+          particleCount,
+          origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+        });
+        confetti({
+          ...defaults,
+          particleCount,
+          origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+        });
+      }, 250);
+    }
+
+    // Reset confetti trigger when percentile drops below 90
+    if (percentile && percentile < 90) {
+      confettiTriggered.current = false;
+    }
+  }, [percentile]);
 
   if (!stats) return null;
 

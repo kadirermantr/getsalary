@@ -12,6 +12,19 @@ export default defineConfig({
     css: true,
     exclude: ['**/node_modules/**', '**/e2e/**'],
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+          charts: ['recharts'],
+          i18n: ['i18next', 'react-i18next'],
+          animations: ['framer-motion'],
+          pdf: ['jspdf', 'html2canvas'],
+        },
+      },
+    },
+  },
   plugins: [
     react(),
     tailwindcss(),
