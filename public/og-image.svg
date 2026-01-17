@@ -1,0 +1,38 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#0f172a"/>
+
+  <!-- Gradient overlay -->
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.2" />
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:0.2" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#gradient)"/>
+
+  <!-- Logo -->
+  <text x="600" y="250" font-family="monospace" font-size="72" font-weight="bold" fill="#60a5fa" text-anchor="middle">
+    getSalary()
+  </text>
+
+  <!-- Tagline -->
+  <text x="600" y="330" font-family="system-ui, sans-serif" font-size="36" fill="#94a3b8" text-anchor="middle">
+    Yazılım Sektörü Maaş Analizi
+  </text>
+
+  <!-- Stats -->
+  <text x="300" y="450" font-family="system-ui, sans-serif" font-size="48" font-weight="bold" fill="#f8fafc" text-anchor="middle">5+</text>
+  <text x="300" y="490" font-family="system-ui, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">Yıllık Veri</text>
+
+  <text x="600" y="450" font-family="system-ui, sans-serif" font-size="48" font-weight="bold" fill="#f8fafc" text-anchor="middle">30K+</text>
+  <text x="600" y="490" font-family="system-ui, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">Katılımcı</text>
+
+  <text x="900" y="450" font-family="system-ui, sans-serif" font-size="48" font-weight="bold" fill="#f8fafc" text-anchor="middle">15+</text>
+  <text x="900" y="490" font-family="system-ui, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">Pozisyon</text>
+
+  <!-- Domain -->
+  <text x="600" y="580" font-family="system-ui, sans-serif" font-size="24" fill="#64748b" text-anchor="middle">
+    getsalary.dev
+  </text>
+</svg>
