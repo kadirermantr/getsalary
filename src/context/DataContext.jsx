@@ -161,7 +161,17 @@ export function useData() {
 // Generate sample data for development
 // This will be replaced with actual data loading
 function generateSampleData() {
-  const positions = ['Backend Developer', 'Frontend Developer', 'Fullstack Developer', 'DevOps Engineer', 'Mobile Developer', 'Data Engineer'];
+  const positions = [
+    'Backend Developer',
+    'Frontend Developer',
+    'Fullstack Developer',
+    'DevOps Engineer',
+    'Mobile Developer',
+    'Data Engineer',
+    'QA Engineer',
+    'Security Engineer',
+    'Engineering Manager',
+  ];
   const cities = ['İstanbul', 'Ankara', 'İzmir', 'Remote'];
   const workModes = ['Remote', 'Hybrid', 'Ofis'];
   const companyTypes = ['Startup', 'Corporate', 'Agency', 'Freelance'];
