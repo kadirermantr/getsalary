@@ -9,6 +9,13 @@ import {
   calculateMinWageMultiplier,
 } from '../utils/calculations';
 
+// Import real survey data
+import data2021 from '../data/2021.json';
+import data2022 from '../data/2022.json';
+import data2023 from '../data/2023.json';
+import data2024 from '../data/2024.json';
+import data2025 from '../data/2025.json';
+
 const DataContext = createContext(undefined);
 
 export function DataProvider({ children }) {
@@ -18,24 +25,27 @@ export function DataProvider({ children }) {
 
   // Load all survey data
   useEffect(() => {
-    async function loadData() {
-      try {
-        setLoading(true);
+    try {
+      setLoading(true);
 
-        // For now, we'll use sample data
-        // In production, this would load from actual JSON files
-        const sampleData = generateSampleData();
-        setSurveyData(sampleData);
+      // Load real survey data
+      const realData = {
+        2021: data2021,
+        2022: data2022,
+        2023: data2023,
+        2024: data2024,
+        2025: data2025,
+      };
 
-        setLoading(false);
-      } catch (err) {
-        console.error('Error loading data:', err);
-        setError(err.message);
-        setLoading(false);
-      }
+      setSurveyData(realData);
+      console.log('Loaded real survey data:', Object.keys(realData).map(y => `${y}: ${realData[y].length} records`).join(', '));
+
+      setLoading(false);
+    } catch (err) {
+      console.error('Error loading data:', err);
+      setError(err.message);
+      setLoading(false);
     }
-
-    loadData();
   }, []);
 
   // Get minimum wage for a specific year
@@ -86,7 +96,6 @@ export function DataProvider({ children }) {
     if (rawData.length === 0) return null;
 
     const data = filterData(rawData, filters);
-    console.log(`Year ${year}: ${rawData.length} raw, ${data.length} filtered`, filters);
     if (data.length === 0) return null;
 
     const salaries = data.map((d) => d.salary).filter((s) => s > 0);
@@ -156,66 +165,4 @@ export function useData() {
     throw new Error('useData must be used within a DataProvider');
   }
   return context;
-}
-
-// Generate sample data for development
-// This will be replaced with actual data loading
-function generateSampleData() {
-  const positions = [
-    'Backend Developer',
-    'Frontend Developer',
-    'Fullstack Developer',
-    'DevOps Engineer',
-    'Mobile Developer',
-    'Data Engineer',
-    'QA Engineer',
-    'Security Engineer',
-    'Engineering Manager',
-  ];
-  const cities = ['İstanbul', 'Ankara', 'İzmir', 'Remote'];
-  const workModes = ['Remote', 'Hybrid', 'Ofis'];
-  const companyTypes = ['Startup', 'Corporate', 'Agency', 'Freelance'];
-  const experienceLevels = ['Junior', 'Mid-Level', 'Senior'];
-
-  const baseSalaries = {
-    2021: { junior: 6000, mid: 10000, senior: 16000 },
-    2022: { junior: 9000, mid: 15000, senior: 22000 },
-    2023: { junior: 17000, mid: 27000, senior: 40000 },
-    2024: { junior: 36000, mid: 55000, senior: 85000 },
-    2025: { junior: 48000, mid: 75000, senior: 120000 },
-  };
-
-  const data = {};
-
-  YEARS.forEach((year) => {
-    const yearData = [];
-    const participantCount = DATA_SOURCES[year]?.participants || 1000;
-
-    for (let i = 0; i < participantCount; i++) {
-      const expLevel = experienceLevels[Math.floor(Math.random() * experienceLevels.length)];
-      const expKey = expLevel === 'Junior' ? 'junior' : expLevel === 'Mid-Level' ? 'mid' : 'senior';
-      const baseSalary = baseSalaries[year]?.[expKey] || 10000;
-
-      // Add some variance
-      const variance = (Math.random() - 0.5) * 0.4; // ±20%
-      const salary = Math.round(baseSalary * (1 + variance));
-
-      yearData.push({
-        id: `${year}-${i}`,
-        year,
-        position: positions[Math.floor(Math.random() * positions.length)],
-        experienceYears: expLevel === 'Junior' ? Math.random() * 2 : expLevel === 'Mid-Level' ? 2 + Math.random() * 3 : 5 + Math.random() * 10,
-        experienceLevel: expLevel,
-        salary,
-        city: cities[Math.floor(Math.random() * cities.length)],
-        workMode: workModes[Math.floor(Math.random() * workModes.length)],
-        companyType: companyTypes[Math.floor(Math.random() * companyTypes.length)],
-      });
-    }
-
-    data[year] = yearData;
-    console.log(`Generated ${yearData.length} records for ${year}`);
-  });
-
-  return data;
 }

@@ -3,10 +3,10 @@ import { useTranslation } from 'react-i18next';
 
 function FAQItem({ question, answer, isOpen, onClick }) {
   return (
-    <div className="border-b border-[var(--border)] last:border-0">
+    <div className="border-b border-[var(--border)] last:border-0 px-4">
       <button
         onClick={onClick}
-        className="w-full py-4 flex items-center justify-between text-left"
+        className="w-full py-5 flex items-center justify-between text-left"
       >
         <span className="font-medium text-[var(--text-primary)] pr-4">{question}</span>
         <svg
@@ -22,10 +22,10 @@ function FAQItem({ question, answer, isOpen, onClick }) {
       </button>
       <div
         className={`overflow-hidden transition-all duration-200 ${
-          isOpen ? 'max-h-96 pb-4' : 'max-h-0'
+          isOpen ? 'max-h-96 pb-5' : 'max-h-0'
         }`}
       >
-        <p className="text-[var(--text-secondary)] text-sm leading-relaxed">{answer}</p>
+        <p className="text-[var(--text-secondary)] text-sm leading-relaxed pt-1">{answer}</p>
       </div>
     </div>
   );
@@ -33,12 +33,16 @@ function FAQItem({ question, answer, isOpen, onClick }) {
 
 export function FAQ() {
   const { t, i18n } = useTranslation();
-  const [openIndex, setOpenIndex] = useState(0);
+  const [openIndex, setOpenIndex] = useState(-1);
 
   const faqs = i18n.language === 'tr' ? [
     {
       question: 'Veriler nereden geliyor?',
-      answer: 'Veriler, @oncekiyazilimci tarafından yıllık olarak düzenlenen Yazılım Sektörü Maaş Anketinden gelmektedir. Her yıl binlerce yazılımcı anonim olarak katılmaktadır.',
+      answer: <span>Veriler, <a href="https://www.linkedin.com/in/oncekiyazilimci/" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">@oncekiyazilimci</a> tarafından yıllık olarak düzenlenen Yazılım Sektörü Maaş Anketinden gelmektedir. Her yıl binlerce yazılımcı anonim olarak katılmaktadır.</span>,
+    },
+    {
+      question: 'Veriler ne kadar güncel?',
+      answer: 'Site, en güncel anket verilerini kullanmaktadır. Yeni anket yayınlandığında veriler güncellenir. Şu anda 2021-2025 yılları arası veriler mevcuttur.',
     },
     {
       question: 'Medyan neden ortalamadan daha iyi?',
@@ -53,17 +57,17 @@ export function FAQ() {
       answer: 'Anket verilerinde yeterli katılımcı sayısı olmayan kategoriler istatistiksel olarak güvenilir olmadığı için gösterilmemektedir.',
     },
     {
-      question: 'Veriler ne kadar güncel?',
-      answer: 'Site, en güncel anket verilerini kullanmaktadır. Yeni anket yayınlandığında veriler güncellenir. Şu anda 2021-2025 yılları arası veriler mevcuttur.',
-    },
-    {
       question: 'Projeye nasıl katkıda bulunabilirim?',
       answer: 'Proje açık kaynaklıdır. GitHub üzerinden hata bildirimi yapabilir, özellik önerebilir veya doğrudan kod katkısında bulunabilirsiniz.',
     },
   ] : [
     {
       question: 'Where does the data come from?',
-      answer: 'The data comes from the annual Software Industry Salary Survey conducted by @oncekiyazilimci. Thousands of developers participate anonymously each year.',
+      answer: <span>The data comes from the annual Software Industry Salary Survey conducted by <a href="https://www.linkedin.com/in/oncekiyazilimci/" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">@oncekiyazilimci</a>. Thousands of developers participate anonymously each year.</span>,
+    },
+    {
+      question: 'How current is the data?',
+      answer: 'The site uses the most recent survey data. Data is updated when new surveys are published. Currently, data from 2021-2025 is available.',
     },
     {
       question: 'Why is median better than average?',
@@ -76,10 +80,6 @@ export function FAQ() {
     {
       question: 'Why are some cities/positions missing?',
       answer: 'Categories with insufficient participant numbers in the survey data are not shown as they are not statistically reliable.',
-    },
-    {
-      question: 'How current is the data?',
-      answer: 'The site uses the most recent survey data. Data is updated when new surveys are published. Currently, data from 2021-2025 is available.',
     },
     {
       question: 'How can I contribute to the project?',

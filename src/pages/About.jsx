@@ -6,14 +6,6 @@ import { FAQ } from '../components/ui/FAQ';
 export function About() {
   const { t } = useTranslation();
 
-  const dataSources = [
-    { year: 2021, url: 'https://github.com/oncekiyazilimci/2021-yazilimci-maaslari', participants: '~2,500' },
-    { year: 2022, url: 'https://github.com/oncekiyazilimci/2022-yazilimci-maaslari', participants: '5,038' },
-    { year: 2023, url: 'https://github.com/oncekiyazilimci/2023-yazilim-sektoru-maaslari', participants: '8,718' },
-    { year: 2024, url: 'https://github.com/oncekiyazilimci/2024-yazilim-sektoru-maaslari', participants: '5,989' },
-    { year: 2025, url: 'https://github.com/oncekiyazilimci/2025-yazilim-sektoru-maaslari', participants: '9,056' },
-  ];
-
   return (
     <PageContainer size="narrow">
       <PageHeader title={t('about.title')} />
@@ -23,68 +15,9 @@ export function About() {
         {t('about.missionDesc')}
       </p>
 
-      {/* Data Sources */}
-      <section className="mb-12">
-        <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-3">
-          {t('about.dataSources')}
-        </h2>
-        <p className="text-[var(--text-secondary)] mb-6">
-          {t('about.dataSourcesDesc.prefix')}
-          <a
-            href="https://www.linkedin.com/in/oncekiyazilimci/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[var(--accent)] "
-          >
-            @oncekiyazilimci
-          </a>
-          {t('about.dataSourcesDesc.suffix')}
-        </p>
-
-        <div className="bg-[var(--bg-secondary)] rounded-xl overflow-hidden">
-          <table className="w-full">
-            <thead>
-              <tr className="border-b border-[var(--bg-primary)]">
-                <th className="px-6 py-3 text-left text-sm font-semibold text-[var(--text-primary)]">
-                  {t('about.year')}
-                </th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-[var(--text-primary)]">
-                  {t('about.participants')}
-                </th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-[var(--text-primary)]">
-                  {t('about.source')}
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {dataSources.map((source) => (
-                <tr key={source.year} className="border-b border-[var(--bg-primary)] last:border-0">
-                  <td className="px-6 py-4 text-[var(--text-primary)] font-medium">
-                    {source.year}
-                  </td>
-                  <td className="px-6 py-4 text-[var(--text-secondary)]">
-                    {source.participants}
-                  </td>
-                  <td className="px-6 py-4">
-                    <a
-                      href={source.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[var(--accent)]  text-sm"
-                    >
-                      GitHub →
-                    </a>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
-
       {/* Methodology */}
-      <section className="mb-12">
-        <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-3">
+      <section className="mb-16">
+        <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-4">
           {t('about.methodology')}
         </h2>
         <div className="space-y-4 text-[var(--text-secondary)]">
@@ -99,16 +32,16 @@ export function About() {
       </section>
 
       {/* FAQ */}
-      <section className="mb-12">
-        <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-3">
+      <section className="mb-16">
+        <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-4">
           {t('about.faq') || 'Sık Sorulan Sorular'}
         </h2>
         <FAQ />
       </section>
 
       {/* Tech Stack */}
-      <section className="mb-12">
-        <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-3">
+      <section className="mb-16">
+        <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-4">
           Tech Stack
         </h2>
         <div className="flex flex-wrap gap-2">
@@ -124,8 +57,8 @@ export function About() {
       </section>
 
       {/* Developer */}
-      <section className="mb-12">
-        <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-3">
+      <section className="mb-16">
+        <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-4">
           {t('about.developer')}
         </h2>
         <p className="text-[var(--text-secondary)]">
@@ -134,7 +67,7 @@ export function About() {
             href="https://www.linkedin.com/in/kadirerman/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[var(--accent)] "
+            className="text-[var(--accent)]"
           >
             @kadirerman
           </a>

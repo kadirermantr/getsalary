@@ -56,25 +56,25 @@ export function SalaryByPosition({ year }) {
 
   return (
     <Card title={t('charts.salaryByPosition')} icon={ChartIcons.position}>
-      <div className="h-72">
+      <div className="h-96">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data} layout="vertical" margin={{ left: 20, right: 20 }}>
+          <BarChart data={data} layout="vertical" margin={{ left: 10, right: 20, top: 10, bottom: 10 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="var(--bg-secondary)" />
             <XAxis
               type="number"
               tickFormatter={(value) => `${(value / 1000).toFixed(0)}K`}
               stroke="var(--text-secondary)"
-              fontSize={12}
+              fontSize={11}
             />
             <YAxis
               type="category"
               dataKey="position"
               stroke="var(--text-secondary)"
-              fontSize={12}
-              width={80}
+              fontSize={11}
+              width={95}
+              tickLine={false}
             />
             <Tooltip content={<ChartTooltip showPercentile />} />
-            <Legend />
             <Bar
               dataKey="median"
               name={t('charts.median')}

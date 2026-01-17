@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useCallback, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useLocation } from 'react-router-dom';
 import { LATEST_YEAR } from '../data/config';
 
 const FilterContext = createContext(undefined);
@@ -17,23 +17,24 @@ const filterKeys = ['year', 'position', 'experience', 'city', 'workMode', 'compa
 
 export function FilterProvider({ children }) {
   const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
+  const isDashboard = location.pathname === '/dashboard' || location.pathname === '/tr/dashboard' || location.pathname === '/en/dashboard';
 
-  // Initialize filters from URL or defaults
-  const getInitialFilters = () => {
-    const urlFilters = { ...initialFilters };
-    filterKeys.forEach((key) => {
-      const value = searchParams.get(key);
-      if (value) {
-        urlFilters[key] = key === 'year' ? parseInt(value, 10) : value;
-      }
-    });
-    return urlFilters;
-  };
+  // Always start with default filters
+  const [filters, setFilters] = useState(initialFilters);
+  const [userInteracted, setUserInteracted] = useState(false);
 
-  const [filters, setFilters] = useState(getInitialFilters);
-
-  // Sync filters to URL
+  // Clear URL params on non-dashboard pages
   useEffect(() => {
+    if (!isDashboard && searchParams.toString()) {
+      setSearchParams({}, { replace: true });
+    }
+  }, [isDashboard, searchParams, setSearchParams]);
+
+  // Sync filters to URL only when user has interacted
+  useEffect(() => {
+    if (!isDashboard || !userInteracted) return;
+
     const params = new URLSearchParams();
     filterKeys.forEach((key) => {
       const value = filters[key];
@@ -43,9 +44,10 @@ export function FilterProvider({ children }) {
       }
     });
     setSearchParams(params, { replace: true });
-  }, [filters, setSearchParams]);
+  }, [filters, setSearchParams, isDashboard, userInteracted]);
 
   const updateFilter = useCallback((key, value) => {
+    setUserInteracted(true);
     setFilters((prev) => ({
       ...prev,
       [key]: value,

@@ -91,14 +91,6 @@ function FilterContent({ onClose }) {
         </div>
       </div>
 
-      {/* Position Filter */}
-      <FilterSection
-        title={t('filters.position')}
-        options={positions}
-        value={filters.position}
-        onChange={(value) => updateFilter('position', value)}
-      />
-
       {/* Experience Filter */}
       <FilterSection
         title={t('filters.experience')}
@@ -107,15 +99,15 @@ function FilterContent({ onClose }) {
         onChange={(value) => updateFilter('experience', value)}
       />
 
-      {/* City Filter - Select */}
+      {/* Position Filter - Dropdown */}
       <div className="border-b border-[var(--border)] pb-4 mb-4">
-        <h3 className="text-sm font-semibold text-[var(--text-primary)] mb-3">{t('filters.city')}</h3>
+        <h3 className="text-sm font-semibold text-[var(--text-primary)] mb-3">{t('filters.position')}</h3>
         <select
-          value={filters.city}
-          onChange={(e) => updateFilter('city', e.target.value)}
+          value={filters.position}
+          onChange={(e) => updateFilter('position', e.target.value)}
           className="w-full bg-[var(--bg-primary)] text-[var(--text-primary)] text-sm rounded-lg px-3 py-2 border border-[var(--border)] focus:border-[var(--accent)] focus:outline-none"
         >
-          {cities.map((opt) => (
+          {positions.map((opt) => (
             <option key={opt.value} value={opt.value}>
               {opt.label}
             </option>
@@ -130,6 +122,22 @@ function FilterContent({ onClose }) {
         value={filters.workMode}
         onChange={(value) => updateFilter('workMode', value)}
       />
+
+      {/* City Filter - Select */}
+      <div className="border-b border-[var(--border)] pb-4 mb-4 last:border-0 last:pb-0 last:mb-0">
+        <h3 className="text-sm font-semibold text-[var(--text-primary)] mb-3">{t('filters.city')}</h3>
+        <select
+          value={filters.city}
+          onChange={(e) => updateFilter('city', e.target.value)}
+          className="w-full bg-[var(--bg-primary)] text-[var(--text-primary)] text-sm rounded-lg px-3 py-2 border border-[var(--border)] focus:border-[var(--accent)] focus:outline-none"
+        >
+          {cities.map((opt) => (
+            <option key={opt.value} value={opt.value}>
+              {opt.label}
+            </option>
+          ))}
+        </select>
+      </div>
 
       {/* Reset Button */}
       {activeFilterCount > 0 && (
