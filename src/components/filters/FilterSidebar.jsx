@@ -37,7 +37,7 @@ function FilterContent({ onClose }) {
 
   const FilterSection = ({ title, options, value, onChange }) => (
     <div className="border-b border-[var(--border)] pb-4 mb-4 last:border-0 last:pb-0 last:mb-0">
-      <h3 className="text-sm font-semibold text-[var(--text-primary)] mb-3">{title}</h3>
+      <h3 className="text-sm font-medium text-[var(--text-primary)] mb-3 lowercase">{title}</h3>
       <div className="space-y-2">
         {options.map((opt) => (
           <label
@@ -79,7 +79,7 @@ function FilterContent({ onClose }) {
 
       {/* Year Selector */}
       <div className="border-b border-[var(--border)] pb-4 mb-4">
-        <h3 className="text-sm font-semibold text-[var(--text-primary)] mb-3">{t('filters.year')}</h3>
+        <h3 className="text-sm font-medium text-[var(--text-primary)] mb-3 lowercase">{t('filters.year')}</h3>
         <div className="flex flex-wrap gap-2">
           {YEARS.map((year) => (
             <button
@@ -107,7 +107,7 @@ function FilterContent({ onClose }) {
 
       {/* Position Filter - Dropdown */}
       <div className="border-b border-[var(--border)] pb-4 mb-4">
-        <h3 className="text-sm font-semibold text-[var(--text-primary)] mb-3">{t('filters.position')}</h3>
+        <h3 className="text-sm font-medium text-[var(--text-primary)] mb-3 lowercase">{t('filters.position')}</h3>
         <select
           value={filters.position}
           onChange={(e) => updateFilter('position', e.target.value)}
@@ -131,7 +131,7 @@ function FilterContent({ onClose }) {
 
       {/* City Filter - Select */}
       <div className="border-b border-[var(--border)] pb-4 mb-4 last:border-0 last:pb-0 last:mb-0">
-        <h3 className="text-sm font-semibold text-[var(--text-primary)] mb-3">{t('filters.city')}</h3>
+        <h3 className="text-sm font-medium text-[var(--text-primary)] mb-3 lowercase">{t('filters.city')}</h3>
         <select
           value={filters.city}
           onChange={(e) => updateFilter('city', e.target.value)}
