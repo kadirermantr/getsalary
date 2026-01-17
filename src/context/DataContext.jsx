@@ -4,6 +4,7 @@ import minWageData from '../data/minWage.json';
 import {
   calculateMedian,
   calculateAverage,
+  calculatePercentile,
   groupAndCalculateStats,
   calculateMinWageMultiplier,
 } from '../utils/calculations';
@@ -91,12 +92,19 @@ export function DataProvider({ children }) {
     const salaries = data.map((d) => d.salary).filter((s) => s > 0);
     const minWage = getLatestMinWage(year);
 
+    const sortedSalaries = [...salaries].sort((a, b) => a - b);
+
     return {
       year,
       participants: DATA_SOURCES[year]?.participants || rawData.length,
       filteredCount: data.length,
       medianSalary: calculateMedian(salaries),
+      median: calculateMedian(salaries),
       averageSalary: calculateAverage(salaries),
+      p25: calculatePercentile(salaries, 25),
+      p75: calculatePercentile(salaries, 75),
+      min: sortedSalaries[0] || 0,
+      max: sortedSalaries[sortedSalaries.length - 1] || 0,
       minWage,
       multiplier: calculateMinWageMultiplier(calculateMedian(salaries), minWage),
       byPosition: groupAndCalculateStats(data, 'position', 'salary'),

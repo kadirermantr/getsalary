@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { useData } from '../context/DataContext';
 import { useFilters } from '../context/FilterContext';
 import { PageHeader } from '../components/layout/PageContainer';
-import { FilterSidebar } from '../components/filters/FilterSidebar';
+import { FilterSidebar, MobileFilterDrawer } from '../components/filters/FilterSidebar';
 import { SalaryByPosition } from '../components/charts/SalaryByPosition';
 import { SalaryByExperience } from '../components/charts/SalaryByExperience';
 import { MinWageMultiplier } from '../components/charts/MinWageMultiplier';
@@ -11,12 +11,15 @@ import { RemoteVsOffice } from '../components/charts/RemoteVsOffice';
 import { SalaryByTech } from '../components/charts/SalaryByTech';
 import { SalaryByCompanyType } from '../components/charts/SalaryByCompanyType';
 import { InflationComparison } from '../components/charts/InflationComparison';
+import { SalaryCalculator } from '../components/calculator/SalaryCalculator';
 import { ShareButtons } from '../components/social/ShareButtons';
-import { formatSalary, formatNumber } from '../utils/calculations';
+import { exportToCSV } from '../utils/export';
+import { AnimatedCounter, AnimatedSalary, AnimatedMultiplier } from '../components/ui/AnimatedCounter';
+import { StatCardSkeleton, ChartSkeleton } from '../components/ui/Skeleton';
 
 export function Dashboard() {
   const { t } = useTranslation();
-  const { getYearStats } = useData();
+  const { getYearStats, loading } = useData();
   const { filters, activeFilterCount } = useFilters();
 
   const currentStats = getYearStats(filters.year, filters);
@@ -27,11 +30,24 @@ export function Dashboard() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <PageHeader title="Dashboard" description={t('dashboard.description')} />
-          <ShareButtons
-            compact
-            title={`getSalary - ${filters.year} ${t('dashboard.shareTitle')}`}
-            description={t('dashboard.shareDescription', { year: filters.year })}
-          />
+          <div className="flex items-center gap-2">
+            {/* Export Button */}
+            <button
+              onClick={() => exportToCSV(currentStats, filters.year, filters)}
+              className="flex items-center gap-2 px-3 py-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] rounded-lg transition-colors"
+              title={t('dashboard.exportCSV') || 'CSV İndir'}
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              <span className="hidden sm:inline">CSV</span>
+            </button>
+            <ShareButtons
+              compact
+              title={`getSalary - ${filters.year} ${t('dashboard.shareTitle')}`}
+              description={t('dashboard.shareDescription', { year: filters.year })}
+            />
+          </div>
         </div>
 
         {/* Main Layout: Sidebar + Content */}
@@ -44,35 +60,41 @@ export function Dashboard() {
           {/* Main Content */}
           <main className="flex-1 min-w-0">
             {/* Quick Stats Bar */}
-            {currentStats && (
+            {loading ? (
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                {[1, 2, 3, 4].map((i) => (
+                  <StatCardSkeleton key={i} />
+                ))}
+              </div>
+            ) : currentStats && (
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                 <div className="bg-[var(--bg-secondary)] rounded-xl p-4 text-center">
                   <p className="text-2xl font-bold text-[var(--accent)]">
-                    {activeFilterCount > 0
-                      ? formatNumber(currentStats.filteredCount)
-                      : formatNumber(currentStats.participants)}
+                    <AnimatedCounter
+                      value={activeFilterCount > 0 ? currentStats.filteredCount : currentStats.participants}
+                    />
                   </p>
                   <p className="text-xs text-[var(--text-secondary)]">
                     {activeFilterCount > 0
-                      ? `${t('dashboard.participants')} (${formatNumber(currentStats.participants)})`
+                      ? `${t('dashboard.participants')} (${currentStats.participants.toLocaleString('tr-TR')})`
                       : t('dashboard.participants')}
                   </p>
                 </div>
                 <div className="bg-[var(--bg-secondary)] rounded-xl p-4 text-center">
                   <p className="text-2xl font-bold text-[var(--text-primary)]">
-                    {formatSalary(currentStats.medianSalary)}
+                    <AnimatedSalary value={currentStats.medianSalary} />
                   </p>
                   <p className="text-xs text-[var(--text-secondary)]">{t('dashboard.medianSalary')}</p>
                 </div>
                 <div className="bg-[var(--bg-secondary)] rounded-xl p-4 text-center">
                   <p className="text-2xl font-bold text-[var(--text-primary)]">
-                    {currentStats.multiplier?.toFixed(1)}x
+                    <AnimatedMultiplier value={currentStats.multiplier || 0} />
                   </p>
                   <p className="text-xs text-[var(--text-secondary)]">{t('dashboard.minWageMultiplier')}</p>
                 </div>
                 <div className="bg-[var(--bg-secondary)] rounded-xl p-4 text-center">
                   <p className="text-2xl font-bold text-[var(--text-primary)]">
-                    {formatSalary(currentStats.minWage)}
+                    <AnimatedSalary value={currentStats.minWage} />
                   </p>
                   <p className="text-xs text-[var(--text-secondary)]">{t('dashboard.minWage')} ({filters.year})</p>
                 </div>
@@ -80,33 +102,47 @@ export function Dashboard() {
             )}
 
             {/* Charts Grid */}
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-              {/* Row 1: Position & Experience */}
-              <SalaryByPosition year={filters.year} />
-              <SalaryByExperience year={filters.year} />
-
-              {/* Row 2: Min Wage Trend (Full Width) */}
-              <div className="xl:col-span-2">
-                <MinWageMultiplier />
+            {loading ? (
+              <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+                {[1, 2, 3, 4, 5, 6].map((i) => (
+                  <ChartSkeleton key={i} />
+                ))}
               </div>
+            ) : (
+              <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+                {/* Salary Calculator */}
+                <SalaryCalculator />
 
-              {/* Row 3: City & Work Mode */}
-              <SalaryByCity year={filters.year} />
-              <RemoteVsOffice year={filters.year} />
+                {/* Row 1: Position & Experience */}
+                <SalaryByPosition year={filters.year} />
+                <SalaryByExperience year={filters.year} />
 
-              {/* Row 4: Tech & Company Type */}
-              <SalaryByTech year={filters.year} />
-              <SalaryByCompanyType year={filters.year} />
+                {/* Row 2: Min Wage Trend (Full Width) */}
+                <div className="xl:col-span-2">
+                  <MinWageMultiplier />
+                </div>
 
-              {/* Row 5: Inflation Comparison (Full Width) */}
-              <div className="xl:col-span-2">
-                <InflationComparison />
+                {/* Row 3: City & Work Mode */}
+                <SalaryByCity year={filters.year} />
+                <RemoteVsOffice year={filters.year} />
+
+                {/* Row 4: Tech & Company Type */}
+                <SalaryByTech year={filters.year} />
+                <SalaryByCompanyType year={filters.year} />
+
+                {/* Row 5: Inflation Comparison (Full Width) */}
+                <div className="xl:col-span-2">
+                  <InflationComparison />
+                </div>
               </div>
-            </div>
+            )}
 
           </main>
         </div>
       </div>
+
+      {/* Mobile Filter Drawer */}
+      <MobileFilterDrawer />
     </div>
   );
 }

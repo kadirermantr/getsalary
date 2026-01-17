@@ -115,6 +115,7 @@ const resources = {
           inflation: 'TÜİK TÜFE verileriyle enflasyon düzeltmesi',
           segmentation: 'Pozisyon, deneyim, şehir ve çalışma moduna göre segmentasyon',
         },
+        faq: 'Sık Sorulan Sorular',
         developer: 'Geliştirici',
         developerDesc: {
           prefix: 'Bu proje ',
@@ -244,6 +245,7 @@ const resources = {
           inflation: 'Inflation adjustment using TURKSTAT CPI data',
           segmentation: 'Segmentation by position, experience, city, and work mode',
         },
+        faq: 'Frequently Asked Questions',
         developer: 'Developer',
         developerDesc: {
           prefix: 'This project is developed by ',

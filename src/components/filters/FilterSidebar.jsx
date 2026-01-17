@@ -1,14 +1,14 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useFilters } from '../../context/FilterContext';
 import { useData } from '../../context/DataContext';
 import { YEARS } from '../../data/config';
 
-export function FilterSidebar() {
+function FilterContent({ onClose }) {
   const { t } = useTranslation();
   const { filters, updateFilter, resetFilters, activeFilterCount } = useFilters();
   const { getUniqueValues } = useData();
 
-  // Get unique values from data
   const positions = [
     { value: 'all', label: t('filters.all') },
     ...getUniqueValues('position').map((p) => ({ value: p, label: p })),
@@ -56,6 +56,21 @@ export function FilterSidebar() {
 
   return (
     <div className="bg-[var(--bg-secondary)] rounded-xl p-4">
+      {/* Mobile Header */}
+      {onClose && (
+        <div className="flex items-center justify-between mb-4 pb-4 border-b border-[var(--border)] lg:hidden">
+          <h2 className="font-semibold text-[var(--text-primary)]">{t('filters.title') || 'Filtreler'}</h2>
+          <button
+            onClick={onClose}
+            className="p-2 hover:bg-[var(--bg-primary)] rounded-lg transition-colors"
+          >
+            <svg className="w-5 h-5 text-[var(--text-secondary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      )}
+
       {/* Year Selector */}
       <div className="border-b border-[var(--border)] pb-4 mb-4">
         <h3 className="text-sm font-semibold text-[var(--text-primary)] mb-3">{t('filters.year')}</h3>
@@ -143,5 +158,57 @@ export function FilterSidebar() {
         </button>
       )}
     </div>
+  );
+}
+
+export function FilterSidebar() {
+  return (
+    <div className="hidden lg:block">
+      <FilterContent />
+    </div>
+  );
+}
+
+export function MobileFilterDrawer() {
+  const [isOpen, setIsOpen] = useState(false);
+  const { activeFilterCount } = useFilters();
+
+  return (
+    <>
+      {/* Floating Button - Mobile Only */}
+      <button
+        onClick={() => setIsOpen(true)}
+        className="lg:hidden fixed bottom-6 right-6 z-40 flex items-center gap-2 bg-[var(--accent)] text-white px-4 py-3 rounded-full shadow-lg hover:bg-[var(--accent-hover)] transition-colors"
+      >
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+        </svg>
+        <span className="font-medium">Filtreler</span>
+        {activeFilterCount > 0 && (
+          <span className="bg-white text-[var(--accent)] text-xs px-1.5 py-0.5 rounded-full font-bold">
+            {activeFilterCount}
+          </span>
+        )}
+      </button>
+
+      {/* Backdrop */}
+      {isOpen && (
+        <div
+          className="lg:hidden fixed inset-0 bg-black/50 z-40 transition-opacity"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
+
+      {/* Drawer */}
+      <div
+        className={`lg:hidden fixed inset-y-0 left-0 z-50 w-80 max-w-[85vw] bg-[var(--bg-primary)] transform transition-transform duration-300 ease-in-out ${
+          isOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
+        <div className="h-full overflow-y-auto p-4">
+          <FilterContent onClose={() => setIsOpen(false)} />
+        </div>
+      </div>
+    </>
   );
 }

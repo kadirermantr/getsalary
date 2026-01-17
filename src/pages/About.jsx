@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { PageContainer, PageHeader } from '../components/layout/PageContainer';
 import { OpenSourceBanner } from '../components/social/OpenSourceBanner';
+import { FAQ } from '../components/ui/FAQ';
 
 export function About() {
   const { t } = useTranslation();
@@ -95,6 +96,14 @@ export function About() {
             <li>{t('about.methodologyList.segmentation')}</li>
           </ul>
         </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="mb-12">
+        <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-3">
+          {t('about.faq') || 'Sık Sorulan Sorular'}
+        </h2>
+        <FAQ />
       </section>
 
       {/* Tech Stack */}

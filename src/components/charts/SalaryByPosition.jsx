@@ -14,6 +14,7 @@ import { useFilters } from '../../context/FilterContext';
 import { CHART_COLOR_ARRAY } from '../../data/config';
 import { formatSalary } from '../../utils/calculations';
 import { Card, ChartIcons } from '../ui/Card';
+import { ChartTooltip } from '../ui/ChartTooltip';
 
 export function SalaryByPosition({ year }) {
   const { t } = useTranslation();
@@ -47,24 +48,11 @@ export function SalaryByPosition({ year }) {
       median: Math.round(posStats.median),
       average: Math.round(posStats.average),
       count: posStats.count,
+      p25: Math.round(posStats.p25),
+      p75: Math.round(posStats.p75),
     }))
     .sort((a, b) => b.median - a.median)
     .slice(0, 8);
-
-  const CustomTooltip = ({ active, payload, label }) => {
-    if (!active || !payload || !payload.length) return null;
-
-    return (
-      <div className="bg-[var(--bg-primary)] border border-[var(--bg-secondary)] rounded-lg p-3 shadow-lg">
-        <p className="font-semibold text-[var(--text-primary)] mb-2">{label}</p>
-        {payload.map((entry, index) => (
-          <p key={index} style={{ color: entry.color }} className="text-sm">
-            {entry.name}: {formatSalary(entry.value)}
-          </p>
-        ))}
-      </div>
-    );
-  };
 
   return (
     <Card title={t('charts.salaryByPosition')} icon={ChartIcons.position}>
@@ -85,7 +73,7 @@ export function SalaryByPosition({ year }) {
               fontSize={12}
               width={80}
             />
-            <Tooltip content={<CustomTooltip />} />
+            <Tooltip content={<ChartTooltip showPercentile />} />
             <Legend />
             <Bar
               dataKey="median"
