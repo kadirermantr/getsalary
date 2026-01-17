@@ -5,11 +5,10 @@ import { useFilters } from '../../context/FilterContext';
 import { Card, ChartIcons } from '../ui/Card';
 
 export function SalaryCalculator() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { getYearStats } = useData();
   const { filters } = useFilters();
   const [salary, setSalary] = useState('');
-  const isTr = i18n.language === 'tr';
 
   const stats = getYearStats(filters.year, filters);
 
@@ -55,19 +54,11 @@ export function SalaryCalculator() {
 
   const getPercentileMessage = (p) => {
     if (!p) return '';
-    if (isTr) {
-      if (p >= 90) return 'Harika! Sektörün en üst %10\'luk diliminde yer alıyorsun.';
-      if (p >= 75) return 'Çok iyi! Ortalamanın üzerinde kazanıyorsun.';
-      if (p >= 50) return 'Medyanın üzerinde, iyi bir seviyedesin.';
-      if (p >= 25) return 'Medyanın altında, ancak çeyrekten yukarıdasın.';
-      return 'Alt %25\'lik dilimdesin. Maaş görüşmesi düşünebilirsin.';
-    } else {
-      if (p >= 90) return 'Amazing! You\'re in the top 10% of the industry.';
-      if (p >= 75) return 'Great! You\'re earning above average.';
-      if (p >= 50) return 'Above median, you\'re at a good level.';
-      if (p >= 25) return 'Below median, but above the first quartile.';
-      return 'You\'re in the bottom 25%. Consider negotiating your salary.';
-    }
+    if (p >= 90) return t('calculator.top10');
+    if (p >= 75) return t('calculator.top25');
+    if (p >= 50) return t('calculator.aboveMedian');
+    if (p >= 25) return t('calculator.belowMedian');
+    return t('calculator.bottom25');
   };
 
   if (!stats) return null;
@@ -75,22 +66,17 @@ export function SalaryCalculator() {
   return (
     <Card
       title={t('charts.salaryCalculator')}
-      icon={ChartIcons.multiplier}
+      icon={ChartIcons.calculator}
     >
       <div className="flex flex-col lg:flex-row lg:items-start gap-6">
         {/* Left: Input */}
         <div className="lg:w-72 flex-shrink-0 space-y-3">
-          <p className="text-sm text-[var(--text-secondary)]">
-            {isTr
-              ? 'Net maaşını gir ve sektördeki yerini gör.'
-              : 'Enter your net salary and see where you stand.'}
-          </p>
           <div className="relative">
             <input
               type="text"
               value={salary}
               onChange={handleChange}
-              placeholder={isTr ? 'Örn: 45.000' : 'E.g: 45,000'}
+              placeholder={t('calculator.placeholder')}
               className="w-full bg-[var(--bg-primary)] text-[var(--text-primary)] rounded-lg px-4 py-3 pr-12 border border-[var(--border)] focus:border-[var(--accent)] focus:outline-none text-lg"
             />
             <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[var(--text-secondary)]">
@@ -104,7 +90,7 @@ export function SalaryCalculator() {
               <p className="font-medium text-sm text-[var(--text-primary)]">{stats.p25?.toLocaleString('tr-TR')} ₺</p>
             </div>
             <div className="text-center">
-              <p className="text-xs text-[var(--text-secondary)]">{isTr ? 'Medyan' : 'Median'}</p>
+              <p className="text-xs text-[var(--text-secondary)]">{t('charts.median')}</p>
               <p className="font-medium text-sm text-[var(--accent)]">{stats.median?.toLocaleString('tr-TR')} ₺</p>
             </div>
             <div className="text-center">
@@ -122,7 +108,7 @@ export function SalaryCalculator() {
               <div className="text-center">
                 <p className="text-4xl font-bold">
                   <span className={getPercentileColor(percentile)}>{percentile}</span>
-                  <span className="text-[var(--text-secondary)] text-xl">. yüzdelik</span>
+                  <span className="text-[var(--text-secondary)] text-xl">. {t('charts.percentile')}</span>
                 </p>
                 <p className="text-sm text-[var(--text-secondary)] mt-2">
                   {getPercentileMessage(percentile)}
@@ -153,7 +139,7 @@ export function SalaryCalculator() {
           ) : (
             <div className="bg-[var(--bg-primary)] rounded-lg p-4 h-full flex items-center justify-center min-h-[120px]">
               <p className="text-[var(--text-secondary)] text-sm">
-                {isTr ? 'Maaşını girerek sektördeki yerini öğren.' : 'Enter your salary to see where you stand.'}
+{t('charts.enterSalaryPlaceholder')}
               </p>
             </div>
           )}

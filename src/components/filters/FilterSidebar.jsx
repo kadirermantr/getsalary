@@ -21,7 +21,13 @@ function FilterContent({ onClose }) {
 
   const cities = [
     { value: 'all', label: t('filters.all') },
-    ...getUniqueValues('city').map((c) => ({ value: c, label: c })),
+    ...getUniqueValues('city')
+      .sort((a, b) => {
+        if (a === 'Diğer') return 1;
+        if (b === 'Diğer') return -1;
+        return a.localeCompare(b, 'tr');
+      })
+      .map((c) => ({ value: c, label: c })),
   ];
 
   const workModes = [

@@ -9,7 +9,6 @@ import { SalaryByExperience } from '../components/charts/SalaryByExperience';
 import { MinWageMultiplier } from '../components/charts/MinWageMultiplier';
 import { SalaryByCity } from '../components/charts/SalaryByCity';
 import { RemoteVsOffice } from '../components/charts/RemoteVsOffice';
-import { SalaryByTech } from '../components/charts/SalaryByTech';
 import { SalaryByCompanyType } from '../components/charts/SalaryByCompanyType';
 import { SalaryCalculator } from '../components/calculator/SalaryCalculator';
 import { AnimatedCounter, AnimatedSalary, AnimatedMultiplier } from '../components/ui/AnimatedCounter';
@@ -98,7 +97,7 @@ export function Dashboard() {
                     }
                     value={<AnimatedCounter value={activeFilterCount > 0 ? currentStats?.filteredCount : currentStats?.participants} />}
                     label={`${t('dashboard.participants')} (${filters.year})`}
-                    subValue={activeFilterCount > 0 ? `/ ${currentStats?.participants?.toLocaleString('tr-TR')} toplam` : null}
+                    subValue={activeFilterCount > 0 ? `/ ${currentStats?.participants?.toLocaleString('tr-TR')} ${t('charts.total')}` : null}
                     color="accent"
                   />
                   <StatCard
@@ -135,12 +134,12 @@ export function Dashboard() {
 
                 {/* Charts - Bento Grid (4 columns) */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                  {/* Row 1: Position (full) */}
+                  {/* Row 1: Position (full) - En önemli */}
                   <div className="md:col-span-2 lg:col-span-4">
                     <SalaryByPosition year={filters.year} />
                   </div>
 
-                  {/* Row 2: Experience (2) + Location (2) */}
+                  {/* Row 2: Experience + Location - Kişisel faktörler */}
                   <div className="md:col-span-2">
                     <SalaryByExperience year={filters.year} />
                   </div>
@@ -148,16 +147,17 @@ export function Dashboard() {
                     <SalaryByCity year={filters.year} />
                   </div>
 
-                  {/* Row 3: Min Wage Trend (full) */}
-                  <div className="md:col-span-2 lg:col-span-4">
-                    <MinWageMultiplier />
+                  {/* Row 3: Work Mode + Company Type - İş ortamı faktörleri */}
+                  <div className="md:col-span-2">
+                    <RemoteVsOffice year={filters.year} />
+                  </div>
+                  <div className="md:col-span-2">
+                    <SalaryByCompanyType year={filters.year} />
                   </div>
 
-                  {/* Row 4: Remote + Tech + Company Type (equal) */}
-                  <div className="md:col-span-2 lg:col-span-4 grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <RemoteVsOffice year={filters.year} />
-                    <SalaryByTech year={filters.year} />
-                    <SalaryByCompanyType year={filters.year} />
+                  {/* Row 4: Min Wage Trend (full) - Yıllık trend */}
+                  <div className="md:col-span-2 lg:col-span-4">
+                    <MinWageMultiplier />
                   </div>
 
                   {/* Row 5: Salary Calculator (full) */}

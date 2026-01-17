@@ -2,13 +2,12 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export function ShareButtons({ title, description, url, compact = false }) {
-  const { i18n } = useTranslation();
+  const { t } = useTranslation();
   const [copied, setCopied] = useState(false);
-  const isTr = i18n.language === 'tr';
 
   const shareUrl = url || window.location.href;
-  const shareTitle = title || 'getSalary - Yazılım Sektörü Maaş Analizi';
-  const shareDescription = description || 'Türkiye yazılım sektöründeki maaş trendlerini keşfedin.';
+  const shareTitle = title || `getSalary - ${t('hero.title')}`;
+  const shareDescription = description || t('hero.description');
 
   const shareLinks = {
     twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareTitle)}&url=${encodeURIComponent(shareUrl)}`,
@@ -67,7 +66,7 @@ export function ShareButtons({ title, description, url, compact = false }) {
               d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z"
             />
           </svg>
-          {isTr ? 'Paylaş' : 'Share'}
+          {t('common.share')}
         </button>
       )}
 

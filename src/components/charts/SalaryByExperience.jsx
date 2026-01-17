@@ -41,25 +41,41 @@ export function SalaryByExperience({ year }) {
     );
   }
 
-  const experienceOrder = ['Junior', 'Mid-Level', 'Senior'];
-  const data = experienceOrder
-    .filter((level) => stats.byExperience[level])
-    .map((level) => ({
-      level,
-      median: Math.round(stats.byExperience[level].median),
-      p25: Math.round(stats.byExperience[level].p25),
-      p75: Math.round(stats.byExperience[level].p75),
-      count: stats.byExperience[level].count,
-    }));
+  // Bilinen seviyeler için sıralama ve key mapping
+  const knownLevelOrder = ['Junior', 'Mid-Level', 'Senior'];
+  const levelKeyMap = {
+    Junior: 'junior',
+    'Mid-Level': 'mid',
+    Senior: 'senior',
+  };
 
-  const CustomTooltip = ({ active, payload, label }) => {
+  // Verideki tüm seviyeleri al (dinamik olarak gelebilecek yeni seviyeler dahil)
+  const allLevels = Object.keys(stats.byExperience);
+
+  // Bilinen seviyeleri sırayla, bilinmeyenleri sona ekle
+  const orderedLevels = [
+    ...knownLevelOrder.filter((level) => allLevels.includes(level)),
+    ...allLevels.filter((level) => !knownLevelOrder.includes(level)),
+  ];
+
+  const data = orderedLevels.map((level) => ({
+    level,
+    // Dinamik çeviri
+    label: t(`experience.${levelKeyMap[level] || level.toLowerCase()}`, { defaultValue: level }),
+    median: Math.round(stats.byExperience[level].median),
+    p25: Math.round(stats.byExperience[level].p25),
+    p75: Math.round(stats.byExperience[level].p75),
+    count: stats.byExperience[level].count,
+  }));
+
+  const CustomTooltip = ({ active, payload }) => {
     if (!active || !payload || !payload.length) return null;
 
-    const item = data.find((d) => d.level === label);
+    const item = payload[0].payload;
 
     return (
       <div className="bg-[var(--bg-primary)] border border-[var(--bg-secondary)] rounded-lg p-3 shadow-lg">
-        <p className="font-semibold text-[var(--text-primary)] mb-2">{label}</p>
+        <p className="font-semibold text-[var(--text-primary)] mb-2">{item.label}</p>
         <p className="text-sm text-[var(--text-secondary)]">
           {t('charts.median')}: {formatSalary(item?.median)}
         </p>
@@ -80,7 +96,7 @@ export function SalaryByExperience({ year }) {
           <BarChart data={data} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="var(--bg-secondary)" />
             <XAxis
-              dataKey="level"
+              dataKey="label"
               stroke="var(--text-secondary)"
               fontSize={12}
             />

@@ -41,19 +41,23 @@ export function SalaryByCompanyType({ year }) {
     );
   }
 
-  const typeOrder = ['Corporate', 'Startup', 'Agency', 'Freelance'];
-  const typeLabels = {
-    Corporate: 'Kurumsal',
-    Startup: 'Startup',
-    Agency: 'Ajans',
-    Freelance: 'Freelance',
-  };
+  // Bilinen türler için sıralama (yeni türler sona eklenir)
+  const knownTypeOrder = ['Corporate', 'Startup', 'Agency', 'Freelance'];
 
-  const data = typeOrder
-    .filter((type) => stats.byCompanyType[type])
+  // Verideki tüm türleri al (dinamik olarak gelebilecek yeni türler dahil)
+  const allTypes = Object.keys(stats.byCompanyType);
+
+  // Bilinen türleri sırayla, bilinmeyenleri sona ekle
+  const orderedTypes = [
+    ...knownTypeOrder.filter((type) => allTypes.includes(type)),
+    ...allTypes.filter((type) => !knownTypeOrder.includes(type)),
+  ];
+
+  const data = orderedTypes
     .map((type) => ({
       type,
-      label: typeLabels[type] || type,
+      // Dinamik çeviri: t('companyType.corporate') veya fallback olarak orijinal değer
+      label: t(`companyType.${type.toLowerCase()}`, { defaultValue: type }),
       median: Math.round(stats.byCompanyType[type].median),
       count: stats.byCompanyType[type].count,
     }))

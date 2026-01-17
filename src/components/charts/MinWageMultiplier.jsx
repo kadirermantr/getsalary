@@ -58,13 +58,13 @@ export function MinWageMultiplier() {
       <div className="bg-[var(--bg-primary)] border border-[var(--bg-secondary)] rounded-lg p-3 shadow-lg">
         <p className="font-semibold text-[var(--text-primary)] mb-2">{label}</p>
         <p className="text-sm" style={{ color: CHART_COLOR_ARRAY[0] }}>
-          Çarpan: {item?.multiplier}x
+          {t('charts.multiplier')}: {item?.multiplier}x
         </p>
         <p className="text-sm text-[var(--text-secondary)]">
-          Medyan: {item?.medianSalary?.toLocaleString('tr-TR')} TL
+          {t('charts.median')}: {item?.medianSalary?.toLocaleString('tr-TR')} TL
         </p>
         <p className="text-sm text-[var(--text-secondary)]">
-          Asgari: {item?.minWage?.toLocaleString('tr-TR')} TL
+          {t('charts.minWage')}: {item?.minWage?.toLocaleString('tr-TR')} TL
         </p>
       </div>
     );
@@ -93,12 +93,12 @@ export function MinWageMultiplier() {
               y={1}
               stroke="var(--text-secondary)"
               strokeDasharray="3 3"
-              label={{ value: '1x (Asgari Ücret)', fill: 'var(--text-secondary)', fontSize: 10 }}
+              label={{ value: t('charts.minWageLabel'), fill: 'var(--text-secondary)', fontSize: 10 }}
             />
             <Line
               type="monotone"
               dataKey="multiplier"
-              name="Maaş / Asgari Ücret"
+              name={t('charts.salaryToMinWage')}
               stroke={CHART_COLOR_ARRAY[0]}
               strokeWidth={3}
               dot={{ fill: CHART_COLOR_ARRAY[0], strokeWidth: 2, r: 5 }}
@@ -108,7 +108,7 @@ export function MinWageMultiplier() {
         </ResponsiveContainer>
       </div>
       <p className="text-xs text-[var(--text-secondary)] mt-2 text-center">
-        Yıllara göre medyan yazılımcı maaşının asgari ücrete oranı
+        {t('charts.minWageTrendDesc')}
       </p>
     </Card>
   );

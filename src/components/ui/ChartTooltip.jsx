@@ -1,6 +1,9 @@
+import { useTranslation } from 'react-i18next';
 import { formatSalary } from '../../utils/calculations';
 
 export function ChartTooltip({ active, payload, label, showPercentile = false }) {
+  const { t } = useTranslation();
+
   if (!active || !payload || !payload.length) return null;
 
   const data = payload[0]?.payload;
@@ -23,7 +26,7 @@ export function ChartTooltip({ active, payload, label, showPercentile = false })
 
         {data?.count && (
           <div className="flex justify-between items-center gap-4 pt-1 border-t border-[var(--bg-secondary)] mt-2">
-            <span className="text-xs text-[var(--text-secondary)]">Katılımcı:</span>
+            <span className="text-xs text-[var(--text-secondary)]">{t('charts.participants')}:</span>
             <span className="text-xs font-medium text-[var(--text-primary)]">
               {data.count.toLocaleString('tr-TR')}
             </span>

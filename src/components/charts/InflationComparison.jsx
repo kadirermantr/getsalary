@@ -17,10 +17,9 @@ import { formatSalary, formatPercentage } from '../../utils/calculations';
 import { Card, ChartIcons } from '../ui/Card';
 
 export function InflationComparison() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { getYearStats, loading } = useData();
   const { filters } = useFilters();
-  const isTr = i18n.language === 'tr';
 
   // Annual inflation rates (TÜFE - approximate year-end values)
   const inflationRates = {
@@ -80,16 +79,16 @@ export function InflationComparison() {
       <div className="bg-[var(--bg-primary)] border border-[var(--bg-secondary)] rounded-lg p-3 shadow-lg">
         <p className="font-semibold text-[var(--text-primary)] mb-2">{label}</p>
         <p className="text-sm" style={{ color: CHART_COLOR_ARRAY[1] }}>
-          {isTr ? 'Maaş Artışı' : 'Salary Growth'}: {formatPercentage(item?.salaryGrowth)}
+          {t('charts.salaryGrowth')}: {formatPercentage(item?.salaryGrowth)}
         </p>
         <p className="text-sm" style={{ color: CHART_COLOR_ARRAY[3] }}>
-          {isTr ? 'Enflasyon' : 'Inflation'}: {formatPercentage(item?.inflation)}
+          {t('charts.inflation')}: {formatPercentage(item?.inflation)}
         </p>
         <p className="text-sm font-semibold" style={{ color: item?.realGrowth >= 0 ? CHART_COLOR_ARRAY[1] : CHART_COLOR_ARRAY[3] }}>
-          {isTr ? 'Reel Artış' : 'Real Growth'}: {formatPercentage(item?.realGrowth)}
+          {t('charts.realGrowth')}: {formatPercentage(item?.realGrowth)}
         </p>
         <p className="text-sm text-[var(--text-secondary)] mt-1">
-          {isTr ? 'Medyan' : 'Median'}: {formatSalary(item?.medianSalary)}
+          {t('charts.median')}: {formatSalary(item?.medianSalary)}
         </p>
       </div>
     );
@@ -115,14 +114,14 @@ export function InflationComparison() {
             <Legend />
             <Bar
               dataKey="salaryGrowth"
-              name={isTr ? 'Maaş Artışı' : 'Salary Growth'}
+              name={t('charts.salaryGrowth')}
               fill={CHART_COLOR_ARRAY[1]}
               radius={[4, 4, 0, 0]}
             />
             <Line
               type="monotone"
               dataKey="inflation"
-              name={isTr ? 'Enflasyon (TÜFE)' : 'Inflation (CPI)'}
+              name={t('charts.inflation')}
               stroke={CHART_COLOR_ARRAY[3]}
               strokeWidth={3}
               dot={{ fill: CHART_COLOR_ARRAY[3], strokeWidth: 2, r: 5 }}
@@ -131,9 +130,7 @@ export function InflationComparison() {
         </ResponsiveContainer>
       </div>
       <p className="text-xs text-[var(--text-secondary)] mt-2 text-center">
-        {isTr
-          ? 'Yıllık maaş artışı vs TÜFE enflasyonu karşılaştırması'
-          : 'Annual salary growth vs CPI inflation comparison'}
+        {t('charts.inflationDesc')}
       </p>
     </Card>
   );

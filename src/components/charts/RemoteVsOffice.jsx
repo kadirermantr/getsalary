@@ -41,26 +41,45 @@ export function RemoteVsOffice({ year }) {
     );
   }
 
-  const modeOrder = ['Remote', 'Hybrid', 'Ofis'];
-  const colors = [CHART_COLOR_ARRAY[1], CHART_COLOR_ARRAY[4], CHART_COLOR_ARRAY[0]];
+  // Bilinen modlar için sıralama ve key mapping
+  const knownModeOrder = ['Remote', 'Hybrid', 'Ofis'];
+  const modeKeyMap = {
+    Remote: 'remote',
+    Hybrid: 'hybrid',
+    Ofis: 'office',
+  };
+  const modeColors = {
+    Remote: CHART_COLOR_ARRAY[1],
+    Hybrid: CHART_COLOR_ARRAY[4],
+    Ofis: CHART_COLOR_ARRAY[0],
+  };
 
-  const data = modeOrder
-    .filter((mode) => stats.byWorkMode[mode])
-    .map((mode, index) => ({
-      mode,
-      median: Math.round(stats.byWorkMode[mode].median),
-      count: stats.byWorkMode[mode].count,
-      color: colors[index],
-    }));
+  // Verideki tüm modları al (dinamik olarak gelebilecek yeni modlar dahil)
+  const allModes = Object.keys(stats.byWorkMode);
 
-  const CustomTooltip = ({ active, payload, label }) => {
+  // Bilinen modları sırayla, bilinmeyenleri sona ekle
+  const orderedModes = [
+    ...knownModeOrder.filter((mode) => allModes.includes(mode)),
+    ...allModes.filter((mode) => !knownModeOrder.includes(mode)),
+  ];
+
+  const data = orderedModes.map((mode, index) => ({
+    mode,
+    // Dinamik çeviri: bilinen key varsa kullan, yoksa lowercase dene, son çare orijinal değer
+    label: t(`workMode.${modeKeyMap[mode] || mode.toLowerCase()}`, { defaultValue: mode }),
+    median: Math.round(stats.byWorkMode[mode].median),
+    count: stats.byWorkMode[mode].count,
+    color: modeColors[mode] || CHART_COLOR_ARRAY[index % CHART_COLOR_ARRAY.length],
+  }));
+
+  const CustomTooltip = ({ active, payload }) => {
     if (!active || !payload || !payload.length) return null;
 
-    const item = data.find((d) => d.mode === label);
+    const item = payload[0].payload;
 
     return (
       <div className="bg-[var(--bg-primary)] border border-[var(--bg-secondary)] rounded-lg p-3 shadow-lg">
-        <p className="font-semibold text-[var(--text-primary)] mb-2">{label}</p>
+        <p className="font-semibold text-[var(--text-primary)] mb-2">{item.label}</p>
         <p className="text-sm text-[var(--text-secondary)]">
           {t('charts.median')}: {formatSalary(item?.median)}
         </p>
@@ -78,7 +97,7 @@ export function RemoteVsOffice({ year }) {
           <BarChart data={data} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="var(--bg-secondary)" />
             <XAxis
-              dataKey="mode"
+              dataKey="label"
               stroke="var(--text-secondary)"
               fontSize={12}
             />

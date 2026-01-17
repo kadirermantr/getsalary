@@ -1,8 +1,9 @@
 import { Link, useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export function NotFound() {
+  const { t } = useTranslation();
   const { lang = 'tr' } = useParams();
-  const isTr = lang === 'tr';
 
   return (
     <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center">
@@ -11,12 +12,10 @@ export function NotFound() {
           404
         </div>
         <h1 className="text-2xl font-bold text-[var(--text-primary)] mb-4">
-          {isTr ? 'Sayfa Bulunamadı' : 'Page Not Found'}
+          {t('common.pageNotFound')}
         </h1>
         <p className="text-[var(--text-secondary)] mb-8">
-          {isTr
-            ? 'Aradığınız sayfa mevcut değil veya taşınmış olabilir.'
-            : "The page you're looking for doesn't exist or has been moved."}
+          {t('common.pageNotFoundDesc')}
         </p>
         <Link
           to={`/${lang}`}
@@ -36,7 +35,7 @@ export function NotFound() {
               d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
             />
           </svg>
-          {isTr ? 'Ana Sayfaya Dön' : 'Back to Home'}
+          {t('common.backToHome')}
         </Link>
       </div>
     </div>

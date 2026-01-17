@@ -40,22 +40,36 @@ export function SalaryByCity({ year }) {
     );
   }
 
+  // Şehir çevirileri (özel durumlar için)
+  const cityKeyMap = {
+    Diğer: 'other',
+  };
+
   const data = Object.entries(stats.byCity)
     .map(([city, cityStats]) => ({
       city,
+      // Dinamik çeviri: özel durumlar için çeviri, diğerleri için orijinal değer
+      label: cityKeyMap[city]
+        ? t(`cities.${cityKeyMap[city]}`, { defaultValue: city })
+        : city,
       median: Math.round(cityStats.median),
       count: cityStats.count,
     }))
-    .sort((a, b) => b.median - a.median);
+    .sort((a, b) => {
+      // "Diğer/Other" her zaman sonda
+      if (a.city === 'Diğer') return 1;
+      if (b.city === 'Diğer') return -1;
+      return b.median - a.median;
+    });
 
-  const CustomTooltip = ({ active, payload, label }) => {
+  const CustomTooltip = ({ active, payload }) => {
     if (!active || !payload || !payload.length) return null;
 
-    const item = data.find((d) => d.city === label);
+    const item = payload[0].payload;
 
     return (
       <div className="bg-[var(--bg-primary)] border border-[var(--bg-secondary)] rounded-lg p-3 shadow-lg">
-        <p className="font-semibold text-[var(--text-primary)] mb-2">{label}</p>
+        <p className="font-semibold text-[var(--text-primary)] mb-2">{item.label}</p>
         <p className="text-sm text-[var(--text-secondary)]">
           {t('charts.median')}: {formatSalary(item?.median)}
         </p>
@@ -73,7 +87,7 @@ export function SalaryByCity({ year }) {
           <BarChart data={data} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="var(--bg-secondary)" />
             <XAxis
-              dataKey="city"
+              dataKey="label"
               stroke="var(--text-secondary)"
               fontSize={12}
             />

@@ -2,9 +2,8 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export function EmbedCode({ chartId, title }) {
-  const { i18n } = useTranslation();
+  const { t } = useTranslation();
   const [copied, setCopied] = useState(false);
-  const isTr = i18n.language === 'tr';
 
   const embedUrl = `${window.location.origin}/embed/${chartId}`;
   const embedCode = `<iframe src="${embedUrl}" width="100%" height="400" frameborder="0" title="${title}"></iframe>`;
@@ -23,7 +22,7 @@ export function EmbedCode({ chartId, title }) {
     <div className="bg-[var(--bg-secondary)] rounded-lg p-4">
       <div className="flex items-center justify-between mb-2">
         <span className="text-sm font-medium text-[var(--text-primary)]">
-          {isTr ? 'Embed Kodu' : 'Embed Code'}
+          {t('common.embedCode')}
         </span>
         <button
           onClick={copyToClipboard}
@@ -33,7 +32,7 @@ export function EmbedCode({ chartId, title }) {
               : 'bg-[var(--bg-primary)] text-[var(--text-secondary)] hover:text-[var(--accent)]'
           }`}
         >
-          {copied ? (isTr ? 'Kopyalandı!' : 'Copied!') : (isTr ? 'Kopyala' : 'Copy')}
+          {copied ? t('common.copied') : t('common.copy')}
         </button>
       </div>
       <pre className="bg-[var(--bg-primary)] p-3 rounded text-xs text-[var(--text-secondary)] overflow-x-auto">
