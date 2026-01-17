@@ -13,7 +13,6 @@ import { SalaryByCompanyType } from '../components/charts/SalaryByCompanyType';
 import { InflationComparison } from '../components/charts/InflationComparison';
 import { SalaryCalculator } from '../components/calculator/SalaryCalculator';
 import { ShareButtons } from '../components/social/ShareButtons';
-import { exportToCSV } from '../utils/export';
 import { AnimatedCounter, AnimatedSalary, AnimatedMultiplier } from '../components/ui/AnimatedCounter';
 import { StatCardSkeleton, ChartSkeleton } from '../components/ui/Skeleton';
 
@@ -30,24 +29,11 @@ export function Dashboard() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <PageHeader title="Dashboard" description={t('dashboard.description')} />
-          <div className="flex items-center gap-2">
-            {/* Export Button */}
-            <button
-              onClick={() => exportToCSV(currentStats, filters.year, filters)}
-              className="flex items-center gap-2 px-3 py-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] rounded-lg transition-colors"
-              title={t('dashboard.exportCSV') || 'CSV İndir'}
-            >
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-              </svg>
-              <span className="hidden sm:inline">CSV</span>
-            </button>
-            <ShareButtons
-              compact
-              title={`getSalary - ${filters.year} ${t('dashboard.shareTitle')}`}
-              description={t('dashboard.shareDescription', { year: filters.year })}
-            />
-          </div>
+          <ShareButtons
+            compact
+            title={`getSalary - ${filters.year} ${t('dashboard.shareTitle')}`}
+            description={t('dashboard.shareDescription', { year: filters.year })}
+          />
         </div>
 
         {/* Main Layout: Sidebar + Content */}
@@ -110,12 +96,14 @@ export function Dashboard() {
               </div>
             ) : (
               <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-                {/* Salary Calculator */}
-                <SalaryCalculator />
-
                 {/* Row 1: Position & Experience */}
                 <SalaryByPosition year={filters.year} />
                 <SalaryByExperience year={filters.year} />
+
+                {/* Salary Calculator (Full Width) */}
+                <div className="xl:col-span-2">
+                  <SalaryCalculator />
+                </div>
 
                 {/* Row 2: Min Wage Trend (Full Width) */}
                 <div className="xl:col-span-2">
