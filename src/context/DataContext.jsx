@@ -62,7 +62,7 @@ export function DataProvider({ children }) {
 
     return {
       year,
-      participants: data.length,
+      participants: DATA_SOURCES[year]?.participants || data.length,
       medianSalary: calculateMedian(salaries),
       averageSalary: calculateAverage(salaries),
       minWage,
