@@ -10,12 +10,10 @@ export function Calculator() {
     <div className="min-h-screen bg-[var(--bg-primary)]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
-        <div className="mb-8">
-          <PageHeader
-            title={t('nav.calculator')}
-            description={t('calculator.pageDescription')}
-          />
-        </div>
+        <PageHeader
+          title={t('nav.calculator')}
+          description={t('calculator.pageDescription')}
+        />
 
         {/* Calculator Tools */}
         <div className="space-y-6">

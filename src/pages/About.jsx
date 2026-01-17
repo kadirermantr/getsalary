@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { PageHeader } from '../components/layout/PageContainer';
 import { OpenSourceBanner } from '../components/social/OpenSourceBanner';
 import { FAQ } from '../components/ui/FAQ';
 
@@ -9,16 +10,12 @@ export function About() {
 
   return (
     <div className="min-h-screen bg-[var(--bg-primary)]">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
-        <div className="mb-12">
-          <h1 className="text-3xl font-bold text-[var(--text-primary)] mb-4">
-            {t('about.title')}
-          </h1>
-          <p className="text-[var(--text-secondary)] leading-relaxed">
-            {t('about.missionDesc')}
-          </p>
-        </div>
+        <PageHeader
+          title={t('about.title')}
+          description={t('about.missionDesc')}
+        />
 
         {/* Methodology */}
         <section className="mb-12">

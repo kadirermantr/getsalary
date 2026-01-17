@@ -180,8 +180,8 @@ export function SalaryCalculator() {
             </div>
           ) : (
             <div className="bg-[var(--bg-primary)] rounded-lg p-4 h-full flex items-center justify-center min-h-[120px]">
-              <p className="text-[var(--text-secondary)] text-sm">
-{t('charts.enterSalaryPlaceholder')}
+              <p className="text-[var(--text-secondary)] text-sm text-center">
+                ← {t('calculator.enterHint')}
               </p>
             </div>
           )}

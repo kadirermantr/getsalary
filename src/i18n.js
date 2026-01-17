@@ -95,6 +95,7 @@ const resources = {
         belowMedian: 'Medyanın altında, ancak çeyrekten yukarıdasın.',
         bottom25: 'Alt %25\'lik dilimdesin. Maaş görüşmesi düşünebilirsin.',
         pageDescription: 'Maaşını gir, sektördeki yerini öğren. Pozisyon, deneyim ve şehre göre tahmini maaş aralığını hesapla.',
+        enterHint: 'Maaşını gir',
       },
       yearComparison: {
         title: 'Yıl Karşılaştırması',
@@ -107,6 +108,7 @@ const resources = {
         estimatedRange: 'Tahmini Aralık',
         confidence: 'Güven Oranı',
         selectFilters: 'Tahmini görmek için filtre seçin.',
+        selectHint: 'Filtre seç',
         insufficientData: 'Yeterli veri yok. Daha geniş filtreler deneyin.',
       },
       export: {
@@ -283,6 +285,7 @@ const resources = {
         belowMedian: 'Below median, but above the first quartile.',
         bottom25: "You're in the bottom 25%. Consider negotiating your salary.",
         pageDescription: 'Enter your salary to see where you stand. Calculate estimated salary range by position, experience, and city.',
+        enterHint: 'Enter your salary',
       },
       yearComparison: {
         title: 'Year Comparison',
@@ -295,6 +298,7 @@ const resources = {
         estimatedRange: 'Estimated Range',
         confidence: 'Confidence',
         selectFilters: 'Select filters to see prediction.',
+        selectHint: 'Select filters',
         insufficientData: 'Insufficient data. Try broader filters.',
       },
       export: {

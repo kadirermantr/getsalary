@@ -10,9 +10,9 @@ export function PageContainer({ children, className = '', size = 'default' }) {
   );
 }
 
-export function PageHeader({ title, description, children }) {
+export function PageHeader({ title, description, children, className = '' }) {
   return (
-    <div className="mb-8">
+    <div className={`mb-8 ${className}`}>
       <h1 className="text-2xl font-bold text-[var(--text-primary)]">
         {title}
       </h1>

@@ -61,14 +61,15 @@ export function Dashboard() {
     <div className="min-h-screen bg-[var(--bg-primary)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-          <PageHeader title="Dashboard" description={t('dashboard.description')} />
-          <ShareButtons
-            compact
-            title={`getSalary - ${filters.year} ${t('dashboard.shareTitle')}`}
-            description={t('dashboard.shareDescription', { year: filters.year })}
-          />
-        </div>
+        <PageHeader title="Dashboard" description={t('dashboard.description')}>
+          <div className="mt-4">
+            <ShareButtons
+              compact
+              title={`getSalary - ${filters.year} ${t('dashboard.shareTitle')}`}
+              description={t('dashboard.shareDescription', { year: filters.year })}
+            />
+          </div>
+        </PageHeader>
 
         {/* Main Layout */}
         <div className="flex flex-col lg:flex-row gap-6">

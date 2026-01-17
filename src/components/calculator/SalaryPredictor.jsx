@@ -148,12 +148,12 @@ export function SalaryPredictor() {
         {/* Result */}
         <div className="bg-[var(--bg-primary)] rounded-lg p-4">
           {!prediction ? (
-            <p className="text-center text-[var(--text-secondary)] py-4">
-              {t('prediction.selectFilters')}
+            <p className="text-center text-[var(--text-secondary)] text-sm py-4">
+              ↑ {t('prediction.selectHint')}
             </p>
           ) : prediction.insufficient ? (
             <div className="text-center py-4">
-              <p className="text-[var(--text-secondary)]">
+              <p className="text-[var(--text-secondary)] text-sm">
                 {t('prediction.insufficientData')}
               </p>
               <p className="text-xs text-[var(--text-secondary)] mt-1">
