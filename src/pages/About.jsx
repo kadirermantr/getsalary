@@ -56,25 +56,6 @@ export function About() {
         </div>
       </section>
 
-      {/* Developer */}
-      <section className="mb-16">
-        <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-4">
-          {t('about.developer')}
-        </h2>
-        <p className="text-[var(--text-secondary)]">
-          {t('about.developerDesc.prefix')}
-          <a
-            href="https://www.linkedin.com/in/kadirerman/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[var(--accent)]"
-          >
-            @kadirerman
-          </a>
-          {t('about.developerDesc.suffix')}
-        </p>
-      </section>
-
       {/* Open Source */}
       <OpenSourceBanner />
     </PageContainer>
