@@ -6,7 +6,7 @@ import { FAQ } from '../components/ui/FAQ';
 export function About() {
   const { t } = useTranslation();
 
-  const techStack = ['React', 'Vite', 'Tailwind CSS', 'Recharts', 'react-i18next', 'Vercel'];
+  const techStack = ['React', 'Vite', 'Tailwind CSS', 'Recharts', 'Framer Motion', 'react-i18next'];
 
   return (
     <div className="min-h-screen bg-[var(--bg-primary)]">

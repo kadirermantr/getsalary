@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useCallback, useEffect, useRef } from 'react';
+import { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import { useSearchParams, useLocation } from 'react-router-dom';
 import { LATEST_YEAR } from '../data/config';
 
@@ -19,35 +19,29 @@ export function FilterProvider({ children }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
   const isDashboard = location.pathname === '/dashboard' || location.pathname === '/tr/dashboard' || location.pathname === '/en/dashboard';
-  const prevPathRef = useRef(location.pathname);
 
   // Always start with default filters
   const [filters, setFilters] = useState(initialFilters);
   const [userInteracted, setUserInteracted] = useState(false);
 
-  // Reset filters when entering dashboard from another page
+  // Reset filters when leaving dashboard
   useEffect(() => {
-    const prevPath = prevPathRef.current;
-    const wasDashboard = prevPath === '/dashboard' || prevPath === '/tr/dashboard' || prevPath === '/en/dashboard';
-
-    if (isDashboard && !wasDashboard) {
-      // Entering dashboard from another page - reset everything
+    if (!isDashboard) {
+      // Not on dashboard - reset everything
       setFilters(initialFilters);
       setUserInteracted(false);
-      setSearchParams({}, { replace: true });
+      if (searchParams.toString()) {
+        setSearchParams({}, { replace: true });
+      }
     }
+  }, [isDashboard, setSearchParams, searchParams]);
 
-    prevPathRef.current = location.pathname;
-  }, [location.pathname, isDashboard, setSearchParams]);
+  // Convert value to URL-friendly format
+  const toUrlValue = (value) => {
+    return value.toString().toLowerCase().replace(/\//g, '-');
+  };
 
-  // Clear URL params on non-dashboard pages
-  useEffect(() => {
-    if (!isDashboard && searchParams.toString()) {
-      setSearchParams({}, { replace: true });
-    }
-  }, [isDashboard, searchParams, setSearchParams]);
-
-  // Sync filters to URL only when user has interacted
+  // Sync filters to URL only when user has interacted (lowercase URLs)
   useEffect(() => {
     if (!isDashboard || !userInteracted) return;
 
@@ -56,7 +50,7 @@ export function FilterProvider({ children }) {
       const value = filters[key];
       const defaultValue = initialFilters[key];
       if (value !== defaultValue) {
-        params.set(key, value.toString());
+        params.set(key.toLowerCase(), toUrlValue(value));
       }
     });
     setSearchParams(params, { replace: true });
@@ -78,14 +72,14 @@ export function FilterProvider({ children }) {
     ([key, value]) => key !== 'year' && value !== 'all'
   ).length;
 
-  // Generate shareable URL
+  // Generate shareable URL (lowercase, URL-friendly)
   const getShareableUrl = useCallback(() => {
     const params = new URLSearchParams();
     filterKeys.forEach((key) => {
       const value = filters[key];
       const defaultValue = initialFilters[key];
       if (value !== defaultValue) {
-        params.set(key, value.toString());
+        params.set(key.toLowerCase(), toUrlValue(value));
       }
     });
     const queryString = params.toString();

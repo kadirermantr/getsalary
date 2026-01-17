@@ -9,11 +9,10 @@ export function OpenSourceBanner({ className = '' }) {
       <span className="absolute -right-4 -top-4 text-[var(--accent)]/5 text-8xl font-mono font-bold pointer-events-none">{'{ }'}</span>
 
       <div className="relative text-center">
-        <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-4 font-mono">
-          <span className="text-emerald-500">{'// '}</span>
+        <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-3">
           {t('home.openSourceTitle')}
         </h3>
-        <p className="text-[var(--text-secondary)]">
+        <p className="text-sm text-[var(--text-secondary)]">
           {t('home.openSourceDesc')}{' '}
           <a
             href="https://github.com/kadirermantr/getsalary"
