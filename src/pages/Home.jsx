@@ -5,7 +5,7 @@ export function Home() {
   const { t } = useTranslation();
 
   const stats = [
-    { value: '5', label: t('hero.stats.years') },
+    { value: '5+', label: t('hero.stats.years') },
     { value: '30K+', label: t('hero.stats.participants') },
     { value: '15+', label: t('hero.stats.positions') },
   ];
@@ -42,11 +42,6 @@ export function Home() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
           <div className="text-center">
-            {/* Tagline */}
-            <p className="font-mono text-[var(--accent)] text-lg mb-4">
-              {t('hero.subtitle')}
-            </p>
-
             {/* Main heading */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[var(--text-primary)] mb-6">
               {t('hero.title')}

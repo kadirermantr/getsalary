@@ -130,7 +130,7 @@ const resources = {
       hero: {
         title: 'Software Industry Salary Analysis',
         subtitle: 'return insights;',
-        description: 'Explore salary trends in Turkish software industry. Thousands of participants, open source.',
+        description: "Explore salary trends in Türkiye's software industry. Thousands of participants, open source.",
         cta: 'Explore Dashboard',
         stats: {
           years: 'Years of Data',
