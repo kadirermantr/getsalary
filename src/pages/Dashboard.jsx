@@ -92,23 +92,18 @@ export function Dashboard() {
 
         {/* Data Source Attribution */}
         <div className="mt-8 p-4 bg-[var(--bg-secondary)] rounded-xl">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <p className="text-sm text-[var(--text-secondary)]">
-              {t('footer.dataSource')}:{' '}
-              <a
-                href={dataSources[filters.year]?.source}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[var(--accent)] hover:underline"
-              >
-                @oncekiyazilimci
-              </a>
-              {' '}{t('dashboard.surveyTitle')} {filters.year}
-            </p>
-            <p className="text-sm text-[var(--text-secondary)]">
-              {formatNumber(dataSources[filters.year]?.participants)} {t('dashboard.participants').toLowerCase()}
-            </p>
-          </div>
+          <p className="text-sm text-[var(--text-secondary)] text-center">
+            {t('footer.dataSource')}:{' '}
+            <a
+              href={dataSources[filters.year]?.source}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[var(--accent)] hover:underline"
+            >
+              @oncekiyazilimci
+            </a>
+            {' '}{t('dashboard.surveyTitle')} {filters.year} - {formatNumber(dataSources[filters.year]?.participants)} {t('dashboard.participants').toLowerCase()}
+          </p>
         </div>
     </PageContainer>
   );

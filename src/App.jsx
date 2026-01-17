@@ -4,7 +4,6 @@ import { LanguageProvider } from './context/LanguageContext';
 import { DataProvider } from './context/DataContext';
 import { FilterProvider } from './context/FilterContext';
 import { Header } from './components/layout/Header';
-import { Footer } from './components/layout/Footer';
 import { Home } from './pages/Home';
 import { Dashboard } from './pages/Dashboard';
 import { About } from './pages/About';
@@ -24,7 +23,6 @@ function AppLayout() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
-        <Footer />
       </div>
     </LanguageProvider>
   );
