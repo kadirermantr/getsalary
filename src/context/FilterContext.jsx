@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useCallback, useEffect } from 'react';
+import { createContext, useContext, useState, useCallback, useEffect, useRef } from 'react';
 import { useSearchParams, useLocation } from 'react-router-dom';
 import { LATEST_YEAR } from '../data/config';
 
@@ -19,10 +19,26 @@ export function FilterProvider({ children }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
   const isDashboard = location.pathname === '/dashboard' || location.pathname === '/tr/dashboard' || location.pathname === '/en/dashboard';
+  const prevPathRef = useRef(location.pathname);
 
   // Always start with default filters
   const [filters, setFilters] = useState(initialFilters);
   const [userInteracted, setUserInteracted] = useState(false);
+
+  // Reset filters when entering dashboard from another page
+  useEffect(() => {
+    const prevPath = prevPathRef.current;
+    const wasDashboard = prevPath === '/dashboard' || prevPath === '/tr/dashboard' || prevPath === '/en/dashboard';
+
+    if (isDashboard && !wasDashboard) {
+      // Entering dashboard from another page - reset everything
+      setFilters(initialFilters);
+      setUserInteracted(false);
+      setSearchParams({}, { replace: true });
+    }
+
+    prevPathRef.current = location.pathname;
+  }, [location.pathname, isDashboard, setSearchParams]);
 
   // Clear URL params on non-dashboard pages
   useEffect(() => {

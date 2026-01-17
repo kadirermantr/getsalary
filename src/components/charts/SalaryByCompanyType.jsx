@@ -79,7 +79,7 @@ export function SalaryByCompanyType({ year }) {
 
   return (
     <Card title={t('charts.salaryByCompanyType')} icon={ChartIcons.company}>
-      <div className="h-72">
+      <div className="h-72 cursor-pointer">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="var(--bg-secondary)" />
@@ -93,7 +93,7 @@ export function SalaryByCompanyType({ year }) {
               stroke="var(--text-secondary)"
               fontSize={12}
             />
-            <Tooltip content={<CustomTooltip />} />
+            <Tooltip content={<CustomTooltip />} cursor={{ fill: 'transparent' }} />
             <Bar dataKey="median" radius={[4, 4, 0, 0]}>
               {data.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={CHART_COLOR_ARRAY[index + 3]} />

@@ -77,15 +77,15 @@ export function SalaryCalculator() {
       title={t('charts.salaryCalculator')}
       icon={ChartIcons.multiplier}
     >
-      <div className="space-y-4">
-        <p className="text-sm text-[var(--text-secondary)]">
-          {isTr
-            ? 'Net maaşını gir ve sektördeki yerini gör.'
-            : 'Enter your net salary and see where you stand.'}
-        </p>
-
-        <div className="flex gap-3">
-          <div className="relative flex-1">
+      <div className="flex flex-col lg:flex-row lg:items-start gap-6">
+        {/* Left: Input */}
+        <div className="lg:w-72 flex-shrink-0 space-y-3">
+          <p className="text-sm text-[var(--text-secondary)]">
+            {isTr
+              ? 'Net maaşını gir ve sektördeki yerini gör.'
+              : 'Enter your net salary and see where you stand.'}
+          </p>
+          <div className="relative">
             <input
               type="text"
               value={salary}
@@ -97,59 +97,67 @@ export function SalaryCalculator() {
               ₺
             </span>
           </div>
-        </div>
-
-        {percentile && (
-          <div className="bg-[var(--bg-primary)] rounded-lg p-4 space-y-3">
-            {/* Percentile Bar */}
-            <div className="relative h-4 bg-[var(--bg-secondary)] rounded-full overflow-hidden">
-              <div
-                className="absolute inset-y-0 left-0 bg-gradient-to-r from-red-500 via-yellow-500 via-blue-500 to-green-500 opacity-30"
-                style={{ width: '100%' }}
-              />
-              <div
-                className="absolute top-0 bottom-0 w-1 bg-[var(--text-primary)] rounded"
-                style={{ left: `${percentile}%`, transform: 'translateX(-50%)' }}
-              />
+          {/* Context - always visible */}
+          <div className="grid grid-cols-3 gap-2 pt-2 border-t border-[var(--border)]">
+            <div className="text-center">
+              <p className="text-xs text-[var(--text-secondary)]">25%</p>
+              <p className="font-medium text-sm text-[var(--text-primary)]">{stats.p25?.toLocaleString('tr-TR')} ₺</p>
             </div>
-
-            {/* Labels */}
-            <div className="flex justify-between text-xs text-[var(--text-secondary)]">
-              <span>0%</span>
-              <span>25%</span>
-              <span>50%</span>
-              <span>75%</span>
-              <span>100%</span>
+            <div className="text-center">
+              <p className="text-xs text-[var(--text-secondary)]">{isTr ? 'Medyan' : 'Median'}</p>
+              <p className="font-medium text-sm text-[var(--accent)]">{stats.median?.toLocaleString('tr-TR')} ₺</p>
             </div>
-
-            {/* Result */}
-            <div className="text-center pt-2">
-              <p className="text-3xl font-bold">
-                <span className={getPercentileColor(percentile)}>{percentile}</span>
-                <span className="text-[var(--text-secondary)] text-lg">. yüzdelik</span>
-              </p>
-              <p className="text-sm text-[var(--text-secondary)] mt-2">
-                {getPercentileMessage(percentile)}
-              </p>
-            </div>
-
-            {/* Context */}
-            <div className="grid grid-cols-3 gap-2 pt-2 border-t border-[var(--border)]">
-              <div className="text-center">
-                <p className="text-xs text-[var(--text-secondary)]">25%</p>
-                <p className="font-medium text-[var(--text-primary)]">{stats.p25?.toLocaleString('tr-TR')} ₺</p>
-              </div>
-              <div className="text-center">
-                <p className="text-xs text-[var(--text-secondary)]">{isTr ? 'Medyan' : 'Median'}</p>
-                <p className="font-medium text-[var(--accent)]">{stats.median?.toLocaleString('tr-TR')} ₺</p>
-              </div>
-              <div className="text-center">
-                <p className="text-xs text-[var(--text-secondary)]">75%</p>
-                <p className="font-medium text-[var(--text-primary)]">{stats.p75?.toLocaleString('tr-TR')} ₺</p>
-              </div>
+            <div className="text-center">
+              <p className="text-xs text-[var(--text-secondary)]">75%</p>
+              <p className="font-medium text-sm text-[var(--text-primary)]">{stats.p75?.toLocaleString('tr-TR')} ₺</p>
             </div>
           </div>
-        )}
+        </div>
+
+        {/* Right: Result */}
+        <div className="flex-1">
+          {percentile ? (
+            <div className="bg-[var(--bg-primary)] rounded-lg p-4 space-y-3">
+              {/* Result */}
+              <div className="text-center">
+                <p className="text-4xl font-bold">
+                  <span className={getPercentileColor(percentile)}>{percentile}</span>
+                  <span className="text-[var(--text-secondary)] text-xl">. yüzdelik</span>
+                </p>
+                <p className="text-sm text-[var(--text-secondary)] mt-2">
+                  {getPercentileMessage(percentile)}
+                </p>
+              </div>
+
+              {/* Percentile Bar */}
+              <div className="relative h-4 bg-[var(--bg-secondary)] rounded-full overflow-hidden">
+                <div
+                  className="absolute inset-y-0 left-0 bg-gradient-to-r from-red-500 via-yellow-500 via-blue-500 to-green-500 opacity-30"
+                  style={{ width: '100%' }}
+                />
+                <div
+                  className="absolute top-0 bottom-0 w-1 bg-[var(--text-primary)] rounded"
+                  style={{ left: `${percentile}%`, transform: 'translateX(-50%)' }}
+                />
+              </div>
+
+              {/* Labels */}
+              <div className="flex justify-between text-xs text-[var(--text-secondary)]">
+                <span>0%</span>
+                <span>25%</span>
+                <span>50%</span>
+                <span>75%</span>
+                <span>100%</span>
+              </div>
+            </div>
+          ) : (
+            <div className="bg-[var(--bg-primary)] rounded-lg p-4 h-full flex items-center justify-center min-h-[120px]">
+              <p className="text-[var(--text-secondary)] text-sm">
+                {isTr ? 'Maaşını girerek sektördeki yerini öğren.' : 'Enter your salary to see where you stand.'}
+              </p>
+            </div>
+          )}
+        </div>
       </div>
     </Card>
   );

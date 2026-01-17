@@ -55,8 +55,8 @@ export function SalaryByPosition({ year }) {
     .slice(0, 8);
 
   return (
-    <Card title={t('charts.salaryByPosition')} icon={ChartIcons.position} className="h-full">
-      <div className="h-80">
+    <Card title={t('charts.salaryByPosition')} icon={ChartIcons.position}>
+      <div className="h-80 cursor-pointer">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} layout="vertical" margin={{ left: 10, right: 20, top: 10, bottom: 10 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="var(--bg-secondary)" />
@@ -74,7 +74,7 @@ export function SalaryByPosition({ year }) {
               width={95}
               tickLine={false}
             />
-            <Tooltip content={<ChartTooltip showPercentile />} />
+            <Tooltip content={<ChartTooltip showPercentile />} cursor={{ fill: 'transparent' }} />
             <Bar
               dataKey="median"
               name={t('charts.median')}

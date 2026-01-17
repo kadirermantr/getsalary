@@ -97,7 +97,7 @@ export function InflationComparison() {
 
   return (
     <Card title={t('charts.inflationComparison')} icon={ChartIcons.inflation}>
-      <div className="h-72">
+      <div className="h-72 cursor-pointer">
         <ResponsiveContainer width="100%" height="100%">
           <ComposedChart data={data} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="var(--bg-secondary)" />
@@ -111,7 +111,7 @@ export function InflationComparison() {
               stroke="var(--text-secondary)"
               fontSize={12}
             />
-            <Tooltip content={<CustomTooltip />} />
+            <Tooltip content={<CustomTooltip />} cursor={{ fill: 'transparent' }} />
             <Legend />
             <Bar
               dataKey="salaryGrowth"

@@ -135,34 +135,32 @@ export function Dashboard() {
 
                 {/* Charts - Bento Grid (4 columns) */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                  {/* Row 1: Position (2) + Experience (1) + Location (1) */}
-                  <div className="md:col-span-2">
+                  {/* Row 1: Position (full) */}
+                  <div className="md:col-span-2 lg:col-span-4">
                     <SalaryByPosition year={filters.year} />
                   </div>
-                  <div className="md:col-span-1">
+
+                  {/* Row 2: Experience (2) + Location (2) */}
+                  <div className="md:col-span-2">
                     <SalaryByExperience year={filters.year} />
                   </div>
-                  <div className="md:col-span-1">
+                  <div className="md:col-span-2">
                     <SalaryByCity year={filters.year} />
                   </div>
 
-                  {/* Row 2: Min Wage Trend (full) */}
+                  {/* Row 3: Min Wage Trend (full) */}
                   <div className="md:col-span-2 lg:col-span-4">
                     <MinWageMultiplier />
                   </div>
 
-                  {/* Row 3: Remote (1) + Tech (1) + Company Type (2) */}
-                  <div className="md:col-span-1">
+                  {/* Row 4: Remote + Tech + Company Type (equal) */}
+                  <div className="md:col-span-2 lg:col-span-4 grid grid-cols-1 md:grid-cols-3 gap-4">
                     <RemoteVsOffice year={filters.year} />
-                  </div>
-                  <div className="md:col-span-1">
                     <SalaryByTech year={filters.year} />
-                  </div>
-                  <div className="md:col-span-2">
                     <SalaryByCompanyType year={filters.year} />
                   </div>
 
-                  {/* Row 4: Salary Calculator (full, at bottom) */}
+                  {/* Row 5: Salary Calculator (full) */}
                   <div className="md:col-span-2 lg:col-span-4">
                     <SalaryCalculator />
                   </div>

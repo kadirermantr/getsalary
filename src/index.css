@@ -62,3 +62,9 @@ html {
   box-shadow: none;
   border: none;
 }
+
+/* Recharts cursor pointer */
+.recharts-wrapper,
+.recharts-surface {
+  cursor: pointer !important;
+}
