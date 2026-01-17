@@ -3,10 +3,10 @@ import { useTranslation } from 'react-i18next';
 
 function FAQItem({ question, answer, isOpen, onClick }) {
   return (
-    <div className="border-b border-[var(--border)]/50 last:border-0">
+    <div className="border-b border-[var(--border)] last:border-0">
       <button
         onClick={onClick}
-        className="w-full py-4 px-4 flex items-center justify-between text-left hover:bg-[var(--bg-primary)]/50 transition-colors rounded-xl"
+        className="w-full py-5 px-4 flex items-center justify-between text-left cursor-pointer"
       >
         <span className="font-medium text-[var(--text-primary)] pr-4">{question}</span>
         <svg
@@ -20,17 +20,13 @@ function FAQItem({ question, answer, isOpen, onClick }) {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
       </button>
-      <div
-        className={`overflow-hidden transition-all duration-200 ${
-          isOpen ? 'max-h-96 pb-4' : 'max-h-0'
-        }`}
-      >
-        <div className="px-4">
-          <p className="text-[var(--text-secondary)] text-sm leading-relaxed p-3 bg-[var(--bg-primary)] rounded-xl border border-[var(--border)]/50">
+      {isOpen && (
+        <div className="px-4 pb-5">
+          <p className="text-[var(--text-secondary)] text-sm leading-relaxed">
             {answer}
           </p>
         </div>
-      </div>
+      )}
     </div>
   );
 }
@@ -92,7 +88,7 @@ export function FAQ() {
   ];
 
   return (
-    <div className="space-y-1">
+    <div>
       {faqs.map((faq, index) => (
         <FAQItem
           key={index}
