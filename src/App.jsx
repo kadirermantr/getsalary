@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Toaster } from 'sonner';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 import { LanguageProvider } from './context/LanguageContext';
@@ -13,6 +14,17 @@ import { NotFound } from './pages/NotFound';
 import ErrorBoundary from './components/error/ErrorBoundary';
 import { JsonLd } from './components/seo/JsonLd';
 import './i18n';
+
+// Scroll to top on route change
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [pathname]);
+
+  return null;
+}
 
 function AppRoutes() {
   return (
@@ -29,6 +41,7 @@ function AppRoutes() {
 function AppLayout() {
   return (
     <LanguageProvider>
+      <ScrollToTop />
       <div className="min-h-screen flex flex-col bg-[var(--bg-primary)]">
         <Header />
         <main className="flex-1">
