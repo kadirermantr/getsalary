@@ -35,7 +35,8 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,json}'],
+        maximumFileSizeToCacheInBytes: 15 * 1024 * 1024, // 15 MB limit for large JSON data
+        globPatterns: ['**/*.{js,css,html,ico,png,svg}'], // Exclude JSON from precache
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
