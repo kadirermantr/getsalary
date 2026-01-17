@@ -1,14 +1,36 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 export function Home() {
   const { t } = useTranslation();
-  const { lang = 'tr' } = useParams();
 
   const stats = [
     { value: '5', label: t('hero.stats.years') },
     { value: '30K+', label: t('hero.stats.participants') },
     { value: '15+', label: t('hero.stats.positions') },
+  ];
+
+  const features = [
+    {
+      icon: '📊',
+      title: t('home.byPosition'),
+      desc: t('home.byPositionDesc'),
+    },
+    {
+      icon: '📈',
+      title: t('home.byExperience'),
+      desc: t('home.byExperienceDesc'),
+    },
+    {
+      icon: '🏙️',
+      title: t('home.byCity'),
+      desc: t('home.byCityDesc'),
+    },
+    {
+      icon: '💰',
+      title: t('home.byMinWage'),
+      desc: t('home.byMinWageDesc'),
+    },
   ];
 
   return (
@@ -31,13 +53,13 @@ export function Home() {
             </h1>
 
             {/* Description */}
-            <p className="text-lg sm:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto mb-10">
+            <p className="text-lg sm:text-xl text-[var(--text-secondary)] mb-10">
               {t('hero.description')}
             </p>
 
             {/* CTA Button */}
             <Link
-              to={`/${lang}/dashboard`}
+              to="/dashboard"
               className="inline-flex items-center gap-2 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-semibold px-8 py-4 rounded-xl transition-colors duration-200 shadow-lg shadow-[var(--accent)]/25"
             >
               {t('hero.cta')}
@@ -78,32 +100,11 @@ export function Home() {
       <section className="bg-[var(--bg-secondary)] py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl font-bold text-center text-[var(--text-primary)] mb-12">
-            {lang === 'tr' ? 'Neler Analiz Edebilirsin?' : 'What Can You Analyze?'}
+            {t('home.featuresTitle')}
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                icon: '📊',
-                title: lang === 'tr' ? 'Pozisyon Bazlı' : 'By Position',
-                desc: lang === 'tr' ? 'Backend, Frontend, DevOps...' : 'Backend, Frontend, DevOps...',
-              },
-              {
-                icon: '📈',
-                title: lang === 'tr' ? 'Deneyim Seviyesi' : 'Experience Level',
-                desc: lang === 'tr' ? 'Junior, Mid, Senior' : 'Junior, Mid, Senior',
-              },
-              {
-                icon: '🏙️',
-                title: lang === 'tr' ? 'Şehir Karşılaştırma' : 'City Comparison',
-                desc: lang === 'tr' ? 'İstanbul, Ankara, Remote...' : 'Istanbul, Ankara, Remote...',
-              },
-              {
-                icon: '💰',
-                title: lang === 'tr' ? 'Asgari Ücret Çarpanı' : 'Min Wage Multiplier',
-                desc: lang === 'tr' ? 'Maaş / Asgari Ücret trendi' : 'Salary / Min Wage trend',
-              },
-            ].map((feature, index) => (
+            {features.map((feature, index) => (
               <div
                 key={index}
                 className="bg-[var(--bg-primary)] p-6 rounded-xl border border-[var(--bg-secondary)] hover:border-[var(--accent)]/50 transition-colors"
@@ -124,15 +125,13 @@ export function Home() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="bg-gradient-to-r from-[var(--accent)]/10 to-purple-500/10 rounded-2xl p-8 border border-[var(--accent)]/20">
             <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-4">
-              {lang === 'tr' ? '🌟 Açık Kaynak Proje' : '🌟 Open Source Project'}
+              🌟 {t('home.openSourceTitle')}
             </h3>
             <p className="text-[var(--text-secondary)] mb-6">
-              {lang === 'tr'
-                ? 'Bu proje tamamen açık kaynak ve MIT lisanslıdır. Katkıda bulunmak ister misin?'
-                : 'This project is fully open source and MIT licensed. Want to contribute?'}
+              {t('home.openSourceDesc')}
             </p>
             <a
-              href="https://github.com/getsalary/getsalary"
+              href="https://github.com/kadirermantr/getsalary"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-[var(--accent)] hover:underline font-medium"

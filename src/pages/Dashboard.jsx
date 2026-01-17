@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useData } from '../context/DataContext';
 import { useFilters } from '../context/FilterContext';
+import { PageContainer, PageHeader } from '../components/layout/PageContainer';
 import { FilterPanel } from '../components/filters/FilterPanel';
 import { SalaryByPosition } from '../components/charts/SalaryByPosition';
 import { SalaryByExperience } from '../components/charts/SalaryByExperience';
@@ -21,25 +22,15 @@ export function Dashboard() {
   const currentStats = getYearStats(filters.year);
 
   return (
-    <div className="min-h-screen bg-[var(--bg-primary)]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Page Header */}
-        <div className="mb-6">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <div>
-              <h1 className="text-3xl font-bold text-[var(--text-primary)]">
-                Dashboard
-              </h1>
-              <p className="text-[var(--text-secondary)] mt-2">
-                {t('hero.description')}
-              </p>
-            </div>
-            <ShareButtons
-              title={`getSalary - ${filters.year} Yazılım Sektörü Maaş Analizi`}
-              description={`Türkiye yazılım sektöründe ${filters.year} yılı maaş trendlerini keşfedin.`}
-            />
-          </div>
+    <PageContainer>
+      <PageHeader title="Dashboard" description={t('hero.description')}>
+        <div className="flex justify-center mt-4">
+          <ShareButtons
+            title={`getSalary - ${filters.year} ${t('dashboard.shareTitle')}`}
+            description={t('dashboard.shareDescription', { year: filters.year })}
+          />
         </div>
+      </PageHeader>
 
         {/* Filter Panel */}
         <FilterPanel />
@@ -51,25 +42,25 @@ export function Dashboard() {
               <p className="text-2xl font-bold text-[var(--accent)]">
                 {formatNumber(currentStats.participants)}
               </p>
-              <p className="text-xs text-[var(--text-secondary)]">Katılımcı</p>
+              <p className="text-xs text-[var(--text-secondary)]">{t('dashboard.participants')}</p>
             </div>
             <div className="bg-[var(--bg-secondary)] rounded-xl p-4 text-center">
               <p className="text-2xl font-bold text-[var(--text-primary)]">
                 {formatSalary(currentStats.medianSalary)}
               </p>
-              <p className="text-xs text-[var(--text-secondary)]">Medyan Maaş</p>
+              <p className="text-xs text-[var(--text-secondary)]">{t('dashboard.medianSalary')}</p>
             </div>
             <div className="bg-[var(--bg-secondary)] rounded-xl p-4 text-center">
               <p className="text-2xl font-bold text-[var(--text-primary)]">
                 {currentStats.multiplier?.toFixed(1)}x
               </p>
-              <p className="text-xs text-[var(--text-secondary)]">Asgari Ücret Çarpanı</p>
+              <p className="text-xs text-[var(--text-secondary)]">{t('dashboard.minWageMultiplier')}</p>
             </div>
             <div className="bg-[var(--bg-secondary)] rounded-xl p-4 text-center">
               <p className="text-2xl font-bold text-[var(--text-primary)]">
                 {formatSalary(currentStats.minWage)}
               </p>
-              <p className="text-xs text-[var(--text-secondary)]">Asgari Ücret ({filters.year})</p>
+              <p className="text-xs text-[var(--text-secondary)]">{t('dashboard.minWage')} ({filters.year})</p>
             </div>
           </div>
         )}
@@ -112,14 +103,13 @@ export function Dashboard() {
               >
                 @oncekiyazilimci
               </a>
-              {' '}Yazılım Sektörü Maaş Anketi {filters.year}
+              {' '}{t('dashboard.surveyTitle')} {filters.year}
             </p>
             <p className="text-sm text-[var(--text-secondary)]">
-              {formatNumber(dataSources[filters.year]?.participants)} katılımcı
+              {formatNumber(dataSources[filters.year]?.participants)} {t('dashboard.participants').toLowerCase()}
             </p>
           </div>
         </div>
-      </div>
-    </div>
+    </PageContainer>
   );
 }
