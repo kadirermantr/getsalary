@@ -161,7 +161,7 @@ export function Home() {
       </section>
 
       {/* Features Preview */}
-      <section className="relative py-20">
+      <section className="relative py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section header with code style */}
           <div className="text-center mb-12">
@@ -193,7 +193,7 @@ export function Home() {
       </section>
 
       {/* Open Source Banner */}
-      <section className="py-16">
+      <section className="pb-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <OpenSourceBanner />
         </div>
