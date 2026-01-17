@@ -74,8 +74,8 @@ export function SalaryByExperience({ year }) {
   };
 
   return (
-    <Card title={t('charts.salaryByExperience')} icon={ChartIcons.experience}>
-      <div className="h-72">
+    <Card title={t('charts.salaryByExperience')} icon={ChartIcons.experience} className="h-full">
+      <div className="h-80">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="var(--bg-secondary)" />

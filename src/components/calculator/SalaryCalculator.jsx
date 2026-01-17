@@ -74,7 +74,7 @@ export function SalaryCalculator() {
 
   return (
     <Card
-      title={isTr ? 'Maaşını Karşılaştır' : 'Compare Your Salary'}
+      title={t('charts.salaryCalculator')}
       icon={ChartIcons.multiplier}
     >
       <div className="space-y-4">
