@@ -2,21 +2,27 @@
 
 /* Custom CSS Variables for Theme */
 :root {
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8fafc;
-  --text-primary: #0f172a;
-  --text-secondary: #64748b;
-  --accent: #3b82f6;
-  --accent-hover: #2563eb;
+  --bg-primary: #f9fafb;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f3f4f6;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --border: #e5e7eb;
+  --shadow: rgba(0, 0, 0, 0.08);
 }
 
 .dark {
   --bg-primary: #0f172a;
   --bg-secondary: #1e293b;
+  --bg-tertiary: #334155;
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
   --accent: #60a5fa;
   --accent-hover: #93c5fd;
+  --border: #334155;
+  --shadow: rgba(0, 0, 0, 0.3);
 }
 
 /* Base Styles */
@@ -42,4 +48,17 @@ html {
 *:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
+}
+
+/* Light mode card improvements */
+:root .card,
+:root [class*="bg-[var(--bg-secondary)]"] {
+  box-shadow: 0 1px 3px var(--shadow), 0 1px 2px var(--shadow);
+  border: 1px solid var(--border);
+}
+
+.dark .card,
+.dark [class*="bg-[var(--bg-secondary)]"] {
+  box-shadow: none;
+  border: none;
 }
