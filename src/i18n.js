@@ -81,7 +81,7 @@ const resources = {
         byCityDesc: 'İstanbul, Ankara, Remote...',
         byMinWage: 'Asgari Ücret Çarpanı',
         byMinWageDesc: 'Maaş / Asgari Ücret trendi',
-        openSourceTitle: 'Açık Kaynak Proje',
+        openSourceTitle: 'Açık Kaynak',
         openSourceDesc: 'Bu proje tamamen açık kaynak ve MIT lisanslıdır. Katkıda bulunmak ister misin?',
       },
       footer: {
@@ -199,7 +199,7 @@ const resources = {
         byCityDesc: 'Istanbul, Ankara, Remote...',
         byMinWage: 'Min Wage Multiplier',
         byMinWageDesc: 'Salary / Min Wage trend',
-        openSourceTitle: 'Open Source Project',
+        openSourceTitle: 'Open Source',
         openSourceDesc: 'This project is fully open source and MIT licensed. Want to contribute?',
       },
       footer: {
