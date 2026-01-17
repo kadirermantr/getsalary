@@ -83,11 +83,6 @@ export function Home() {
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
           <div className="text-center">
-            {/* Code Comment */}
-            <p className="font-mono text-[var(--text-secondary)] text-sm mb-4">
-              {'// '}{t('hero.codeComment')}
-            </p>
-
             {/* Main heading */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[var(--text-primary)] mb-6">
               <span className="text-[var(--accent)]">{'<'}</span>
