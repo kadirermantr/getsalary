@@ -57,11 +57,7 @@ npm run build
 
 ## Katkıda Bulunma
 
-1. Repoyu fork edin
-2. Feature branch oluşturun (`git checkout -b feature/amazing-feature`)
-3. Commit edin (`git commit -m 'Add amazing feature'`)
-4. Push edin (`git push origin feature/amazing-feature`)
-5. Pull Request açın
+Detaylar için [CONTRIBUTING.md](CONTRIBUTING.md) dosyasına bakın.
 
 ## Lisans
 

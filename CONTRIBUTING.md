@@ -70,17 +70,17 @@ npm run lint
 ## Katkı Türleri
 
 ### Bug Düzeltmeleri
-1. GitHub Issues'da bug'ı raporlayın veya mevcut bir issue bulun
-2. Issue'da çalışacağınızı belirtin
-3. Bug'ı düzeltin ve test ekleyin
-4. PR açın
+1. [GitHub Issues](https://github.com/kadirermantr/getsalary/issues)'da bug'ı raporlayın veya mevcut bir issue bulun.
+2. Issue'da çalışacağınızı belirtin.
+3. Bug'ı düzeltin ve test ekleyin.
+4. PR açın.
 
 ### Yeni Özellikler
-1. Önce GitHub Issues'da tartışın
-2. Onay aldıktan sonra geliştirmeye başlayın
-3. Testler ekleyin
-4. Dokümantasyonu güncelleyin
-5. PR açın
+1. Önce [GitHub Issues](https://github.com/kadirermantr/getsalary/issues)'da tartışın.
+2. Onay aldıktan sonra geliştirmeye başlayın.
+3. Testler ekleyin.
+4. Dokümantasyonu güncelleyin.
+5. PR açın.
 
 ### Yeni Yıl Verisi Ekleme
 
@@ -123,20 +123,20 @@ export const DATA_SOURCES = {
 Conventional Commits standardını kullanın:
 
 ```
-feat: yeni özellik ekle
-fix: bug düzelt
-docs: dokümantasyon güncelle
-style: kod formatı düzelt
-refactor: kod yeniden yapılandır
-test: test ekle/güncelle
-chore: build/config değişiklikleri
+feat: add new feature
+fix: fix bug
+docs: update documentation
+style: fix code formatting
+refactor: restructure code
+test: add/update tests
+chore: build/config changes
 ```
 
 Örnekler:
 ```
-feat: 2026 yılı verisi ekle
-fix: dark mode toggle hatası düzelt
-docs: README'ye kurulum adımları ekle
+feat: add 2026 salary data
+fix: resolve dark mode toggle issue
+docs: add installation steps to README
 ```
 
 ## Pull Request Süreci
@@ -157,8 +157,8 @@ npm run build
 ```
 
 3. PR açın ve şunları belirtin:
-   - Ne değişti
-   - Neden değişti
+   - Ne değişti?
+   - Neden değişti?
    - İlgili issue (varsa)
    - Test etme adımları
 
@@ -198,7 +198,7 @@ Katkılarınız MIT lisansı altında yayınlanacaktır.
 
 ## Sorular?
 
-GitHub Issues üzerinden sorabilirsiniz.
+[GitHub Issues](https://github.com/kadirermantr/getsalary/issues) üzerinden sorabilirsiniz.
 
 ---
 
