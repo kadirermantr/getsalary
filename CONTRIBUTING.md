@@ -198,7 +198,7 @@ Katkılarınız MIT lisansı altında yayınlanacaktır.
 
 ## Sorular?
 
-[GitHub Issues](https://github.com/kadirermantr/getsalary/issues) üzerinden sorabilirsiniz.
+[GitHub Discussions](https://github.com/kadirermantr/getsalary/discussions) üzerinden sorabilirsiniz.
 
 ---
 
