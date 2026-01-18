@@ -122,11 +122,7 @@ export function Home() {
       {/* Features Preview */}
       <section className="relative py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section header with code style */}
           <div className="text-center mb-12">
-            <p className="font-mono text-[var(--text-secondary)] text-sm mb-2">
-              {'function analyze() {'}
-            </p>
             <h2 className="text-2xl sm:text-3xl font-bold text-[var(--text-primary)]">
               {t('home.featuresTitle')}
             </h2>
@@ -143,10 +139,6 @@ export function Home() {
             ))}
           </div>
 
-          {/* Closing brace */}
-          <p className="font-mono text-[var(--text-secondary)] text-sm text-center mt-8">
-            {'}'}
-          </p>
         </div>
       </section>
 
