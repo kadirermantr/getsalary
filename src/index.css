@@ -1,28 +1,62 @@
 @import "tailwindcss";
 
-/* Custom CSS Variables for Theme */
+/*
+ * Color Palette - Developer-focused, minimalist
+ * Inspired by Linear, Vercel, Raycast
+ * - Slate monochromatic base
+ * - Single accent (Indigo)
+ * - Emerald for success/positive only
+ */
 :root {
-  --bg-primary: #f9fafb;
-  --bg-secondary: #ffffff;
-  --bg-tertiary: #f3f4f6;
-  --text-primary: #111827;
-  --text-secondary: #4b5563;
-  --accent: #2563eb;
-  --accent-hover: #1d4ed8;
-  --border: #e5e7eb;
-  --shadow: rgba(0, 0, 0, 0.08);
+  /* Backgrounds - soft, not pure white */
+  --bg-primary: #f8fafc;
+  --bg-secondary: #f1f5f9;
+  --bg-tertiary: #e2e8f0;
+
+  /* Text - dark but not pure black */
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+
+  /* Accent - Indigo (modern, professional) */
+  --accent: #6366f1;
+  --accent-hover: #4f46e5;
+  --accent-soft: rgba(99, 102, 241, 0.1);
+
+  /* Semantic - only for meaning */
+  --success: #10b981;
+  --warning: #f59e0b;
+  --error: #ef4444;
+
+  /* UI */
+  --border: #e2e8f0;
+  --shadow: rgba(15, 23, 42, 0.08);
 }
 
 .dark {
+  /* Backgrounds - soft black, not pure */
   --bg-primary: #0f172a;
   --bg-secondary: #1e293b;
   --bg-tertiary: #334155;
-  --text-primary: #f8fafc;
+
+  /* Text - off-white for less strain */
+  --text-primary: #e2e8f0;
   --text-secondary: #94a3b8;
-  --accent: #60a5fa;
-  --accent-hover: #93c5fd;
+  --text-muted: #64748b;
+
+  /* Accent - slightly brighter for dark mode */
+  --accent: #818cf8;
+  --accent-hover: #a5b4fc;
+  --accent-soft: rgba(129, 140, 248, 0.15);
+
+  /* Semantic */
+  --success: #34d399;
+  --warning: #fbbf24;
+  --error: #f87171;
+
+  /* UI */
   --border: #334155;
-  --shadow: rgba(0, 0, 0, 0.3);
+  --shadow: rgba(0, 0, 0, 0.4);
 }
 
 /* Base Styles */

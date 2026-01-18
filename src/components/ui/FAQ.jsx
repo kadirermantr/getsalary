@@ -64,6 +64,10 @@ export function FAQ() {
       answer: 'Medyan yazılımcı maaşının asgari ücrete bölünmesiyle hesaplanır. Örneğin 4.5x, yazılımcıların ortalamasının asgari ücretin 4.5 katı kazandığı anlamına gelir.',
     },
     {
+      question: 'Yurt dışı verileri dahil mi?',
+      answer: 'Hayır. Bu site Türkiye\'deki yazılım sektörü maaşlarına odaklanmaktadır. Yurt dışında çalışanların verileri analizlere dahil edilmemiştir.',
+    },
+    {
       question: 'Neden bazı şehirler/pozisyonlar yok?',
       answer: 'Anket verilerinde yeterli katılımcı sayısı olmayan kategoriler istatistiksel olarak güvenilir olmadığı için gösterilmemektedir.',
     },
@@ -87,6 +91,10 @@ export function FAQ() {
     {
       question: 'What does the minimum wage multiplier mean?',
       answer: 'It\'s calculated by dividing the median developer salary by the minimum wage. For example, 4.5x means developers earn 4.5 times the minimum wage on average.',
+    },
+    {
+      question: 'Is foreign data included?',
+      answer: 'No. This site focuses on software industry salaries in Turkey. Data from those working abroad is not included in the analyses.',
     },
     {
       question: 'Why are some cities/positions missing?',

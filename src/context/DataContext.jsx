@@ -28,17 +28,21 @@ export function DataProvider({ children }) {
     try {
       setLoading(true);
 
-      // Load real survey data
+      // Filter function to exclude "Yurt Dışı" (foreign) data
+      // This site focuses on Turkey salary data only
+      const filterTurkeyOnly = (data) => data.filter((item) => item.city !== 'Yurtdışı' && item.city !== 'Yurt Dışı');
+
+      // Load real survey data (excluding foreign entries)
       const realData = {
-        2021: data2021,
-        2022: data2022,
-        2023: data2023,
-        2024: data2024,
-        2025: data2025,
+        2021: filterTurkeyOnly(data2021),
+        2022: filterTurkeyOnly(data2022),
+        2023: filterTurkeyOnly(data2023),
+        2024: filterTurkeyOnly(data2024),
+        2025: filterTurkeyOnly(data2025),
       };
 
       setSurveyData(realData);
-      console.log('Loaded real survey data:', Object.keys(realData).map(y => `${y}: ${realData[y].length} records`).join(', '));
+      console.log('Loaded real survey data (Turkey only):', Object.keys(realData).map(y => `${y}: ${realData[y].length} records`).join(', '));
 
       setLoading(false);
     } catch (err) {

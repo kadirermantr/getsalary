@@ -6,7 +6,14 @@ import { FAQ } from '../components/ui/FAQ';
 export function About() {
   const { t } = useTranslation();
 
-  const techStack = ['React', 'Vite', 'Tailwind CSS', 'Recharts', 'Framer Motion', 'react-i18next'];
+  const techStack = [
+    { name: 'React', url: 'https://react.dev' },
+    { name: 'Vite', url: 'https://vite.dev' },
+    { name: 'Tailwind CSS', url: 'https://tailwindcss.com' },
+    { name: 'Recharts', url: 'https://recharts.github.io' },
+    { name: 'Framer Motion', url: 'https://motion.dev' },
+    { name: 'react-i18next', url: 'https://react.i18next.com' },
+  ];
 
   return (
     <div className="min-h-screen bg-[var(--bg-primary)]">
@@ -15,6 +22,7 @@ export function About() {
         <PageHeader
           title={t('about.title')}
           description={t('about.missionDesc')}
+          className="mb-12"
         />
 
         {/* Methodology */}
@@ -50,12 +58,15 @@ export function About() {
           </h2>
           <div className="flex flex-wrap gap-2">
             {techStack.map((tech) => (
-              <span
-                key={tech}
-                className="px-3 py-1 bg-[var(--bg-secondary)] text-[var(--text-secondary)] rounded-full text-sm border border-[var(--border)]"
+              <a
+                key={tech.name}
+                href={tech.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3 py-1 bg-[var(--bg-secondary)] text-[var(--text-secondary)] rounded-full text-sm border border-[var(--border)] hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors"
               >
-                {tech}
-              </span>
+                {tech.name}
+              </a>
             ))}
           </div>
         </section>

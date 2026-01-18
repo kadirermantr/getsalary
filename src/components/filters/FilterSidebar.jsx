@@ -22,6 +22,7 @@ function FilterContent({ onClose }) {
   const cities = [
     { value: 'all', label: t('filters.all') },
     ...getUniqueValues('city')
+      .filter((c) => c !== 'Yurtdışı' && c !== 'Yurt Dışı')
       .sort((a, b) => {
         if (a === 'Diğer') return 1;
         if (b === 'Diğer') return -1;
@@ -37,24 +38,30 @@ function FilterContent({ onClose }) {
 
   const FilterSection = ({ title, options, value, onChange }) => (
     <div className="border-b border-[var(--border)] pb-4 mb-4 last:border-0 last:pb-0 last:mb-0">
-      <h3 className="text-sm font-medium text-[var(--text-primary)] mb-3 lowercase">{title}</h3>
+      <h3 className="text-sm font-medium text-[var(--text-primary)] mb-3">{title}</h3>
       <div className="space-y-2">
         {options.map((opt) => (
-          <label
+          <button
             key={opt.value}
-            className="flex items-center gap-2 cursor-pointer group"
+            type="button"
+            onClick={() => onChange(opt.value)}
+            className="flex items-center gap-2 w-full text-left cursor-pointer group"
           >
-            <input
-              type="radio"
-              name={title}
-              checked={value === opt.value}
-              onChange={() => onChange(opt.value)}
-              className="w-4 h-4 text-[var(--accent)] bg-[var(--bg-primary)] border-[var(--border)] focus:ring-[var(--accent)] focus:ring-offset-0"
-            />
+            <div
+              className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${
+                value === opt.value
+                  ? 'border-[var(--accent)] bg-[var(--accent)]'
+                  : 'border-[var(--border)] bg-[var(--bg-primary)] group-hover:border-[var(--accent)]/50'
+              }`}
+            >
+              {value === opt.value && (
+                <div className="w-1.5 h-1.5 rounded-full bg-white" />
+              )}
+            </div>
             <span className={`text-sm ${value === opt.value ? 'text-[var(--accent)] font-medium' : 'text-[var(--text-secondary)] group-hover:text-[var(--text-primary)]'}`}>
               {opt.label}
             </span>
-          </label>
+          </button>
         ))}
       </div>
     </div>
@@ -79,13 +86,13 @@ function FilterContent({ onClose }) {
 
       {/* Year Selector */}
       <div className="border-b border-[var(--border)] pb-4 mb-4">
-        <h3 className="text-sm font-medium text-[var(--text-primary)] mb-3 lowercase">{t('filters.year')}</h3>
+        <h3 className="text-sm font-medium text-[var(--text-primary)] mb-3 ">{t('filters.year')}</h3>
         <div className="flex flex-wrap gap-2">
           {YEARS.map((year) => (
             <button
               key={year}
               onClick={() => updateFilter('year', year)}
-              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors cursor-pointer ${
                 filters.year === year
                   ? 'bg-[var(--accent)] text-white'
                   : 'bg-[var(--bg-primary)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
@@ -107,7 +114,7 @@ function FilterContent({ onClose }) {
 
       {/* Position Filter - Dropdown */}
       <div className="border-b border-[var(--border)] pb-4 mb-4">
-        <h3 className="text-sm font-medium text-[var(--text-primary)] mb-3 lowercase">{t('filters.position')}</h3>
+        <h3 className="text-sm font-medium text-[var(--text-primary)] mb-3 ">{t('filters.position')}</h3>
         <select
           value={filters.position}
           onChange={(e) => updateFilter('position', e.target.value)}
@@ -131,7 +138,7 @@ function FilterContent({ onClose }) {
 
       {/* City Filter - Select */}
       <div className="border-b border-[var(--border)] pb-4 mb-4 last:border-0 last:pb-0 last:mb-0">
-        <h3 className="text-sm font-medium text-[var(--text-primary)] mb-3 lowercase">{t('filters.city')}</h3>
+        <h3 className="text-sm font-medium text-[var(--text-primary)] mb-3 ">{t('filters.city')}</h3>
         <select
           value={filters.city}
           onChange={(e) => updateFilter('city', e.target.value)}

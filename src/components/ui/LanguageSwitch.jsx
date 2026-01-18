@@ -4,7 +4,7 @@ export function LanguageSwitch() {
   const { currentLanguage, changeLanguage, supportedLanguages } = useLanguage();
 
   return (
-    <div className="flex items-center gap-1 bg-[var(--bg-secondary)] rounded-lg p-1">
+    <div className="inline-flex items-center gap-1 bg-[var(--bg-secondary)] rounded-lg p-1">
       {supportedLanguages.map((lang) => (
         <button
           key={lang}

@@ -12,12 +12,12 @@ export function PageContainer({ children, className = '', size = 'default' }) {
 
 export function PageHeader({ title, description, children, className = '' }) {
   return (
-    <div className={`mb-8 ${className}`}>
+    <div className={`mb-6 ${className}`}>
       <h1 className="text-2xl font-bold text-[var(--text-primary)]">
         {title}
       </h1>
       {description && (
-        <p className="text-sm text-[var(--text-secondary)] mt-1">
+        <p className="text-[var(--text-secondary)] mt-2">
           {description}
         </p>
       )}

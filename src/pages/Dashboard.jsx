@@ -61,15 +61,28 @@ export function Dashboard() {
     <div className="min-h-screen bg-[var(--bg-primary)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
-        <PageHeader title="Dashboard" description={t('dashboard.description')}>
-          <div className="mt-4">
+        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 md:mb-6">
+          <div>
+            <div className="flex items-center justify-between gap-4">
+              <h1 className="text-2xl font-bold text-[var(--text-primary)]">Dashboard</h1>
+              <div className="md:hidden flex-shrink-0">
+                <ShareButtons
+                  compact
+                  title={`getSalary - ${filters.year} ${t('dashboard.shareTitle')}`}
+                  description={t('dashboard.shareDescription', { year: filters.year })}
+                />
+              </div>
+            </div>
+            <p className="text-[var(--text-secondary)] mt-2">{t('dashboard.description')}</p>
+          </div>
+          <div className="hidden md:block flex-shrink-0">
             <ShareButtons
               compact
               title={`getSalary - ${filters.year} ${t('dashboard.shareTitle')}`}
               description={t('dashboard.shareDescription', { year: filters.year })}
             />
           </div>
-        </PageHeader>
+        </div>
 
         {/* Main Layout */}
         <div className="flex flex-col lg:flex-row gap-6">

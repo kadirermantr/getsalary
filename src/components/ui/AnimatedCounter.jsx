@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 
 export function AnimatedCounter({
   value,
-  duration = 1000,
+  duration = 2000,
   formatter = (val) => val.toLocaleString('tr-TR'),
   className = '',
 }) {
@@ -63,7 +63,7 @@ export function AnimatedMultiplier({ value, className = '' }) {
     const startValue = previousValue.current;
     const endValue = value;
     const startTime = performance.now();
-    const duration = 1000;
+    const duration = 2000;
 
     const animate = (currentTime) => {
       const elapsed = currentTime - startTime;

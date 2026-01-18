@@ -13,8 +13,8 @@ const resources = {
       hero: {
         title: 'Yazılım Sektörü Maaş Analizi',
         subtitle: 'return insights;',
-        description: 'Türkiye yazılım sektöründeki maaş trendlerini keşfedin.',
-        cta: "Dashboard'u Keşfet",
+        description: 'Türkiye yazılım sektöründeki maaş trendlerini keşfet.',
+        cta: "Dashboard'a Git",
         codeComment: 'Türkiye yazılım sektörü maaş verileri',
         stats: {
           years: 'Yıllık Veri',
@@ -107,9 +107,9 @@ const resources = {
         title: 'Maaş Tahmini',
         estimatedRange: 'Tahmini Aralık',
         confidence: 'Güven Oranı',
-        selectFilters: 'Tahmini görmek için filtre seçin.',
+        selectFilters: 'Tahmini görmek için filtre seç.',
         selectHint: 'Filtre seç',
-        insufficientData: 'Yeterli veri yok. Daha geniş filtreler deneyin.',
+        insufficientData: 'Yeterli veri yok. Daha geniş filtreler dene.',
       },
       export: {
         downloadPdf: 'PDF İndir',
@@ -123,8 +123,8 @@ const resources = {
         minWage: 'Asgari Ücret',
         surveyTitle: 'Yazılım Sektörü Maaş Anketi',
         shareTitle: 'Yazılım Sektörü Maaş Analizi',
-        shareDescription: 'Türkiye yazılım sektöründe {{year}} yılı maaş trendlerini keşfedin.',
-        description: 'Türkiye yazılım sektöründeki maaş trendlerini keşfedin.',
+        shareDescription: 'Türkiye yazılım sektöründe {{year}} yılı maaş trendlerini keşfet.',
+        description: 'Türkiye yazılım sektöründeki maaş trendlerini keşfet.',
       },
       home: {
         featuresTitle: 'Neler Analiz Edebilirsin?',
@@ -183,7 +183,7 @@ const resources = {
         noData: 'Veri bulunamadı',
         currency: 'TL',
         pageNotFound: 'Sayfa Bulunamadı',
-        pageNotFoundDesc: 'Aradığınız sayfa bulunamadı veya taşınmış olabilir.',
+        pageNotFoundDesc: 'Aradığın sayfa bulunamadı veya taşınmış olabilir.',
         backToHome: 'Ana Sayfaya Dön',
         embedCode: 'Embed Kodu',
         copy: 'Kopyala',
@@ -204,7 +204,7 @@ const resources = {
         title: 'Software Industry Salary Analysis',
         subtitle: 'return insights;',
         description: "Explore salary trends in Türkiye's software industry.",
-        cta: 'Explore Dashboard',
+        cta: 'Go to Dashboard',
         codeComment: "Türkiye's software industry salary data",
         stats: {
           years: 'Years of Data',

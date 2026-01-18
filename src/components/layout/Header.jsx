@@ -52,10 +52,8 @@ export function Header() {
           </nav>
 
           {/* Actions */}
-          <div className="flex items-center gap-3">
-            <div className="hidden sm:block">
-              <LanguageSwitch />
-            </div>
+          <div className="flex items-center gap-2">
+            <LanguageSwitch />
             <ThemeToggle />
 
             {/* Mobile menu button */}
@@ -119,9 +117,6 @@ export function Header() {
                 </Link>
               ))}
             </nav>
-            <div className="mt-4 px-4 sm:hidden">
-              <LanguageSwitch />
-            </div>
           </div>
         )}
       </div>

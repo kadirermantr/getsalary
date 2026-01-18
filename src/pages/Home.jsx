@@ -2,22 +2,13 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { OpenSourceBanner } from '../components/social/OpenSourceBanner';
 
-function FeatureCard({ icon, title, desc, color = 'accent' }) {
-  const hoverColors = {
-    accent: 'group-hover:text-[var(--accent)]',
-    green: 'group-hover:text-emerald-500',
-    purple: 'group-hover:text-purple-500',
-    amber: 'group-hover:text-amber-500',
-  };
-
+function FeatureCard({ icon, title, desc }) {
   return (
-    <div
-      className="group bg-[var(--bg-secondary)] p-6 rounded-xl border border-[var(--border)] hover:border-[var(--accent)]/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[var(--accent)]/5 text-center"
-    >
-      <div className={`mb-4 text-[var(--text-secondary)] transition-colors ${hoverColors[color]} flex justify-center`}>
+    <div className="group bg-[var(--bg-secondary)] p-6 rounded-xl border border-[var(--border)] hover:border-[var(--accent)]/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg text-center">
+      <div className="mb-4 text-[var(--text-secondary)] transition-colors group-hover:text-[var(--accent)] flex justify-center">
         {icon}
       </div>
-      <h3 className="font-semibold text-[var(--text-primary)] mb-2 font-mono">
+      <h3 className="font-semibold text-[var(--text-primary)] mb-2">
         {title}
       </h3>
       <p className="text-sm text-[var(--text-secondary)]">{desc}</p>
@@ -29,9 +20,9 @@ export function Home() {
   const { t } = useTranslation();
 
   const stats = [
-    { value: '5+', label: t('hero.stats.years'), color: 'text-emerald-500' },
-    { value: '30K+', label: t('hero.stats.participants'), color: 'text-[var(--accent)]' },
-    { value: '15+', label: t('hero.stats.positions'), color: 'text-purple-500' },
+    { value: '5+', label: t('hero.stats.years') },
+    { value: '30K+', label: t('hero.stats.participants') },
+    { value: '15+', label: t('hero.stats.positions') },
   ];
 
   const features = [
@@ -43,7 +34,6 @@ export function Home() {
       ),
       title: t('home.byPosition'),
       desc: t('home.byPositionDesc'),
-      color: 'green',
     },
     {
       icon: (
@@ -53,7 +43,6 @@ export function Home() {
       ),
       title: t('home.byExperience'),
       desc: t('home.byExperienceDesc'),
-      color: 'accent',
     },
     {
       icon: (
@@ -64,7 +53,6 @@ export function Home() {
       ),
       title: t('home.byCity'),
       desc: t('home.byCityDesc'),
-      color: 'purple',
     },
     {
       icon: (
@@ -74,33 +62,31 @@ export function Home() {
       ),
       title: t('home.byMinWage'),
       desc: t('home.byMinWageDesc'),
-      color: 'amber',
     },
   ];
 
   return (
     <div className="min-h-[calc(100vh-4rem)] relative">
+      {/* Dot Grid Pattern with soft fade - covers full page */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-30"
+        style={{
+          backgroundImage: 'radial-gradient(circle, var(--text-secondary) 1px, transparent 1px)',
+          backgroundSize: '24px 24px',
+          maskImage: 'linear-gradient(to bottom, black 0%, black 30%, transparent 60%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 30%, transparent 60%)',
+        }}
+      />
+
       {/* Hero Section */}
       <section className="relative">
-        {/* Dot Grid Pattern */}
-        <div
-          className="absolute inset-0 pointer-events-none opacity-30"
-          style={{
-            backgroundImage: 'radial-gradient(circle, var(--text-secondary) 1px, transparent 1px)',
-            backgroundSize: '24px 24px',
-          }}
-        />
 
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[var(--accent)]/5 via-transparent to-purple-500/5 pointer-events-none" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
           <div className="text-center">
             {/* Main heading */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[var(--text-primary)] mb-6">
-              <span className="text-[var(--accent)]">{'<'}</span>
               {t('hero.title')}
-              <span className="text-[var(--accent)]">{' />'}</span>
             </h1>
 
             {/* Description */}
@@ -108,37 +94,20 @@ export function Home() {
               {t('hero.description')}
             </p>
 
-            {/* Terminal-like CTA */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link
-                to="/dashboard"
-                className="group inline-flex items-center gap-3 bg-[var(--bg-secondary)] border border-[var(--border)] hover:border-[var(--accent)] text-[var(--text-primary)] font-mono px-6 py-4 rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-[var(--accent)]/10"
-              >
-                <span className="text-emerald-500">$</span>
-                <span>getSalary</span>
-                <span className="text-[var(--accent)]">--analyze</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={2}
-                  stroke="currentColor"
-                  className="w-5 h-5 text-[var(--text-secondary)] group-hover:text-[var(--accent)] group-hover:translate-x-1 transition-all"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                </svg>
-              </Link>
-            </div>
+            {/* CTA Button - uses accent */}
+            <Link
+              to="/dashboard"
+              className="inline-flex items-center gap-2 px-8 py-3 rounded-lg bg-[var(--accent)] text-white hover:bg-[var(--accent-hover)] transition-all"
+            >
+              {t('hero.cta')} →
+            </Link>
           </div>
 
-          {/* Stats */}
+          {/* Stats - monochromatic, accent only for emphasis */}
           <div className="mt-20 grid grid-cols-3 gap-4 sm:gap-8 max-w-3xl mx-auto">
             {stats.map((stat, index) => (
-              <div key={index} className="text-center p-4 rounded-xl bg-[var(--bg-secondary)]/50 border border-[var(--border)]">
-                <div className="font-mono text-xs text-[var(--text-secondary)] mb-1">
-                  {`// stat[${index}]`}
-                </div>
-                <div className={`text-3xl sm:text-4xl font-bold font-mono ${stat.color}`}>
+              <div key={index} className="text-center p-4 rounded-xl bg-[var(--bg-secondary)] border border-[var(--border)]">
+                <div className="text-3xl sm:text-4xl font-bold font-mono text-[var(--text-primary)]">
                   {stat.value}
                 </div>
                 <div className="text-sm text-[var(--text-secondary)] mt-1">
@@ -170,7 +139,6 @@ export function Home() {
                 icon={feature.icon}
                 title={feature.title}
                 desc={feature.desc}
-                color={feature.color}
               />
             ))}
           </div>
