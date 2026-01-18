@@ -12,7 +12,7 @@ getSalary projesine katkıda bulunmak istediğiniz için teşekkürler! Bu rehbe
 
 ```bash
 # Repoyu fork edin ve klonlayın
-git clone https://github.com/YOUR_USERNAME/getsalary.git
+git clone https://github.com/kadirermantr/getsalary.git
 cd getsalary
 
 # Bağımlılıkları yükleyin
@@ -107,9 +107,9 @@ export const DATA_SOURCES = {
 
 ### Çeviri Güncellemeleri
 
-Çeviriler `public/locales/` klasöründe bulunur:
-- `tr/translation.json` - Türkçe
-- `en/translation.json` - İngilizce
+Çeviriler `src/i18n.js` dosyasında bulunur:
+- `tr.translation` - Türkçe
+- `en.translation` - İngilizce
 
 ## Branch Stratejisi
 

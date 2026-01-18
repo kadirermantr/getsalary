@@ -1,42 +1,29 @@
-# getSalary() - Yazılım Sektörü Maaş Analizi
+# getSalary()
 
-<p align="center">
-  <img src="public/favicon.svg" alt="getSalary Logo" width="80" height="80">
-</p>
+**Yazılım Sektörü Maaş Analizi**
 
-<p align="center">
-  <strong>return insights;</strong>
-</p>
-
-<p align="center">
-  Türkiye yazılım sektöründeki maaş trendlerini keşfedin.<br>
-  5 yıllık veri, 30.000+ katılımcı, açık kaynak.
-</p>
-
-<p align="center">
-  <a href="#özellikler">Özellikler</a> •
-  <a href="#kurulum">Kurulum</a> •
-  <a href="#katkıda-bulunma">Katkıda Bulunma</a>
-</p>
+Türkiye yazılım sektörü maaş verileri ve analizleri.
 
 ---
 
 ## Özellikler
 
-- 📊 **8 İnteraktif Grafik** - Pozisyon, deneyim, şehir, teknoloji bazlı analizler
-- 💰 **Asgari Ücret Karşılaştırması** - Maaş/Asgari ücret çarpanı trendi
-- 📈 **Enflasyon Analizi** - Reel vs nominal maaş değişimi
-- 🌓 **Dark/Light Mode** - Göz dostu tema seçenekleri
-- 🌍 **Çoklu Dil** - Türkçe ve İngilizce desteği
-- 📱 **PWA** - Mobilde uygulama gibi çalışır
-- ♿ **Erişilebilir** - WCAG AA uyumlu
-- 🔓 **Açık Kaynak** - MIT lisanslı
+- **8 İnteraktif Grafik** - Pozisyon, deneyim, şehir, teknoloji bazlı analizler
+- **Asgari Ücret Karşılaştırması** - Maaş/Asgari ücret çarpanı trendi
+- **Enflasyon Analizi** - Reel vs nominal maaş değişimi
+- **Maaş Tahmini** - Pozisyon, deneyim ve şehre göre tahmini maaş aralığı
+- **Yıl Karşılaştırma** - Yıllar arası maaş değişim analizi
+- **Çoklu Dil** - Türkçe ve İngilizce desteği
+- **PWA** - Mobilde uygulama gibi çalışır
+- **Erişilebilir** - WCAG AA uyumlu
+- **Açık Kaynak** - MIT lisanslı
 
 ## Tech Stack
 
 - **Framework:** React 18 + Vite
-- **Styling:** Tailwind CSS
+- **Styling:** Tailwind CSS v4
 - **Charts:** Recharts
+- **Animations:** Framer Motion
 - **i18n:** react-i18next
 - **PWA:** vite-plugin-pwa
 - **Hosting:** Vercel
@@ -45,7 +32,7 @@
 
 ```bash
 # Repoyu klonla
-git clone https://github.com/yourusername/getsalary.git
+git clone https://github.com/kadirermantr/getsalary.git
 cd getsalary
 
 # Bağımlılıkları yükle
@@ -79,9 +66,3 @@ npm run build
 ## Lisans
 
 MIT License - detaylar için [LICENSE](LICENSE) dosyasına bakın.
-
----
-
-<p align="center">
-  <strong>Track. Compare. Grow.</strong>
-</p>
