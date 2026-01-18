@@ -61,10 +61,10 @@ export function MinWageMultiplier() {
           {t('charts.multiplier')}: {item?.multiplier}x
         </p>
         <p className="text-sm text-[var(--text-secondary)]">
-          {t('charts.median')}: ₺{item?.medianSalary?.toLocaleString('tr-TR')}
+          {t('charts.median')}: {item?.medianSalary?.toLocaleString('tr-TR')} ₺
         </p>
         <p className="text-sm text-[var(--text-secondary)]">
-          {t('charts.minWage')}: ₺{item?.minWage?.toLocaleString('tr-TR')}
+          {t('charts.minWage')}: {item?.minWage?.toLocaleString('tr-TR')} ₺
         </p>
       </div>
     );

@@ -194,12 +194,14 @@ export function getExperienceLevel(years, levelMap) {
 export function formatSalary(value, locale = 'tr-TR') {
   if (!value || isNaN(value)) return '—';
 
-  return new Intl.NumberFormat(locale, {
-    style: 'currency',
-    currency: 'TRY',
+  // Format number with thousands separator
+  const formattedNumber = new Intl.NumberFormat(locale, {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   }).format(value);
+
+  // Turkish format: number + space + symbol (107.500 ₺)
+  return `${formattedNumber} ₺`;
 }
 
 /**

@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
+/* Blob animation */
+@keyframes blob {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(20px, -30px) scale(1.1);
+  }
+  50% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  75% {
+    transform: translate(30px, 10px) scale(1.05);
+  }
+}
+
 /*
  * Color Palette - Developer-focused, minimalist
  * Inspired by Linear, Vercel, Raycast
@@ -44,9 +60,9 @@
   --text-secondary: #94a3b8;
   --text-muted: #64748b;
 
-  /* Accent - slightly brighter for dark mode */
-  --accent: #6366f1;
-  --accent-hover: #818cf8;
+  /* Accent - bright for dark mode */
+  --accent: #818cf8;
+  --accent-hover: #6366f1;
   --accent-soft: rgba(129, 140, 248, 0.15);
 
   /* Semantic */

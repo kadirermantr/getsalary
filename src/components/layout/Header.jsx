@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ThemeToggle } from '../ui/ThemeToggle';
 import { LanguageSwitch } from '../ui/LanguageSwitch';
 
 export function Header() {
@@ -54,7 +53,6 @@ export function Header() {
           {/* Actions */}
           <div className="flex items-center gap-2">
             <LanguageSwitch />
-            <ThemeToggle />
 
             {/* Mobile menu button */}
             <button

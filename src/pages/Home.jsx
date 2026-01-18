@@ -5,10 +5,7 @@ import { OpenSourceBanner } from '../components/social/OpenSourceBanner';
 function FeatureCard({ icon, title, desc }) {
   return (
     <div
-      className="group p-6 rounded-xl border border-[var(--border)] shadow-sm hover:shadow-md hover:border-[var(--accent)]/50 transition-all duration-300 hover:-translate-y-1 text-center"
-      style={{
-        background: 'linear-gradient(145deg, var(--bg-primary) 0%, var(--bg-secondary) 100%)'
-      }}
+      className="group px-4 py-6 rounded-xl border border-[var(--border)]/50 backdrop-blur-sm hover:border-[var(--accent)]/50 transition-all duration-300 hover:-translate-y-1 text-center bg-[var(--bg-secondary)]/50"
     >
       <div className="mb-4 text-[var(--text-secondary)] transition-colors group-hover:text-[var(--accent)] flex justify-center">
         {icon}
@@ -72,22 +69,33 @@ export function Home() {
 
   return (
     <div className="min-h-[calc(100vh-4rem)] relative">
-      {/* Dot Grid Pattern with soft fade - covers full page */}
+      {/* Aurora + Topographic combined */}
+      {/* Aurora base layer */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-30"
+        className="absolute inset-0 pointer-events-none overflow-hidden"
+        style={{
+          background: `
+            radial-gradient(ellipse 100% 60% at 50% 0%, rgba(99, 102, 241, 0.12) 0%, transparent 50%),
+            radial-gradient(ellipse 50% 40% at 25% 5%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+            radial-gradient(ellipse 50% 40% at 75% 5%, rgba(59, 130, 246, 0.08) 0%, transparent 50%)
+          `,
+          filter: 'blur(50px)',
+        }}
+      />
+      {/* Dot grid overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-25"
         style={{
           backgroundImage: 'radial-gradient(circle, var(--text-secondary) 1px, transparent 1px)',
           backgroundSize: '24px 24px',
-          maskImage: 'linear-gradient(to bottom, black 0%, black 38%, transparent 68%)',
-          WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 38%, transparent 68%)',
+          maskImage: 'linear-gradient(to bottom, black 0%, black 40%, transparent 80%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 40%, transparent 80%)',
         }}
       />
 
       {/* Hero Section */}
       <section className="relative">
-
-
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
           <div className="text-center">
             {/* Main heading */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[var(--text-primary)] mb-6">
@@ -102,9 +110,12 @@ export function Home() {
             {/* CTA Button - purple like min wage multiplier */}
             <Link
               to="/dashboard"
-              className="inline-flex items-center gap-2 px-8 py-3 rounded-lg bg-[var(--accent)] text-white hover:bg-[var(--accent-hover)] transition-all"
+              className="inline-flex items-center gap-2 px-8 py-3 rounded-lg bg-[#6366f1] text-white hover:bg-[#4f46e5] transition-all"
             >
-              {t('hero.cta')} →
+              <span>{t('hero.cta')}</span>
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+              </svg>
             </Link>
           </div>
 
@@ -113,10 +124,7 @@ export function Home() {
             {stats.map((stat, index) => (
               <div
                 key={index}
-                className="text-center p-4 rounded-xl border border-[var(--border)] shadow-sm hover:shadow-md transition-shadow"
-                style={{
-                  background: 'linear-gradient(145deg, var(--bg-primary) 0%, var(--bg-secondary) 100%)'
-                }}
+                className="text-center px-4 py-6 rounded-xl border border-[var(--border)]/50 backdrop-blur-sm hover:border-[var(--accent)]/50 transition-all bg-[var(--bg-secondary)]/50"
               >
                 <div className="text-3xl sm:text-4xl font-bold font-mono text-[var(--text-primary)]">
                   {stat.value}
@@ -154,7 +162,7 @@ export function Home() {
       </section>
 
       {/* Open Source Banner */}
-      <section className="pb-12">
+      <section className="py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <OpenSourceBanner />
         </div>
