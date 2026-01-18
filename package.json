@@ -18,7 +18,7 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",
     "canvas-confetti": "^1.9.4",
-    "framer-motion": "^12.26.2",
+    "framer-motion": "^12.27.0",
     "html2canvas": "^1.4.1",
     "i18next": "^25.7.4",
     "jspdf": "^4.0.0",
