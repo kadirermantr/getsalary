@@ -8,10 +8,10 @@
  * - Emerald for success/positive only
  */
 :root {
-  /* Backgrounds - soft, not pure white */
-  --bg-primary: #f8fafc;
-  --bg-secondary: #f1f5f9;
-  --bg-tertiary: #e2e8f0;
+  /* Backgrounds - warm with subtle purple tint (Linear + Notion) */
+  --bg-primary: #faf9fb;
+  --bg-secondary: #f3f1f5;
+  --bg-tertiary: #e9e6ed;
 
   /* Text - dark but not pure black */
   --text-primary: #0f172a;
@@ -29,7 +29,7 @@
   --error: #ef4444;
 
   /* UI */
-  --border: #e2e8f0;
+  --border: #e5e7eb;
   --shadow: rgba(15, 23, 42, 0.08);
 }
 
@@ -45,8 +45,8 @@
   --text-muted: #64748b;
 
   /* Accent - slightly brighter for dark mode */
-  --accent: #818cf8;
-  --accent-hover: #a5b4fc;
+  --accent: #6366f1;
+  --accent-hover: #818cf8;
   --accent-soft: rgba(129, 140, 248, 0.15);
 
   /* Semantic */
@@ -66,6 +66,12 @@ body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Light mode background gradient */
+html:not(.dark) body {
+  background: linear-gradient(180deg, #ede9fe 0%, var(--bg-primary) 50%);
+  background-attachment: fixed;
 }
 
 /* Monospace font for code elements */

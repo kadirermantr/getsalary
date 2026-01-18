@@ -100,14 +100,14 @@ export function Header() {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-[var(--bg-secondary)] py-4">
-            <nav className="flex flex-col gap-2">
+          <div className="md:hidden border-t border-[var(--bg-secondary)] py-2">
+            <nav className="flex flex-col gap-1">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`px-4 py-3 rounded-lg transition-colors ${
+                  className={`px-3 py-2 rounded-lg text-sm transition-colors ${
                     isActive(link.path)
                       ? 'bg-[var(--accent)] text-white font-medium'
                       : 'text-[var(--text-secondary)] hover:bg-[var(--bg-secondary)] hover:text-[var(--text-primary)]'

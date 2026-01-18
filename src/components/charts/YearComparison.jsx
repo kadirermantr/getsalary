@@ -107,40 +107,36 @@ export function YearComparison() {
   return (
     <Card title={t('yearComparison.title')} icon={ChartIcons.trend}>
       {/* Year Selectors */}
-      <div className="flex flex-wrap items-center gap-4 mb-4">
-        <div className="flex items-center gap-2">
-          <select
-            value={year1}
-            onChange={(e) => setYear1(Number(e.target.value))}
-            className="bg-[var(--bg-primary)] text-[var(--text-primary)] rounded-lg px-3 py-1.5 border border-[var(--border)] text-sm focus:outline-none focus:border-[var(--accent)]"
-          >
-            {availableYears.map((y) => (
-              <option key={y} value={y} disabled={y === year2}>
-                {y}
-              </option>
-            ))}
-          </select>
-        </div>
+      <div className="flex items-center gap-1.5 sm:gap-2 mb-4">
+        <select
+          value={year1}
+          onChange={(e) => setYear1(Number(e.target.value))}
+          className="bg-[var(--bg-primary)] text-[var(--text-primary)] rounded-lg px-2 sm:px-3 py-1.5 border border-[var(--border)] text-sm focus:outline-none focus:border-[var(--accent)]"
+        >
+          {availableYears.map((y) => (
+            <option key={y} value={y} disabled={y === year2}>
+              {y}
+            </option>
+          ))}
+        </select>
 
-        <span className="text-sm text-[var(--text-secondary)]">vs</span>
+        <span className="text-xs sm:text-sm text-[var(--text-secondary)]">vs</span>
 
-        <div className="flex items-center gap-2">
-          <select
-            value={year2}
-            onChange={(e) => setYear2(Number(e.target.value))}
-            className="bg-[var(--bg-primary)] text-[var(--text-primary)] rounded-lg px-3 py-1.5 border border-[var(--border)] text-sm focus:outline-none focus:border-[var(--accent)]"
-          >
-            {availableYears.map((y) => (
-              <option key={y} value={y} disabled={y === year1}>
-                {y}
-              </option>
-            ))}
-          </select>
-        </div>
+        <select
+          value={year2}
+          onChange={(e) => setYear2(Number(e.target.value))}
+          className="bg-[var(--bg-primary)] text-[var(--text-primary)] rounded-lg px-2 sm:px-3 py-1.5 border border-[var(--border)] text-sm focus:outline-none focus:border-[var(--accent)]"
+        >
+          {availableYears.map((y) => (
+            <option key={y} value={y} disabled={y === year1}>
+              {y}
+            </option>
+          ))}
+        </select>
 
         {/* Overall Growth Badge */}
         <div
-          className={`px-3 py-1 rounded-full text-sm font-medium ${
+          className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium whitespace-nowrap ${
             overallGrowth >= 0
               ? 'bg-green-500/10 text-green-500'
               : 'bg-red-500/10 text-red-500'

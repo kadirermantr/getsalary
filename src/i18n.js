@@ -23,6 +23,7 @@ const resources = {
         },
       },
       filters: {
+        title: 'Filtreler',
         year: 'Yıl',
         position: 'Pozisyon',
         city: 'Lokasyon',
@@ -213,6 +214,7 @@ const resources = {
         },
       },
       filters: {
+        title: 'Filters',
         year: 'Year',
         position: 'Position',
         city: 'Location',

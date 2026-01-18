@@ -4,7 +4,12 @@ import { OpenSourceBanner } from '../components/social/OpenSourceBanner';
 
 function FeatureCard({ icon, title, desc }) {
   return (
-    <div className="group bg-[var(--bg-secondary)] p-6 rounded-xl border border-[var(--border)] hover:border-[var(--accent)]/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg text-center">
+    <div
+      className="group p-6 rounded-xl border border-[var(--border)] shadow-sm hover:shadow-md hover:border-[var(--accent)]/50 transition-all duration-300 hover:-translate-y-1 text-center"
+      style={{
+        background: 'linear-gradient(145deg, var(--bg-primary) 0%, var(--bg-secondary) 100%)'
+      }}
+    >
       <div className="mb-4 text-[var(--text-secondary)] transition-colors group-hover:text-[var(--accent)] flex justify-center">
         {icon}
       </div>
@@ -73,8 +78,8 @@ export function Home() {
         style={{
           backgroundImage: 'radial-gradient(circle, var(--text-secondary) 1px, transparent 1px)',
           backgroundSize: '24px 24px',
-          maskImage: 'linear-gradient(to bottom, black 0%, black 30%, transparent 60%)',
-          WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 30%, transparent 60%)',
+          maskImage: 'linear-gradient(to bottom, black 0%, black 38%, transparent 68%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 38%, transparent 68%)',
         }}
       />
 
@@ -94,7 +99,7 @@ export function Home() {
               {t('hero.description')}
             </p>
 
-            {/* CTA Button - uses accent */}
+            {/* CTA Button - purple like min wage multiplier */}
             <Link
               to="/dashboard"
               className="inline-flex items-center gap-2 px-8 py-3 rounded-lg bg-[var(--accent)] text-white hover:bg-[var(--accent-hover)] transition-all"
@@ -106,7 +111,13 @@ export function Home() {
           {/* Stats - monochromatic, accent only for emphasis */}
           <div className="mt-20 grid grid-cols-3 gap-4 sm:gap-8 max-w-3xl mx-auto">
             {stats.map((stat, index) => (
-              <div key={index} className="text-center p-4 rounded-xl bg-[var(--bg-secondary)] border border-[var(--border)]">
+              <div
+                key={index}
+                className="text-center p-4 rounded-xl border border-[var(--border)] shadow-sm hover:shadow-md transition-shadow"
+                style={{
+                  background: 'linear-gradient(145deg, var(--bg-primary) 0%, var(--bg-secondary) 100%)'
+                }}
+              >
                 <div className="text-3xl sm:text-4xl font-bold font-mono text-[var(--text-primary)]">
                   {stat.value}
                 </div>
