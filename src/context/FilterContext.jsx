@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useCallback, useEffect } from 'react';
+import { createContext, useContext, useState, useCallback, useEffect, useRef } from 'react';
 import { useSearchParams, useLocation } from 'react-router-dom';
 import { LATEST_YEAR } from '../data/config';
 
@@ -15,14 +15,56 @@ const initialFilters = {
 
 const filterKeys = ['year', 'position', 'experience', 'city', 'workMode', 'companyType'];
 
+// Known filter values for reverse URL mapping
+const knownValues = {
+  position: ['Backend Developer', 'Frontend Developer', 'Fullstack Developer', 'Mobile Developer', 'DevOps Engineer', 'Data/AI Engineer', 'QA Engineer', 'Security Engineer', 'Embedded Developer', 'Game Developer', 'Software Engineer', 'Software Architect', 'System/DB Admin', 'SAP/ERP Developer', 'Engineering Manager', 'Product/Project Manager', 'Team/Tech Lead', 'Agile Coach', 'Business Analyst', 'UI/UX Designer', 'Consultant/Support', 'Diğer'],
+  experience: ['Junior', 'Mid-Level', 'Senior'],
+  city: ['İstanbul', 'Ankara', 'İzmir', 'Bursa', 'Antalya', 'Yurtdışı', 'Diğer'],
+  workMode: ['Remote', 'Hybrid', 'Ofis'],
+  companyType: ['Startup', 'Corporate', 'Agency', 'Freelance'],
+};
+
+// Convert URL-friendly value back to actual value
+const fromUrlValue = (urlValue, key) => {
+  if (!urlValue || urlValue === 'all') return 'all';
+  if (key === 'year') return parseInt(urlValue, 10) || LATEST_YEAR;
+
+  const values = knownValues[key];
+  if (!values) return urlValue;
+
+  // Find matching value (case-insensitive, handle / to - conversion)
+  const normalizedUrl = urlValue.toLowerCase();
+  const match = values.find(v => v.toLowerCase().replace(/\//g, '-') === normalizedUrl);
+  return match || 'all';
+};
+
 export function FilterProvider({ children }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
   const isDashboard = location.pathname === '/dashboard' || location.pathname === '/tr/dashboard' || location.pathname === '/en/dashboard';
+  const initializedFromUrl = useRef(false);
 
   // Always start with default filters
   const [filters, setFilters] = useState(initialFilters);
   const [userInteracted, setUserInteracted] = useState(false);
+
+  // Initialize filters from URL on first mount
+  useEffect(() => {
+    if (!isDashboard || initializedFromUrl.current) return;
+
+    const hasParams = filterKeys.some(key => searchParams.has(key.toLowerCase()));
+    if (hasParams) {
+      const newFilters = { ...initialFilters };
+      filterKeys.forEach(key => {
+        const urlValue = searchParams.get(key.toLowerCase());
+        if (urlValue) {
+          newFilters[key] = fromUrlValue(urlValue, key);
+        }
+      });
+      setFilters(newFilters);
+      initializedFromUrl.current = true;
+    }
+  }, [isDashboard, searchParams]);
 
   // Reset filters when leaving dashboard
   useEffect(() => {
@@ -30,6 +72,7 @@ export function FilterProvider({ children }) {
       // Not on dashboard - reset everything
       setFilters(initialFilters);
       setUserInteracted(false);
+      initializedFromUrl.current = false;
       if (searchParams.toString()) {
         setSearchParams({}, { replace: true });
       }
