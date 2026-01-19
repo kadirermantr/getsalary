@@ -2,17 +2,48 @@ import { useState, useMemo, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import confetti from 'canvas-confetti';
 import { useData } from '../../context/DataContext';
-import { useFilters } from '../../context/FilterContext';
 import { Card, ChartIcons } from '../ui/Card';
+import { LATEST_YEAR } from '../../data/config';
 
 export function SalaryCalculator() {
   const { t } = useTranslation();
-  const { getYearStats } = useData();
-  const { filters } = useFilters();
+  const { getYearStats, getUniqueValues } = useData();
   const [salary, setSalary] = useState('');
+  const [calcFilters, setCalcFilters] = useState({
+    year: LATEST_YEAR,
+    position: 'all',
+    experience: 'all',
+    city: 'all',
+  });
   const confettiTriggered = useRef(false);
 
-  const stats = getYearStats(filters.year, filters);
+  const stats = getYearStats(calcFilters.year, calcFilters);
+
+  const positions = [
+    { value: 'all', label: t('filters.all') },
+    ...getUniqueValues('position').map((p) => ({ value: p, label: p })),
+  ];
+
+  const experiences = [
+    { value: 'all', label: t('filters.all') },
+    ...getUniqueValues('experienceLevel').map((e) => ({ value: e, label: e })),
+  ];
+
+  const cities = [
+    { value: 'all', label: t('filters.all') },
+    ...getUniqueValues('city')
+      .filter((c) => c !== 'Yurtdışı' && c !== 'Yurt Dışı')
+      .sort((a, b) => {
+        if (a === 'Diğer') return 1;
+        if (b === 'Diğer') return -1;
+        return a.localeCompare(b, 'tr');
+      })
+      .map((c) => ({ value: c, label: c })),
+  ];
+
+  const updateCalcFilter = (key, value) => {
+    setCalcFilters((prev) => ({ ...prev, [key]: value }));
+  };
 
   const percentile = useMemo(() => {
     if (!salary || !stats) return null;
@@ -110,6 +141,52 @@ export function SalaryCalculator() {
       title={t('charts.salaryCalculator')}
       icon={ChartIcons.calculator}
     >
+      {/* Filters */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6 pb-4 border-b border-[var(--border)]">
+        <div>
+          <label className="block text-xs font-medium text-[var(--text-secondary)] mb-1.5">
+            {t('filters.position')}
+          </label>
+          <select
+            value={calcFilters.position}
+            onChange={(e) => updateCalcFilter('position', e.target.value)}
+            className="w-full bg-[var(--bg-primary)] text-[var(--text-primary)] text-sm rounded-lg px-3 py-2 border border-[var(--border)] focus:border-[var(--accent)] focus:outline-none"
+          >
+            {positions.map((opt) => (
+              <option key={opt.value} value={opt.value}>{opt.label}</option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label className="block text-xs font-medium text-[var(--text-secondary)] mb-1.5">
+            {t('filters.experience')}
+          </label>
+          <select
+            value={calcFilters.experience}
+            onChange={(e) => updateCalcFilter('experience', e.target.value)}
+            className="w-full bg-[var(--bg-primary)] text-[var(--text-primary)] text-sm rounded-lg px-3 py-2 border border-[var(--border)] focus:border-[var(--accent)] focus:outline-none"
+          >
+            {experiences.map((opt) => (
+              <option key={opt.value} value={opt.value}>{opt.label}</option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label className="block text-xs font-medium text-[var(--text-secondary)] mb-1.5">
+            {t('filters.city')}
+          </label>
+          <select
+            value={calcFilters.city}
+            onChange={(e) => updateCalcFilter('city', e.target.value)}
+            className="w-full bg-[var(--bg-primary)] text-[var(--text-primary)] text-sm rounded-lg px-3 py-2 border border-[var(--border)] focus:border-[var(--accent)] focus:outline-none"
+          >
+            {cities.map((opt) => (
+              <option key={opt.value} value={opt.value}>{opt.label}</option>
+            ))}
+          </select>
+        </div>
+      </div>
+
       <div className="flex flex-col lg:flex-row lg:items-start gap-6">
         {/* Left: Input */}
         <div className="lg:w-72 flex-shrink-0 space-y-3">
