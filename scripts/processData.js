@@ -77,14 +77,24 @@ function normalizePosition(position) {
 
   const lower = position.toLowerCase();
 
+  // UI/UX Designer (before Frontend to catch separately)
+  if (lower.includes('ui/ux') || lower.includes('ux/ui') || lower.includes('ui designer') || lower.includes('ux designer')) {
+    return 'UI/UX Designer';
+  }
+
   // Backend
   if (lower.includes('back-end') || lower.includes('backend') || lower.includes('back end')) {
     return 'Backend Developer';
   }
 
   // Frontend
-  if (lower.includes('front-end') || lower.includes('frontend') || lower.includes('front end') || lower.includes('ui developer') || lower.includes('ui/ux')) {
+  if (lower.includes('front-end') || lower.includes('frontend') || lower.includes('front end') || lower.includes('ui developer')) {
     return 'Frontend Developer';
+  }
+
+  // Mobile (before Fullstack to catch cross-platform mobile devs)
+  if (lower.includes('mobile') || lower.includes('ios') || lower.includes('android') || lower.includes('swift') || lower.includes('kotlin')) {
+    return 'Mobile Developer';
   }
 
   // Fullstack
@@ -92,18 +102,23 @@ function normalizePosition(position) {
     return 'Fullstack Developer';
   }
 
-  // Mobile
-  if (lower.includes('mobile') || lower.includes('ios') || lower.includes('android') || lower.includes('swift') || lower.includes('kotlin')) {
-    return 'Mobile Developer';
-  }
-
   // DevOps / SRE / Platform / Cloud
   if (lower.includes('devops') || lower.includes('sre') || lower.includes('platform') || lower.includes('cloud') || lower.includes('infrastructure') || lower.includes('site reliability')) {
     return 'DevOps Engineer';
   }
 
-  // Data (Engineer, Scientist, Analyst, ML, AI, BI)
-  if (lower.includes('data') || lower.includes('ml ') || lower.includes('machine learning') || lower.includes('ai ') || lower.includes('artificial') || lower.includes('bi ') || lower.includes('business intelligence') || lower.includes('deep learning') || lower.includes('big data') || lower.includes('etl') || lower.includes('dwh') || lower.includes('datawarehouse')) {
+  // C-Level positions (before other checks to catch Chief Data Officer, etc.)
+  if (lower.includes('chief') || lower.includes('cto') || lower.includes('cdo') || lower.includes('cio')) {
+    return 'Engineering Manager';
+  }
+
+  // System Admin / DBA / Network (before Data to catch DBA correctly)
+  if (lower.includes('system') || lower.includes('sysadmin') || lower.includes('dba') || lower.includes('database admin') || lower.includes('network') || lower.includes('linux') || lower.includes('windows admin')) {
+    return 'System/DB Admin';
+  }
+
+  // Data (Engineer, Scientist, Analyst, ML, AI, BI, Computer Vision)
+  if (lower.includes('data') || lower.includes('ml ') || lower.includes('machine learning') || lower.includes('ai ') || lower.includes('artificial') || lower.includes('bi ') || lower.includes('business intelligence') || lower.includes('deep learning') || lower.includes('big data') || lower.includes('etl') || lower.includes('dwh') || lower.includes('datawarehouse') || lower.includes('computer vision')) {
     return 'Data/AI Engineer';
   }
 
@@ -117,11 +132,6 @@ function normalizePosition(position) {
     return 'Security Engineer';
   }
 
-  // Management / Leadership
-  if (lower.includes('cto') || lower.includes('manager') || lower.includes('lead') || lower.includes('architect') || lower.includes('director') || lower.includes('head of') || lower.includes('vp ') || lower.includes('chief') || lower.includes('müdür') || lower.includes('yönetici')) {
-    return 'Engineering Manager';
-  }
-
   // Embedded / Hardware
   if (lower.includes('embedded') || lower.includes('gömülü') || lower.includes('firmware') || lower.includes('hardware') || lower.includes('iot')) {
     return 'Embedded Developer';
@@ -132,19 +142,34 @@ function normalizePosition(position) {
     return 'Game Developer';
   }
 
-  // System Admin / DBA / Network
-  if (lower.includes('system') || lower.includes('sysadmin') || lower.includes('dba') || lower.includes('database admin') || lower.includes('network') || lower.includes('linux') || lower.includes('windows admin')) {
-    return 'System/DB Admin';
-  }
-
-  // Product / Project / Scrum / Agile
-  if (lower.includes('product') || lower.includes('project') || lower.includes('scrum') || lower.includes('agile') || lower.includes('proje') || lower.includes('pm')) {
-    return 'Product/Project Manager';
-  }
-
   // SAP / ERP
   if (lower.includes('sap') || lower.includes('erp') || lower.includes('abap') || lower.includes('odoo')) {
     return 'SAP/ERP Developer';
+  }
+
+  // Architect (before manager/lead checks)
+  if (lower.includes('architect')) {
+    return 'Software Architect';
+  }
+
+  // Team / Tech Lead (before manager check - these are technical leadership, not management)
+  if (lower.includes('tech lead') || lower.includes('team lead') || lower.includes('team / tech lead')) {
+    return 'Team/Tech Lead';
+  }
+
+  // Engineering Management (Director, Engineering Manager, etc.) - before Product/Project to catch Directors correctly
+  if (lower.includes('engineering manager') || lower.includes('software development manager') || lower.includes('r&d manager') || lower.includes('it manager') || lower.includes('director') || lower.includes('head of') || lower.includes('vp ') || lower.includes('müdür') || lower.includes('yönetici') || lower.includes('digital transformation')) {
+    return 'Engineering Manager';
+  }
+
+  // Agile Coach (separate from Product/Project Manager)
+  if (lower.includes('agile coach') || lower.includes('scrum master')) {
+    return 'Agile Coach';
+  }
+
+  // Product / Project
+  if (lower.includes('product') || lower.includes('project') || lower.includes('program manager') || lower.includes('proje')) {
+    return 'Product/Project Manager';
   }
 
   // Support / Consultant
@@ -152,9 +177,19 @@ function normalizePosition(position) {
     return 'Consultant/Support';
   }
 
+  // No-Code Developer (before Software Engineer - not really a developer)
+  if (lower.includes('no-code') || lower.includes('nocode')) {
+    return 'Diğer';
+  }
+
   // Software Engineer (generic)
   if (lower.includes('software engineer') || lower.includes('software developer') || lower.includes('yazılım') || lower.includes('developer') || lower.includes('engineer') || lower.includes('programmer')) {
     return 'Software Engineer';
+  }
+
+  // Business Analyst
+  if (lower.includes('business analyst') || lower.includes('iş analisti')) {
+    return 'Business Analyst';
   }
 
   // Everything else
