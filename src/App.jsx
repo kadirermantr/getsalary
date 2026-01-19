@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { Toaster } from 'sonner';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 import { LanguageProvider } from './context/LanguageContext';
@@ -86,6 +88,8 @@ function App() {
           </DataProvider>
         </ThemeProvider>
       </BrowserRouter>
+      <Analytics />
+      <SpeedInsights />
     </ErrorBoundary>
   );
 }
