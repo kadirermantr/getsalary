@@ -42,6 +42,8 @@ export function FilterProvider({ children }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
   const isDashboard = location.pathname === '/dashboard' || location.pathname === '/tr/dashboard' || location.pathname === '/en/dashboard';
+  const isCalculator = location.pathname === '/calculator' || location.pathname === '/tr/calculator' || location.pathname === '/en/calculator';
+  const isFilterPage = isDashboard || isCalculator;
   const initializedFromUrl = useRef(false);
 
   // Always start with default filters
@@ -50,7 +52,7 @@ export function FilterProvider({ children }) {
 
   // Initialize filters from URL on first mount
   useEffect(() => {
-    if (!isDashboard || initializedFromUrl.current) return;
+    if (!isFilterPage || initializedFromUrl.current) return;
 
     const hasParams = filterKeys.some(key => searchParams.has(key.toLowerCase()));
     if (hasParams) {
@@ -64,12 +66,12 @@ export function FilterProvider({ children }) {
       setFilters(newFilters);
       initializedFromUrl.current = true;
     }
-  }, [isDashboard, searchParams]);
+  }, [isFilterPage, searchParams]);
 
-  // Reset filters when leaving dashboard
+  // Reset filters when leaving filter pages
   useEffect(() => {
-    if (!isDashboard) {
-      // Not on dashboard - reset everything
+    if (!isFilterPage) {
+      // Not on filter page - reset everything
       setFilters(initialFilters);
       setUserInteracted(false);
       initializedFromUrl.current = false;
@@ -77,7 +79,7 @@ export function FilterProvider({ children }) {
         setSearchParams({}, { replace: true });
       }
     }
-  }, [isDashboard, setSearchParams, searchParams]);
+  }, [isFilterPage, setSearchParams, searchParams]);
 
   // Convert value to URL-friendly format
   const toUrlValue = (value) => {
@@ -86,7 +88,7 @@ export function FilterProvider({ children }) {
 
   // Sync filters to URL only when user has interacted (lowercase URLs)
   useEffect(() => {
-    if (!isDashboard || !userInteracted) return;
+    if (!isFilterPage || !userInteracted) return;
 
     const params = new URLSearchParams();
     filterKeys.forEach((key) => {
@@ -97,7 +99,7 @@ export function FilterProvider({ children }) {
       }
     });
     setSearchParams(params, { replace: true });
-  }, [filters, setSearchParams, isDashboard, userInteracted]);
+  }, [filters, setSearchParams, isFilterPage, userInteracted]);
 
   const updateFilter = useCallback((key, value) => {
     setUserInteracted(true);
@@ -126,9 +128,10 @@ export function FilterProvider({ children }) {
       }
     });
     const queryString = params.toString();
-    const baseUrl = `${window.location.origin}/dashboard`;
+    const currentPath = location.pathname.includes('calculator') ? '/calculator' : '/dashboard';
+    const baseUrl = `${window.location.origin}${currentPath}`;
     return queryString ? `${baseUrl}?${queryString}` : baseUrl;
-  }, [filters]);
+  }, [filters, location.pathname]);
 
   const value = {
     filters,
