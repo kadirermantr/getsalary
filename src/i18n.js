@@ -156,10 +156,10 @@ const resources = {
         methodology: 'Metodoloji',
         contact: 'İletişim',
         mission: 'Misyonumuz',
-        missionDesc: 'getSalary, Türkiye yazılım sektöründe maaş şeffaflığını artırmayı hedefleyen açık kaynak bir projedir. Amacımız, yazılımcıların kariyer kararlarını verirken doğru verilere erişebilmelerini sağlamaktır.',
+        missionDesc: 'getSalary, Türkiye yazılım sektöründe maaş şeffaflığını artırmayı hedefleyen açık kaynak bir proje. Amacımız, yazılımcıların kariyer kararlarını verirken doğru verilere erişebilmesini sağlamak.',
         dataSourcesDesc: {
           prefix: 'Verilerimiz, ',
-          suffix: ' tarafından yıllık olarak düzenlenen Yazılım Sektörü Maaş Anketinden gelmektedir.',
+          suffix: ' tarafından yıllık olarak düzenlenen Yazılım Sektörü Maaş Anketi\'nden geliyor.',
         },
         year: 'Yıl',
         participants: 'Katılımcı',
@@ -176,7 +176,7 @@ const resources = {
         developer: 'Geliştirici',
         developerDesc: {
           prefix: 'Bu proje ',
-          suffix: ' tarafından geliştirilmektedir.',
+          suffix: ' tarafından geliştiriliyor.',
         },
         contribute: 'Katkıda Bulun',
         contributeDesc: 'Bu proje açık kaynaklıdır. Hata bildirimi, özellik önerisi veya kod katkısı yapabilirsin.',

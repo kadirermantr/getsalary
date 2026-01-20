@@ -47,11 +47,11 @@ export function FAQ() {
   const faqs = i18n.language === 'tr' ? [
     {
       question: 'Veriler nereden geliyor?',
-      answer: <span>Veriler, <a href="https://www.linkedin.com/in/oncekiyazilimci/" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">@oncekiyazilimci</a> tarafından yıllık olarak düzenlenen Yazılım Sektörü Maaş Anketinden gelmektedir. Her yıl binlerce yazılımcı anonim olarak katılmaktadır. Ham veriler: <a href="https://github.com/oncekiyazilimci/2025-yazilim-sektoru-maaslari" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">2025</a>, <a href="https://github.com/oncekiyazilimci/2024-yazilim-sektoru-maaslari" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">2024</a>, <a href="https://github.com/oncekiyazilimci/2023-yazilim-sektoru-maaslari" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">2023</a>, <a href="https://github.com/oncekiyazilimci/2022-yazilimci-maaslari" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">2022</a>, <a href="https://github.com/oncekiyazilimci/2021-yazilimci-maaslari" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">2021</a></span>,
+      answer: <span>Veriler, <a href="https://www.linkedin.com/in/oncekiyazilimci/" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">@oncekiyazilimci</a> tarafından yıllık olarak düzenlenen Yazılım Sektörü Maaş Anketi'nden geliyor. Her yıl binlerce yazılımcı anonim olarak katılıyor. Ham veriler: <a href="https://github.com/oncekiyazilimci/2025-yazilim-sektoru-maaslari" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">2025</a>, <a href="https://github.com/oncekiyazilimci/2024-yazilim-sektoru-maaslari" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">2024</a>, <a href="https://github.com/oncekiyazilimci/2023-yazilim-sektoru-maaslari" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">2023</a>, <a href="https://github.com/oncekiyazilimci/2022-yazilimci-maaslari" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">2022</a>, <a href="https://github.com/oncekiyazilimci/2021-yazilimci-maaslari" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">2021</a></span>,
     },
     {
       question: 'Veriler ne kadar güncel?',
-      answer: 'Site, en güncel anket verilerini kullanmaktadır. Yeni anket yayınlandığında veriler güncellenir. Şu anda 2021-2025 yılları arası veriler mevcuttur.',
+      answer: 'Site, en güncel anket verilerini kullanıyor. Yeni anket yayınlandığında veriler güncellenir. Şu anda 2021-2025 yılları arası veriler mevcut.',
     },
     {
       question: 'Medyan neden ortalamadan daha iyi?',
@@ -63,17 +63,17 @@ export function FAQ() {
     },
     {
       question: 'Yurt dışı verileri dahil mi?',
-      answer: 'Hayır. Bu site Türkiye\'deki yazılım sektörü maaşlarına odaklanmaktadır. Yurt dışında çalışanların verileri analizlere dahil edilmemiştir.',
+      answer: 'Hayır. Bu site Türkiye\'deki yazılım sektörü maaşlarına odaklanıyor. Yurt dışında çalışanların verileri analizlere dahil değil.',
     },
     {
       question: 'Neden bazı şehirler/pozisyonlar yok?',
-      answer: 'Anket verilerinde yeterli katılımcı sayısı olmayan kategoriler istatistiksel olarak güvenilir olmadığı için gösterilmemektedir.',
+      answer: 'Anket verilerinde yeterli katılımcı sayısı olmayan kategoriler istatistiksel olarak güvenilir olmadığı için gösterilmiyor.',
     },
     {
       question: 'Pozisyonlar nasıl kategorize ediliyor?',
       answer: (
         <div className="space-y-3">
-          <p>Ankette 50+ farklı pozisyon başlığı, analiz kolaylığı için 22 ana kategoriye gruplandırılmıştır:</p>
+          <p>Ankette 50+ farklı pozisyon başlığı, analiz kolaylığı için 22 ana kategoriye gruplandırıldı:</p>
           <div className="flex flex-wrap gap-1.5">
             {['Backend Developer', 'Frontend Developer', 'Fullstack Developer', 'Mobile Developer', 'DevOps Engineer', 'Data/AI Engineer', 'QA Engineer', 'Security Engineer', 'Embedded Developer', 'Game Developer', 'Software Engineer', 'Software Architect', 'System/DB Admin', 'SAP/ERP Developer', 'Engineering Manager', 'Product/Project Manager', 'Team/Tech Lead', 'Agile Coach', 'Business Analyst', 'UI/UX Designer', 'Consultant/Support', 'Diğer'].map(cat => (
               <span key={cat} className="px-2 py-0.5 text-xs bg-[var(--bg-tertiary)] text-[var(--text-secondary)] rounded">{cat}</span>
@@ -104,19 +104,19 @@ export function FAQ() {
     },
     {
       question: 'Projeye nasıl katkıda bulunabilirim?',
-      answer: 'Proje açık kaynaklıdır. GitHub üzerinden hata bildirimi yapabilir, özellik önerebilir veya doğrudan kod katkısında bulunabilirsiniz.',
+      answer: 'Proje açık kaynak. GitHub üzerinden hata bildirimi yapabilir, özellik önerebilir veya doğrudan kod katkısında bulunabilirsin.',
     },
     {
-      question: 'Bordro hesaplayıcı nedir?',
-      answer: 'Bordro hesaplayıcı, brüt maaşınızdan net maaşınızı veya net maaşınızdan brüt maaşınızı hesaplamanızı sağlar. Türkiye\'deki güncel vergi dilimleri ve SGK parametreleri kullanılır.',
+      question: 'Bordro sayfası ne işe yarıyor?',
+      answer: 'Bordro sayfası, brüt maaşından net maaşını veya net maaşından brüt maaşını hesaplamana olanak sağlıyor. Türkiye\'deki güncel vergi dilimleri ve SGK parametreleri kullanılıyor.',
     },
     {
       question: 'Bordro hesaplamasında hangi kesintiler var?',
-      answer: 'SGK işçi payı (%14), işsizlik sigortası (%1), gelir vergisi (kümülatif dilimli, %15-%40 arası) ve damga vergisi (%0.759). Asgari ücret tutarı kadar kısım gelir vergisi ve damga vergisinden muaftır.',
+      answer: 'SGK işçi payı (%14), işsizlik sigortası (%1), gelir vergisi (kümülatif dilimli, %15-%40 arası) ve damga vergisi (%0.759). Asgari ücret tutarı kadar kısım gelir vergisi ve damga vergisinden muaf.',
     },
     {
       question: 'Neden bordro hesaplaması gerçek bordromdan farklı olabilir?',
-      answer: 'Hesaplama sade brüt maaş içindir. Yol, yemek, özel sağlık sigortası, prim gibi ek ödemeler dahil değildir. Ayrıca şirketinizin uyguladığı özel kesintiler de farklılık yaratabilir.',
+      answer: 'Hesaplama sade brüt maaş içindir. Yol, yemek, özel sağlık sigortası, prim gibi ek ödemeler dahil değil. Ayrıca şirketinin uyguladığı özel kesintiler de farklılık yaratabilir.',
     },
   ] : [
     {
@@ -181,8 +181,8 @@ export function FAQ() {
       answer: 'The project is open source. You can report bugs, suggest features, or contribute code directly on GitHub.',
     },
     {
-      question: 'What is the payroll calculator?',
-      answer: 'The payroll calculator allows you to calculate your net salary from gross or your gross salary from net. It uses current Turkish tax brackets and social security parameters.',
+      question: 'What does the Payroll page do?',
+      answer: 'The Payroll page allows you to calculate your net salary from gross or your gross salary from net. It uses current Turkish tax brackets and social security parameters.',
     },
     {
       question: 'What deductions are included in the payroll calculation?',
