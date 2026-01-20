@@ -40,7 +40,7 @@ export function SalaryCalculator() {
   }, [salary, stats]);
 
   const formatInput = (value) => {
-    const numbers = value.replace(/\D/g, '');
+    const numbers = value.replace(/\D/g, '').replace(/^0+/, '');
     return numbers.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
   };
 
@@ -133,7 +133,8 @@ export function SalaryCalculator() {
                 value={salary}
                 onChange={handleChange}
                 placeholder={t('calculator.placeholder')}
-                className={`w-full bg-[var(--bg-primary)] text-[var(--text-primary)] rounded-lg px-4 py-3 border border-[var(--border)] focus:border-[var(--accent)] focus:outline-none text-lg ${isTurkish ? 'pr-12' : 'pl-12'}`}
+                style={{ outline: 'none', boxShadow: 'none' }}
+                className={`w-full bg-[var(--bg-primary)] text-[var(--text-primary)] rounded-lg px-4 py-3 border border-[var(--border)] text-lg ${isTurkish ? 'pr-12' : 'pl-12'}`}
               />
               <span className={`absolute ${isTurkish ? 'right-4' : 'left-4'} top-1/2 -translate-y-1/2 text-[var(--text-secondary)]`}>
                 ₺
