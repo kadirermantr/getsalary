@@ -7,11 +7,6 @@ const SUPPORTED_LANGUAGES = ['tr', 'en'];
 const DEFAULT_LANGUAGE = 'tr';
 const STORAGE_KEY = 'getsalary-language';
 
-const TITLES = {
-  tr: 'getSalary() - Yazılım Sektörü Maaş Analizi',
-  en: 'getSalary() - Software Industry Salary Insights',
-};
-
 function getInitialLanguage() {
   // 1. Check localStorage
   const stored = localStorage.getItem(STORAGE_KEY);
@@ -38,8 +33,6 @@ export function LanguageProvider({ children }) {
     if (i18n.language !== currentLang) {
       i18n.changeLanguage(currentLang);
     }
-    // Update document title
-    document.title = TITLES[currentLang] || TITLES[DEFAULT_LANGUAGE];
     // Update html lang attribute
     document.documentElement.lang = currentLang;
   }, [currentLang, i18n]);

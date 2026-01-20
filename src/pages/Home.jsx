@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { usePageTitle } from '../hooks/usePageTitle';
 import { OpenSourceBanner } from '../components/social/OpenSourceBanner';
 
 function FeatureCard({ icon, title, desc }) {
@@ -20,6 +21,7 @@ function FeatureCard({ icon, title, desc }) {
 
 export function Home() {
   const { t } = useTranslation();
+  usePageTitle('home');
 
   const stats = [
     { value: '5+', label: t('hero.stats.years') },
