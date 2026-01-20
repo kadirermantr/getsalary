@@ -25,7 +25,7 @@ export function PayrollCalculator({ selectedYear, setSelectedYear }) {
   };
 
   const formatInput = (value) => {
-    const numbers = value.replace(/\D/g, '');
+    const numbers = value.replace(/\D/g, '').replace(/^0+/, '');
     return numbers.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
   };
 

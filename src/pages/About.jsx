@@ -1,7 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { usePageTitle } from '../hooks/usePageTitle';
 import { PageHeader } from '../components/layout/PageContainer';
-import { OpenSourceBanner } from '../components/social/OpenSourceBanner';
 import { FAQ } from '../components/ui/FAQ';
 
 export function About() {
@@ -48,16 +47,6 @@ export function About() {
           </div>
         </section>
 
-        {/* FAQ */}
-        <section className="mb-12">
-          <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-4">
-            {t('about.faq')}
-          </h2>
-          <div className="bg-[var(--bg-secondary)] rounded-xl border border-[var(--border)]">
-            <FAQ />
-          </div>
-        </section>
-
         {/* Tech Stack */}
         <section className="mb-12">
           <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-4">
@@ -78,14 +67,17 @@ export function About() {
           </div>
         </section>
 
-      </div>
+        {/* FAQ */}
+        <section className="mb-12">
+          <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-4">
+            {t('about.faq')}
+          </h2>
+          <div className="bg-[var(--bg-secondary)] rounded-xl border border-[var(--border)]">
+            <FAQ />
+          </div>
+        </section>
 
-      {/* Open Source */}
-      <section className="pt-4 pb-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <OpenSourceBanner />
-        </div>
-      </section>
+      </div>
     </div>
   );
 }
