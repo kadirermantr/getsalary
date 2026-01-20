@@ -11,6 +11,7 @@ import { Header } from './components/layout/Header';
 import { Home } from './pages/Home';
 import { Dashboard } from './pages/Dashboard';
 import { Calculator } from './pages/Calculator';
+import { GrossToNet } from './pages/GrossToNet';
 import { About } from './pages/About';
 import { NotFound } from './pages/NotFound';
 import ErrorBoundary from './components/error/ErrorBoundary';
@@ -34,7 +35,8 @@ function AppRoutes() {
     <Routes>
       <Route index element={<Home />} />
       <Route path="dashboard" element={<Dashboard />} />
-      <Route path="calculator" element={<Calculator />} />
+      <Route path="salary" element={<Calculator />} />
+      <Route path="payroll" element={<GrossToNet />} />
       <Route path="about" element={<About />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

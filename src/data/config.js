@@ -34,7 +34,7 @@ export const DATA_SOURCES = {
   },
 };
 
-export const YEARS = Object.keys(DATA_SOURCES).map(Number).sort((a, b) => a - b);
+export const YEARS = Object.keys(DATA_SOURCES).map(Number).sort((a, b) => b - a);
 export const LATEST_YEAR = Math.max(...YEARS);
 
 // Position mappings (normalize different naming conventions across years)

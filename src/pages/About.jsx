@@ -54,7 +54,7 @@ export function About() {
         {/* Tech Stack */}
         <section className="mb-12">
           <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-4">
-            Tech Stack
+            {t('about.techStack')}
           </h2>
           <div className="flex flex-wrap gap-2">
             {techStack.map((tech) => (

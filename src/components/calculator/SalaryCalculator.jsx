@@ -44,7 +44,10 @@ export function SalaryCalculator() {
   };
 
   const handleChange = (e) => {
-    setSalary(formatInput(e.target.value));
+    const formatted = formatInput(e.target.value);
+    if (formatted.replace(/\./g, '').length <= 6) {
+      setSalary(formatted);
+    }
   };
 
   const getPercentileColor = (p) => {
