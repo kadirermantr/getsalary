@@ -1,8 +1,10 @@
 import { Link, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { usePageTitle } from '../hooks/usePageTitle';
 
 export function NotFound() {
   const { t } = useTranslation();
+  usePageTitle('notFound');
   const { lang = 'tr' } = useParams();
 
   return (

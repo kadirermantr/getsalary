@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { usePageTitle } from '../hooks/usePageTitle';
 import { useFilters } from '../context/FilterContext';
 import { FilterSidebar, MobileFilterDrawer } from '../components/filters/FilterSidebar';
 import { ShareButtons } from '../components/social/ShareButtons';
@@ -7,6 +8,7 @@ import { SalaryPredictor } from '../components/calculator/SalaryPredictor';
 
 export function Calculator() {
   const { t } = useTranslation();
+  usePageTitle('salary');
   const { filters } = useFilters();
 
   return (

@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { usePageTitle } from '../hooks/usePageTitle';
 import { GrossToNetCalculator } from '../components/gross-to-net/GrossToNetCalculator';
 import { ShareButtons } from '../components/social/ShareButtons';
 import { DEFAULT_YEAR } from '../data/bordroParams';
 
 export function GrossToNet() {
   const { t } = useTranslation();
+  usePageTitle('payroll');
   const [selectedYear, setSelectedYear] = useState(DEFAULT_YEAR);
 
   return (

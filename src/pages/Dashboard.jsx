@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { usePageTitle } from '../hooks/usePageTitle';
 import { useData } from '../context/DataContext';
 import { useFilters } from '../context/FilterContext';
 import { PageHeader } from '../components/layout/PageContainer';
@@ -53,6 +54,7 @@ function StatCard({ value, label, subValue, icon, color = 'accent' }) {
 
 export function Dashboard() {
   const { t } = useTranslation();
+  usePageTitle('dashboard');
   const { getYearStats, loading } = useData();
   const { filters, activeFilterCount } = useFilters();
   const currentStats = getYearStats(filters.year, filters);

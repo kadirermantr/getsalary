@@ -1,10 +1,12 @@
 import { useTranslation } from 'react-i18next';
+import { usePageTitle } from '../hooks/usePageTitle';
 import { PageHeader } from '../components/layout/PageContainer';
 import { OpenSourceBanner } from '../components/social/OpenSourceBanner';
 import { FAQ } from '../components/ui/FAQ';
 
 export function About() {
   const { t } = useTranslation();
+  usePageTitle('about');
 
   const techStack = [
     { name: 'React', url: 'https://react.dev' },
