@@ -42,8 +42,8 @@ export function FilterProvider({ children }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
   const isDashboard = location.pathname === '/dashboard' || location.pathname === '/tr/dashboard' || location.pathname === '/en/dashboard';
-  const isCalculator = location.pathname === '/calculator' || location.pathname === '/tr/calculator' || location.pathname === '/en/calculator';
-  const isFilterPage = isDashboard || isCalculator;
+  const isSalary = location.pathname === '/salary' || location.pathname === '/tr/salary' || location.pathname === '/en/salary';
+  const isFilterPage = isDashboard || isSalary;
   const initializedFromUrl = useRef(false);
 
   // Always start with default filters
@@ -128,7 +128,7 @@ export function FilterProvider({ children }) {
       }
     });
     const queryString = params.toString();
-    const currentPath = location.pathname.includes('calculator') ? '/calculator' : '/dashboard';
+    const currentPath = location.pathname.includes('salary') ? '/salary' : '/dashboard';
     const baseUrl = `${window.location.origin}${currentPath}`;
     return queryString ? `${baseUrl}?${queryString}` : baseUrl;
   }, [filters, location.pathname]);
