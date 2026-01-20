@@ -6,7 +6,8 @@ import { useFilters } from '../../context/FilterContext';
 import { Card, ChartIcons } from '../ui/Card';
 
 export function SalaryCalculator() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isTurkish = i18n.language === 'tr';
   const { getYearStats } = useData();
   const { filters } = useFilters();
   const [salary, setSalary] = useState('');
@@ -132,9 +133,9 @@ export function SalaryCalculator() {
                 value={salary}
                 onChange={handleChange}
                 placeholder={t('calculator.placeholder')}
-                className="w-full bg-[var(--bg-primary)] text-[var(--text-primary)] rounded-lg px-4 py-3 pr-12 border border-[var(--border)] focus:border-[var(--accent)] focus:outline-none text-lg"
+                className={`w-full bg-[var(--bg-primary)] text-[var(--text-primary)] rounded-lg px-4 py-3 border border-[var(--border)] focus:border-[var(--accent)] focus:outline-none text-lg ${isTurkish ? 'pr-12' : 'pl-12'}`}
               />
-              <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[var(--text-secondary)]">
+              <span className={`absolute ${isTurkish ? 'right-4' : 'left-4'} top-1/2 -translate-y-1/2 text-[var(--text-secondary)]`}>
                 ₺
               </span>
             </div>

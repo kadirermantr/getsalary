@@ -45,6 +45,7 @@ export function FAQ() {
   const [openIndex, setOpenIndex] = useState(-1);
 
   const faqs = i18n.language === 'tr' ? [
+    // Veri
     {
       question: 'Veriler nereden geliyor?',
       answer: <span>Veriler, <a href="https://www.linkedin.com/in/oncekiyazilimci/" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">@oncekiyazilimci</a> tarafından yıllık olarak düzenlenen Yazılım Sektörü Maaş Anketi'nden geliyor. Her yıl binlerce yazılımcı anonim olarak katılıyor. Ham veriler: <a href="https://github.com/oncekiyazilimci/2025-yazilim-sektoru-maaslari" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">2025</a>, <a href="https://github.com/oncekiyazilimci/2024-yazilim-sektoru-maaslari" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">2024</a>, <a href="https://github.com/oncekiyazilimci/2023-yazilim-sektoru-maaslari" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">2023</a>, <a href="https://github.com/oncekiyazilimci/2022-yazilimci-maaslari" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">2022</a>, <a href="https://github.com/oncekiyazilimci/2021-yazilimci-maaslari" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">2021</a></span>,
@@ -54,20 +55,21 @@ export function FAQ() {
       answer: 'Site, en güncel anket verilerini kullanıyor. Yeni anket yayınlandığında veriler güncellenir. Şu anda 2021-2025 yılları arası veriler mevcut.',
     },
     {
-      question: 'Medyan neden ortalamadan daha iyi?',
-      answer: 'Medyan, aşırı yüksek veya düşük değerlerden (outlier) etkilenmez. Örneğin, 10 kişiden 9\'u 30.000 TL, 1 kişi 500.000 TL kazanıyorsa, ortalama 77.000 TL çıkar ama medyan gerçekçi olan 30.000 TL\'yi gösterir.',
-    },
-    {
-      question: 'Asgari ücret çarpanı ne anlama geliyor?',
-      answer: 'Medyan yazılımcı maaşının asgari ücrete bölünmesiyle hesaplanır. Örneğin 4.5x, yazılımcıların ortalamasının asgari ücretin 4.5 katı kazandığı anlamına gelir.',
-    },
-    {
       question: 'Yurt dışı verileri dahil mi?',
       answer: 'Hayır. Bu site Türkiye\'deki yazılım sektörü maaşlarına odaklanıyor. Yurt dışında çalışanların verileri analizlere dahil değil.',
     },
     {
       question: 'Neden bazı şehirler/pozisyonlar yok?',
       answer: 'Anket verilerinde yeterli katılımcı sayısı olmayan kategoriler istatistiksel olarak güvenilir olmadığı için gösterilmiyor.',
+    },
+    // Analiz/Metodoloji
+    {
+      question: 'Medyan neden ortalamadan daha iyi?',
+      answer: 'Medyan, aşırı yüksek veya düşük değerlerden (outlier) etkilenmez. Örneğin, 10 kişiden 9\'u 30.000 TL, 1 kişi 500.000 TL kazanıyorsa, ortalama 77.000 TL çıkar ama medyan gerçekçi olan 30.000 TL\'yi gösterir.',
+    },
+    {
+      question: 'Asgari ücret çarpanı ne anlama geliyor?',
+      answer: 'Medyan yazılımcı maaşının asgari ücrete bölünmesiyle hesaplanır. Örneğin 4.5x, yazılımcıların ortalamasının asgari ücretin 4.5 katı kazandığı anlamına gelir.',
     },
     {
       question: 'Pozisyonlar nasıl kategorize ediliyor?',
@@ -102,10 +104,7 @@ export function FAQ() {
         </div>
       ),
     },
-    {
-      question: 'Projeye nasıl katkıda bulunabilirim?',
-      answer: 'Proje açık kaynak. GitHub üzerinden hata bildirimi yapabilir, özellik önerebilir veya doğrudan kod katkısında bulunabilirsin.',
-    },
+    // Bordro
     {
       question: 'Bordro sayfası ne işe yarıyor?',
       answer: 'Bordro sayfası, brüt maaşından net maaşını veya net maaşından brüt maaşını hesaplamana olanak sağlıyor. Türkiye\'deki güncel vergi dilimleri ve SGK parametreleri kullanılıyor.',
@@ -118,7 +117,13 @@ export function FAQ() {
       question: 'Neden bordro hesaplaması gerçek bordromdan farklı olabilir?',
       answer: 'Hesaplama sade brüt maaş içindir. Yol, yemek, özel sağlık sigortası, prim gibi ek ödemeler dahil değil. Ayrıca şirketinin uyguladığı özel kesintiler de farklılık yaratabilir.',
     },
+    // Proje
+    {
+      question: 'Projeye nasıl katkıda bulunabilirim?',
+      answer: <span>Hata bildirimi, özellik önerisi ve geliştirmeler için <a href="https://github.com/kadirermantr/getsalary" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)]">GitHub</a> üzerinden katkıda bulunulabilir.</span>,
+    },
   ] : [
+    // Data
     {
       question: 'Where does the data come from?',
       answer: <span>The data comes from the annual Software Industry Salary Survey conducted by <a href="https://www.linkedin.com/in/oncekiyazilimci/" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">@oncekiyazilimci</a>. Thousands of developers participate anonymously each year. Raw data: <a href="https://github.com/oncekiyazilimci/2025-yazilim-sektoru-maaslari" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">2025</a>, <a href="https://github.com/oncekiyazilimci/2024-yazilim-sektoru-maaslari" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">2024</a>, <a href="https://github.com/oncekiyazilimci/2023-yazilim-sektoru-maaslari" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">2023</a>, <a href="https://github.com/oncekiyazilimci/2022-yazilimci-maaslari" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">2022</a>, <a href="https://github.com/oncekiyazilimci/2021-yazilimci-maaslari" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">2021</a></span>,
@@ -128,20 +133,21 @@ export function FAQ() {
       answer: 'The site uses the most recent survey data. Data is updated when new surveys are published. Currently, data from 2021-2025 is available.',
     },
     {
-      question: 'Why is median better than average?',
-      answer: 'Median is not affected by extreme values (outliers). For example, if 9 out of 10 people earn 30,000 TL and 1 person earns 500,000 TL, the average would be 77,000 TL but the median shows the realistic 30,000 TL.',
-    },
-    {
-      question: 'What does the minimum wage multiplier mean?',
-      answer: 'It\'s calculated by dividing the median developer salary by the minimum wage. For example, 4.5x means developers earn 4.5 times the minimum wage on average.',
-    },
-    {
       question: 'Is foreign data included?',
       answer: 'No. This site focuses on software industry salaries in Turkey. Data from those working abroad is not included in the analyses.',
     },
     {
       question: 'Why are some cities/positions missing?',
       answer: 'Categories with insufficient participant numbers in the survey data are not shown as they are not statistically reliable.',
+    },
+    // Analysis/Methodology
+    {
+      question: 'Why is median better than average?',
+      answer: 'Median is not affected by extreme values (outliers). For example, if 9 out of 10 people earn 30,000 TL and 1 person earns 500,000 TL, the average would be 77,000 TL but the median shows the realistic 30,000 TL.',
+    },
+    {
+      question: 'What does the minimum wage multiplier mean?',
+      answer: 'It\'s calculated by dividing the median developer salary by the minimum wage. For example, 4.5x means developers earn 4.5 times the minimum wage on average.',
     },
     {
       question: 'How are positions categorized?',
@@ -176,10 +182,7 @@ export function FAQ() {
         </div>
       ),
     },
-    {
-      question: 'How can I contribute to the project?',
-      answer: 'The project is open source. You can report bugs, suggest features, or contribute code directly on GitHub.',
-    },
+    // Payroll
     {
       question: 'What does the Payroll page do?',
       answer: 'The Payroll page allows you to calculate your net salary from gross or your gross salary from net. It uses current Turkish tax brackets and social security parameters.',
@@ -191,6 +194,11 @@ export function FAQ() {
     {
       question: 'Why might the payroll calculation differ from my actual payslip?',
       answer: 'The calculation is for base gross salary only. Additional payments like transportation, meals, private health insurance, or bonuses are not included. Your company may also apply specific deductions.',
+    },
+    // Project
+    {
+      question: 'How can I contribute to the project?',
+      answer: <span>Bug reports, feature suggestions, and contributions can be made via <a href="https://github.com/kadirermantr/getsalary" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)]">GitHub</a>.</span>,
     },
   ];
 

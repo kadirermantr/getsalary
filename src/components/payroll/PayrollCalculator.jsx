@@ -8,10 +8,11 @@ import {
   calculateNetToGross,
   calculateAnnualTotals,
 } from '../../data/bordroParams';
-import { MonthlyTable } from './MonthlyTable';
+import { PayrollMonthlyTable } from './PayrollMonthlyTable';
 
-export function GrossToNetCalculator({ selectedYear, setSelectedYear }) {
-  const { t } = useTranslation();
+export function PayrollCalculator({ selectedYear, setSelectedYear }) {
+  const { t, i18n } = useTranslation();
+  const isTurkish = i18n.language === 'tr';
   const [grossInput, setGrossInput] = useState('');
   const [netInput, setNetInput] = useState('');
   const [activeField, setActiveField] = useState(null); // 'gross' or 'net'
@@ -121,7 +122,7 @@ export function GrossToNetCalculator({ selectedYear, setSelectedYear }) {
 
   return (
     <div className="space-y-4">
-      <Card title={cardTitle} icon={ChartIcons.calculator}>
+      <Card title={cardTitle} icon={ChartIcons.banknote}>
         <div className="space-y-4">
           {/* Yıl Seçici */}
           <div className="flex flex-wrap gap-2 pb-4 border-b border-[var(--border)]">
@@ -148,14 +149,14 @@ export function GrossToNetCalculator({ selectedYear, setSelectedYear }) {
                 {t('grossToNet.grossSalary')}
               </div>
               <div className="relative">
-                <span className={`absolute left-0 top-1/2 -translate-y-1/2 text-2xl font-bold ${activeField === 'net' && avgValues ? 'text-[var(--accent)]' : 'text-[var(--text-primary)]'}`}>₺</span>
+                <span className={`absolute ${isTurkish ? 'right-0' : 'left-0'} top-1/2 -translate-y-1/2 text-2xl font-bold ${activeField === 'net' && avgValues ? 'text-[var(--accent)]' : 'text-[var(--text-primary)]'}`}>₺</span>
                 <input
                   type="text"
                   value={grossInput}
                   onChange={handleGrossChange}
                   placeholder="0"
                   style={{ outline: 'none', boxShadow: 'none' }}
-                  className={`w-full bg-transparent text-2xl font-bold pl-5 ${activeField === 'net' && avgValues ? 'text-[var(--accent)]' : 'text-[var(--text-primary)]'}`}
+                  className={`w-full bg-transparent text-2xl font-bold ${isTurkish ? 'pr-5' : 'pl-5'} ${activeField === 'net' && avgValues ? 'text-[var(--accent)]' : 'text-[var(--text-primary)]'}`}
                 />
               </div>
             </div>
@@ -166,14 +167,14 @@ export function GrossToNetCalculator({ selectedYear, setSelectedYear }) {
                 {t('grossToNet.netSalary')}
               </div>
               <div className="relative">
-                <span className={`absolute left-0 top-1/2 -translate-y-1/2 text-2xl font-bold ${activeField === 'gross' && avgValues ? 'text-[var(--accent)]' : 'text-[var(--text-primary)]'}`}>₺</span>
+                <span className={`absolute ${isTurkish ? 'right-0' : 'left-0'} top-1/2 -translate-y-1/2 text-2xl font-bold ${activeField === 'gross' && avgValues ? 'text-[var(--accent)]' : 'text-[var(--text-primary)]'}`}>₺</span>
                 <input
                   type="text"
                   value={netInput}
                   onChange={handleNetChange}
                   placeholder="0"
                   style={{ outline: 'none', boxShadow: 'none' }}
-                  className={`w-full bg-transparent text-2xl font-bold pl-5 ${activeField === 'gross' && avgValues ? 'text-[var(--accent)]' : 'text-[var(--text-primary)]'}`}
+                  className={`w-full bg-transparent text-2xl font-bold ${isTurkish ? 'pr-5' : 'pl-5'} ${activeField === 'gross' && avgValues ? 'text-[var(--accent)]' : 'text-[var(--text-primary)]'}`}
                 />
               </div>
             </div>
@@ -198,7 +199,7 @@ export function GrossToNetCalculator({ selectedYear, setSelectedYear }) {
               <div className="flex justify-between items-center px-3 py-2 rounded-lg bg-[var(--bg-primary)] border border-[var(--border)]">
                 <span className="text-sm text-[var(--text-secondary)]">{t('grossToNet.totalDeductions')}</span>
                 <span className="font-bold text-[var(--text-secondary)]">
-                  -₺{totalDeductions.toLocaleString('tr-TR', { maximumFractionDigits: 0 })}
+                  {isTurkish ? `-${totalDeductions.toLocaleString('tr-TR', { maximumFractionDigits: 0 })} ₺` : `-₺${totalDeductions.toLocaleString('tr-TR', { maximumFractionDigits: 0 })}`}
                 </span>
               </div>
 
@@ -216,7 +217,7 @@ export function GrossToNetCalculator({ selectedYear, setSelectedYear }) {
 
       {/* Monthly Table */}
       {monthlyData && annualTotals && (
-        <MonthlyTable monthlyData={monthlyData} annualTotals={annualTotals} />
+        <PayrollMonthlyTable monthlyData={monthlyData} annualTotals={annualTotals} />
       )}
     </div>
   );

@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { Card } from '../ui/Card';
 import { AYLAR } from '../../data/bordroParams';
 
-export function MonthlyTable({ monthlyData, annualTotals }) {
+export function PayrollMonthlyTable({ monthlyData, annualTotals }) {
   const { t, i18n } = useTranslation();
   const lang = i18n.language;
   const months = AYLAR[lang] || AYLAR.tr;
