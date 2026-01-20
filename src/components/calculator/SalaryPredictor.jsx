@@ -35,7 +35,7 @@ export function SalaryPredictor() {
 
   if (loading) {
     return (
-      <Card title={t('prediction.title')} icon={ChartIcons.calculator}>
+      <Card title={t('prediction.title')} icon={ChartIcons.lightBulb}>
         <div className="h-64 flex items-center justify-center">
           <p className="text-[var(--text-secondary)]">{t('common.loading')}</p>
         </div>
@@ -44,7 +44,7 @@ export function SalaryPredictor() {
   }
 
   return (
-    <Card title={t('prediction.title')} icon={ChartIcons.calculator}>
+    <Card title={t('prediction.title')} icon={ChartIcons.lightBulb}>
       <div className="space-y-4">
         {/* Result */}
         <div className="bg-[var(--bg-primary)] rounded-lg p-4 min-h-[160px] flex items-center justify-center">
