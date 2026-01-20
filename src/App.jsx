@@ -15,6 +15,7 @@ import { About } from './pages/About';
 import { NotFound } from './pages/NotFound';
 import ErrorBoundary from './components/error/ErrorBoundary';
 import { JsonLd } from './components/seo/JsonLd';
+import { UpdatePrompt } from './components/pwa/UpdatePrompt';
 import './i18n';
 
 // Scroll to top on route change
@@ -78,6 +79,7 @@ function App() {
       <BrowserRouter>
         <ThemeProvider>
           <ToasterWrapper />
+          <UpdatePrompt />
           <DataProvider>
             <FilterProvider>
               <JsonLd />

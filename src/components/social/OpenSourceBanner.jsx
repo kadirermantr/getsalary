@@ -10,20 +10,20 @@ export function OpenSourceBanner({ className = '' }) {
   const { t } = useTranslation();
 
   return (
-    <div className={`flex items-center gap-4 px-5 py-4 rounded-xl border border-[var(--border)]/30 max-w-2xl mx-auto ${className}`}>
-      <a
-        href="https://github.com/kadirermantr/getsalary"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex flex-col items-center gap-1 px-4 py-3 rounded-xl bg-[var(--bg-tertiary)]/50 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-tertiary)] transition-colors shrink-0"
-      >
+    <a
+      href="https://github.com/kadirermantr/getsalary"
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`flex items-center gap-4 px-5 py-4 rounded-xl border border-[var(--border)]/30 max-w-2xl mx-auto hover:bg-slate-500/10 transition-colors ${className}`}
+    >
+      <div className="flex flex-col items-center gap-1 px-4 py-3 rounded-xl bg-[var(--bg-tertiary)]/50 text-[var(--text-secondary)] shrink-0">
         <GitHubIcon />
         <span className="text-xs font-medium">GitHub</span>
-      </a>
+      </div>
       <div className="flex-1 min-w-0">
         <h4 className="font-medium text-[var(--text-primary)]">{t('home.openSourceTitle')}</h4>
         <p className="text-sm text-[var(--text-secondary)] mt-1">{t('home.openSourceDesc')}</p>
       </div>
-    </div>
+    </a>
   );
 }
