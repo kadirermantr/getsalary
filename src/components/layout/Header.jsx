@@ -11,7 +11,8 @@ export function Header() {
   const navLinks = [
     { path: '/', label: t('nav.home') },
     { path: '/dashboard', label: t('nav.dashboard') },
-    { path: '/calculator', label: t('nav.calculator') },
+    { path: '/salary', label: t('nav.calculator') },
+    { path: '/payroll', label: t('nav.payroll') },
     { path: '/about', label: t('nav.about') },
   ];
 

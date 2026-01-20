@@ -42,11 +42,8 @@ export function DataProvider({ children }) {
       };
 
       setSurveyData(realData);
-      console.log('Loaded real survey data (Turkey only):', Object.keys(realData).map(y => `${y}: ${realData[y].length} records`).join(', '));
-
       setLoading(false);
     } catch (err) {
-      console.error('Error loading data:', err);
       setError(err.message);
       setLoading(false);
     }

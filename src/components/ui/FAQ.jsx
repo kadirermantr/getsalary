@@ -106,6 +106,18 @@ export function FAQ() {
       question: 'Projeye nasıl katkıda bulunabilirim?',
       answer: 'Proje açık kaynaklıdır. GitHub üzerinden hata bildirimi yapabilir, özellik önerebilir veya doğrudan kod katkısında bulunabilirsiniz.',
     },
+    {
+      question: 'Bordro hesaplayıcı nedir?',
+      answer: 'Bordro hesaplayıcı, brüt maaşınızdan net maaşınızı veya net maaşınızdan brüt maaşınızı hesaplamanızı sağlar. Türkiye\'deki güncel vergi dilimleri ve SGK parametreleri kullanılır.',
+    },
+    {
+      question: 'Bordro hesaplamasında hangi kesintiler var?',
+      answer: 'SGK işçi payı (%14), işsizlik sigortası (%1), gelir vergisi (kümülatif dilimli, %15-%40 arası) ve damga vergisi (%0.759). Asgari ücret tutarı kadar kısım gelir vergisi ve damga vergisinden muaftır.',
+    },
+    {
+      question: 'Neden bordro hesaplaması gerçek bordromdan farklı olabilir?',
+      answer: 'Hesaplama sade brüt maaş içindir. Yol, yemek, özel sağlık sigortası, prim gibi ek ödemeler dahil değildir. Ayrıca şirketinizin uyguladığı özel kesintiler de farklılık yaratabilir.',
+    },
   ] : [
     {
       question: 'Where does the data come from?',
@@ -167,6 +179,18 @@ export function FAQ() {
     {
       question: 'How can I contribute to the project?',
       answer: 'The project is open source. You can report bugs, suggest features, or contribute code directly on GitHub.',
+    },
+    {
+      question: 'What is the payroll calculator?',
+      answer: 'The payroll calculator allows you to calculate your net salary from gross or your gross salary from net. It uses current Turkish tax brackets and social security parameters.',
+    },
+    {
+      question: 'What deductions are included in the payroll calculation?',
+      answer: 'SSI employee contribution (14%), unemployment insurance (1%), income tax (cumulative brackets, 15%-40%), and stamp tax (0.759%). The minimum wage portion is exempt from income tax and stamp tax.',
+    },
+    {
+      question: 'Why might the payroll calculation differ from my actual payslip?',
+      answer: 'The calculation is for base gross salary only. Additional payments like transportation, meals, private health insurance, or bonuses are not included. Your company may also apply specific deductions.',
     },
   ];
 

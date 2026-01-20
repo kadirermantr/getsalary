@@ -22,8 +22,7 @@ export function ShareButtons({ title, description, url, compact = false }) {
       setCopied(true);
       toast.success(t('common.copied'));
       setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error('Failed to copy:', err);
+    } catch {
       toast.error(t('common.error'));
     }
   };
@@ -36,10 +35,8 @@ export function ShareButtons({ title, description, url, compact = false }) {
           text: shareDescription,
           url: shareUrl,
         });
-      } catch (err) {
-        if (err.name !== 'AbortError') {
-          console.error('Share failed:', err);
-        }
+      } catch {
+        // User cancelled or share failed
       }
     }
   };
