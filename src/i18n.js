@@ -192,6 +192,11 @@ const resources = {
         copied: 'Kopyalandı!',
         share: 'Paylaş',
       },
+      pwa: {
+        updateAvailable: 'Yeni sürüm mevcut',
+        updateDescription: 'Yenilikler için sayfayı yenileyin.',
+        refresh: 'Yenile',
+      },
     },
   },
   en: {
@@ -383,6 +388,11 @@ const resources = {
         copy: 'Copy',
         copied: 'Copied!',
         share: 'Share',
+      },
+      pwa: {
+        updateAvailable: 'Update available',
+        updateDescription: 'Refresh the page to see the latest changes.',
+        refresh: 'Refresh',
       },
     },
   },

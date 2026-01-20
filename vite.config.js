@@ -29,7 +29,7 @@ export default defineConfig({
     react(),
     tailwindcss(),
     VitePWA({
-      registerType: 'autoUpdate',
+      registerType: 'prompt',
       includeAssets: ['favicon.svg', 'robots.txt'],
       manifest: {
         name: 'getSalary - Yazılım Sektörü Maaş Analizi',
