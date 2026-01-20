@@ -194,7 +194,7 @@ const resources = {
       },
       pwa: {
         updateAvailable: 'Yeni sürüm mevcut',
-        updateDescription: 'Yenilikler için sayfayı yenileyin.',
+        updateDescription: 'Güncellemek için tıklayın.',
         refresh: 'Yenile',
       },
     },
@@ -391,7 +391,7 @@ const resources = {
       },
       pwa: {
         updateAvailable: 'Update available',
-        updateDescription: 'Refresh the page to see the latest changes.',
+        updateDescription: 'Click to update.',
         refresh: 'Refresh',
       },
     },
