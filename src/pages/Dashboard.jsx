@@ -64,7 +64,7 @@ export function Dashboard() {
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 md:mb-6">
           <div>
             <div className="flex items-center justify-between gap-4">
-              <h1 className="text-2xl font-bold text-[var(--text-primary)]">Dashboard</h1>
+              <h1 className="text-2xl font-bold text-[var(--text-primary)]">{t('nav.dashboard')}</h1>
               <div className="md:hidden flex-shrink-0">
                 <ShareButtons
                   compact
@@ -85,7 +85,7 @@ export function Dashboard() {
         </div>
 
         {/* Main Layout */}
-        <div className="flex flex-col lg:flex-row gap-6">
+        <div className="flex flex-col lg:flex-row lg:items-start gap-6">
           {/* Left Sidebar - Filters */}
           <aside className="lg:w-64 flex-shrink-0">
             <FilterSidebar />
