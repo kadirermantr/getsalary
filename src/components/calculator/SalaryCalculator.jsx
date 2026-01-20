@@ -2,48 +2,17 @@ import { useState, useMemo, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import confetti from 'canvas-confetti';
 import { useData } from '../../context/DataContext';
+import { useFilters } from '../../context/FilterContext';
 import { Card, ChartIcons } from '../ui/Card';
-import { LATEST_YEAR } from '../../data/config';
 
 export function SalaryCalculator() {
   const { t } = useTranslation();
-  const { getYearStats, getUniqueValues } = useData();
+  const { getYearStats } = useData();
+  const { filters } = useFilters();
   const [salary, setSalary] = useState('');
-  const [calcFilters, setCalcFilters] = useState({
-    year: LATEST_YEAR,
-    position: 'all',
-    experience: 'all',
-    city: 'all',
-  });
   const confettiTriggered = useRef(false);
 
-  const stats = getYearStats(calcFilters.year, calcFilters);
-
-  const positions = [
-    { value: 'all', label: t('filters.all') },
-    ...getUniqueValues('position').map((p) => ({ value: p, label: p })),
-  ];
-
-  const experiences = [
-    { value: 'all', label: t('filters.all') },
-    ...getUniqueValues('experienceLevel').map((e) => ({ value: e, label: e })),
-  ];
-
-  const cities = [
-    { value: 'all', label: t('filters.all') },
-    ...getUniqueValues('city')
-      .filter((c) => c !== 'Yurtdışı' && c !== 'Yurt Dışı')
-      .sort((a, b) => {
-        if (a === 'Diğer') return 1;
-        if (b === 'Diğer') return -1;
-        return a.localeCompare(b, 'tr');
-      })
-      .map((c) => ({ value: c, label: c })),
-  ];
-
-  const updateCalcFilter = (key, value) => {
-    setCalcFilters((prev) => ({ ...prev, [key]: value }));
-  };
+  const stats = getYearStats(filters.year, filters);
 
   const percentile = useMemo(() => {
     if (!salary || !stats) return null;
@@ -134,139 +103,101 @@ export function SalaryCalculator() {
     }
   }, [percentile]);
 
-  if (!stats) return null;
+  const hasInsufficientData = !stats || !stats.filteredCount || stats.filteredCount < 5;
 
   return (
     <Card
       title={t('charts.salaryCalculator')}
       icon={ChartIcons.calculator}
     >
-      {/* Filters */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6 pb-4 border-b border-[var(--border)]">
-        <div>
-          <label className="block text-xs font-medium text-[var(--text-secondary)] mb-1.5">
-            {t('filters.position')}
-          </label>
-          <select
-            value={calcFilters.position}
-            onChange={(e) => updateCalcFilter('position', e.target.value)}
-            className="w-full bg-[var(--bg-primary)] text-[var(--text-primary)] text-sm rounded-lg px-3 py-2 border border-[var(--border)] focus:border-[var(--accent)] focus:outline-none"
-          >
-            {positions.map((opt) => (
-              <option key={opt.value} value={opt.value}>{opt.label}</option>
-            ))}
-          </select>
+      {hasInsufficientData ? (
+        <div className="bg-[var(--bg-primary)] rounded-lg p-4">
+          <p className="text-center text-[var(--text-secondary)] text-sm py-4">
+            {t('prediction.insufficientData')}
+          </p>
+          <p className="text-center text-xs text-[var(--text-secondary)]">
+            ({stats?.filteredCount || 0} {t('charts.participants').toLowerCase()})
+          </p>
         </div>
-        <div>
-          <label className="block text-xs font-medium text-[var(--text-secondary)] mb-1.5">
-            {t('filters.experience')}
-          </label>
-          <select
-            value={calcFilters.experience}
-            onChange={(e) => updateCalcFilter('experience', e.target.value)}
-            className="w-full bg-[var(--bg-primary)] text-[var(--text-primary)] text-sm rounded-lg px-3 py-2 border border-[var(--border)] focus:border-[var(--accent)] focus:outline-none"
-          >
-            {experiences.map((opt) => (
-              <option key={opt.value} value={opt.value}>{opt.label}</option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label className="block text-xs font-medium text-[var(--text-secondary)] mb-1.5">
-            {t('filters.city')}
-          </label>
-          <select
-            value={calcFilters.city}
-            onChange={(e) => updateCalcFilter('city', e.target.value)}
-            className="w-full bg-[var(--bg-primary)] text-[var(--text-primary)] text-sm rounded-lg px-3 py-2 border border-[var(--border)] focus:border-[var(--accent)] focus:outline-none"
-          >
-            {cities.map((opt) => (
-              <option key={opt.value} value={opt.value}>{opt.label}</option>
-            ))}
-          </select>
-        </div>
-      </div>
-
-      <div className="flex flex-col lg:flex-row lg:items-start gap-6">
-        {/* Left: Input */}
-        <div className="lg:w-72 flex-shrink-0 space-y-3">
-          <div className="relative">
-            <input
-              type="text"
-              value={salary}
-              onChange={handleChange}
-              placeholder={t('calculator.placeholder')}
-              className="w-full bg-[var(--bg-primary)] text-[var(--text-primary)] rounded-lg px-4 py-3 pr-12 border border-[var(--border)] focus:border-[var(--accent)] focus:outline-none text-lg"
-            />
-            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[var(--text-secondary)]">
-              ₺
-            </span>
-          </div>
-          {/* Context - always visible */}
-          <div className="grid grid-cols-3 gap-2 pt-2 border-t border-[var(--border)]">
-            <div className="text-center">
-              <p className="text-xs text-[var(--text-secondary)]">25%</p>
-              <p className="font-medium text-sm text-[var(--text-primary)]">{stats.p25?.toLocaleString('tr-TR')} ₺</p>
+      ) : (
+        <div className="flex flex-col lg:flex-row lg:items-start gap-6">
+          {/* Left: Input */}
+          <div className="lg:w-72 flex-shrink-0 space-y-3">
+            <div className="relative">
+              <input
+                type="text"
+                value={salary}
+                onChange={handleChange}
+                placeholder={t('calculator.placeholder')}
+                className="w-full bg-[var(--bg-primary)] text-[var(--text-primary)] rounded-lg px-4 py-3 pr-12 border border-[var(--border)] focus:border-[var(--accent)] focus:outline-none text-lg"
+              />
+              <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[var(--text-secondary)]">
+                ₺
+              </span>
             </div>
-            <div className="text-center">
-              <p className="text-xs text-[var(--text-secondary)]">{t('charts.median')}</p>
-              <p className="font-medium text-sm text-[var(--accent)]">{stats.median?.toLocaleString('tr-TR')} ₺</p>
-            </div>
-            <div className="text-center">
-              <p className="text-xs text-[var(--text-secondary)]">75%</p>
-              <p className="font-medium text-sm text-[var(--text-primary)]">{stats.p75?.toLocaleString('tr-TR')} ₺</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Right: Result */}
-        <div className="flex-1">
-          {percentile ? (
-            <div className="bg-[var(--bg-primary)] rounded-lg p-4 space-y-3">
-              {/* Result */}
+            {/* Context - always visible */}
+            <div className="grid grid-cols-3 gap-2 pt-2 border-t border-[var(--border)]">
               <div className="text-center">
-                <p className="text-4xl font-bold">
-                  <span className={getPercentileColor(percentile)}>{percentile}</span>
-                  <span className="text-[var(--text-secondary)] text-xl">. {t('charts.percentile')}</span>
-                </p>
-                <p className="text-sm text-[var(--text-secondary)] mt-2">
-                  {getPercentileMessage(percentile)}
-                </p>
+                <p className="text-xs text-[var(--text-secondary)]">25%</p>
+                <p className="font-medium text-sm text-[var(--text-primary)]">{stats.p25?.toLocaleString('tr-TR')} ₺</p>
               </div>
-
-              {/* Percentile Bar */}
-              <div className="relative h-4 bg-[var(--bg-secondary)] rounded-full overflow-hidden">
-                <div
-                  className="absolute inset-y-0 left-0 bg-gradient-to-r from-red-500 via-yellow-500 via-blue-500 to-green-500 opacity-30"
-                  style={{ width: '100%' }}
-                />
-                <div
-                  className="absolute top-0 bottom-0 w-1 bg-[var(--text-primary)] rounded"
-                  style={{ left: `${percentile}%`, transform: 'translateX(-50%)' }}
-                />
+              <div className="text-center">
+                <p className="text-xs text-[var(--text-secondary)]">{t('charts.median')}</p>
+                <p className="font-medium text-sm text-[var(--accent)]">{stats.median?.toLocaleString('tr-TR')} ₺</p>
               </div>
-
-              {/* Labels */}
-              <div className="flex justify-between text-xs text-[var(--text-secondary)]">
-                <span>0%</span>
-                <span>25%</span>
-                <span>50%</span>
-                <span>75%</span>
-                <span>100%</span>
+              <div className="text-center">
+                <p className="text-xs text-[var(--text-secondary)]">75%</p>
+                <p className="font-medium text-sm text-[var(--text-primary)]">{stats.p75?.toLocaleString('tr-TR')} ₺</p>
               </div>
             </div>
-          ) : (
-            <div className="bg-[var(--bg-primary)] rounded-lg p-4 h-full flex items-center justify-center min-h-[120px]">
-              <p className="text-[var(--text-secondary)] text-sm text-center inline-flex items-center gap-2">
-                <svg className="w-4 h-4 hidden lg:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
-                </svg>
-                <span>{t('calculator.enterHint')}</span>
-              </p>
+          </div>
+
+          {/* Right: Result */}
+          <div className="flex-1">
+            <div className="bg-[var(--bg-primary)] rounded-lg p-4 min-h-[160px] flex items-center justify-center">
+              {percentile ? (
+                <div className="space-y-3 w-full">
+                  {/* Result */}
+                  <div className="text-center">
+                    <p className="text-4xl font-bold">
+                      <span className={getPercentileColor(percentile)}>{percentile}</span>
+                      <span className="text-[var(--text-secondary)] text-xl">. {t('charts.percentile')}</span>
+                    </p>
+                    <p className="text-sm text-[var(--text-secondary)] mt-2">
+                      {getPercentileMessage(percentile)}
+                    </p>
+                  </div>
+
+                  {/* Percentile Bar */}
+                  <div className="relative h-4 bg-[var(--bg-secondary)] rounded-full overflow-hidden">
+                    <div
+                      className="absolute inset-y-0 left-0 bg-gradient-to-r from-red-500 via-yellow-500 via-blue-500 to-green-500 opacity-30"
+                      style={{ width: '100%' }}
+                    />
+                    <div
+                      className="absolute top-0 bottom-0 w-1 bg-[var(--text-primary)] rounded"
+                      style={{ left: `${percentile}%`, transform: 'translateX(-50%)' }}
+                    />
+                  </div>
+
+                  {/* Labels */}
+                  <div className="flex justify-between text-xs text-[var(--text-secondary)]">
+                    <span>0%</span>
+                    <span>25%</span>
+                    <span>50%</span>
+                    <span>75%</span>
+                    <span>100%</span>
+                  </div>
+                </div>
+              ) : (
+                <p className="text-[var(--text-secondary)] text-sm text-center">
+                  {t('calculator.enterHint')}
+                </p>
+              )}
             </div>
-          )}
+          </div>
         </div>
-      </div>
+      )}
     </Card>
   );
 }

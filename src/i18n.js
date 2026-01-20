@@ -97,6 +97,7 @@ const resources = {
         bottom25: 'Alt %25\'lik dilimdesin. Maaş görüşmesi düşünebilirsin.',
         pageDescription: 'Maaşını gir, sektördeki yerini öğren. Pozisyon, deneyim ve şehre göre tahmini maaş aralığını hesapla.',
         enterHint: 'Maaşını gir',
+        shareTitle: 'Maaş Hesaplayıcı',
       },
       yearComparison: {
         title: 'Yıl Karşılaştırması',
@@ -288,6 +289,7 @@ const resources = {
         bottom25: "You're in the bottom 25%. Consider negotiating your salary.",
         pageDescription: 'Enter your salary to see where you stand. Calculate estimated salary range by position, experience, and city.',
         enterHint: 'Enter your salary',
+        shareTitle: 'Salary Calculator',
       },
       yearComparison: {
         title: 'Year Comparison',
