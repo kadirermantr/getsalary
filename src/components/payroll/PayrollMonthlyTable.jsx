@@ -14,7 +14,7 @@ export function PayrollMonthlyTable({ monthlyData, annualTotals }) {
     });
 
   return (
-    <Card title={t('grossToNet.monthlyBreakdown')} titleCenter>
+    <Card>
       <div className="overflow-x-auto -mx-4 px-4">
         <table className="w-full text-sm">
           <thead>

@@ -121,7 +121,7 @@ export function PayrollCalculator({ selectedYear, setSelectedYear }) {
   const cardTitle = activeField === 'net' ? t('grossToNet.netToGross') : t('grossToNet.grossToNet');
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       <Card title={cardTitle} icon={ChartIcons.banknote}>
         <div className="space-y-4">
           {/* Yıl Seçici */}
@@ -182,9 +182,8 @@ export function PayrollCalculator({ selectedYear, setSelectedYear }) {
 
           {monthlyData ? (
             <>
-              {/* Kesintiler - 4 kolon grid */}
-              <div className="text-sm font-medium text-[var(--text-secondary)] mb-2">{t('grossToNet.avgMonthlyDeductions')}</div>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              {/* Kesintiler - 5 kolon grid */}
+              <div className="mt-6 grid grid-cols-2 sm:grid-cols-5 gap-3">
                 {deductions.map((item) => (
                   <div key={item.label} className="text-center p-3 rounded-lg bg-[var(--bg-tertiary)]/50 border border-[var(--border)]">
                     <div className="text-[10px] text-[var(--text-secondary)] uppercase tracking-wide">{item.label}</div>
@@ -193,17 +192,16 @@ export function PayrollCalculator({ selectedYear, setSelectedYear }) {
                     </div>
                   </div>
                 ))}
+                {/* Toplam kesinti - 5. kutu */}
+                <div className="col-span-2 sm:col-span-1 text-center p-3 rounded-lg bg-[var(--bg-tertiary)]/50 border border-[var(--border)]">
+                  <div className="text-[10px] text-[var(--text-secondary)] uppercase tracking-wide">{t('grossToNet.totalDeductions')}</div>
+                  <div className="text-base font-semibold text-[var(--text-secondary)]">
+                    -{totalDeductions.toLocaleString('tr-TR', { maximumFractionDigits: 0 })}
+                  </div>
+                </div>
               </div>
 
-              {/* Toplam kesinti */}
-              <div className="flex justify-between items-center px-3 py-2 rounded-lg bg-[var(--bg-primary)] border border-[var(--border)]">
-                <span className="text-sm text-[var(--text-secondary)]">{t('grossToNet.totalDeductions')}</span>
-                <span className="font-bold text-[var(--text-secondary)]">
-                  {isTurkish ? `-${totalDeductions.toLocaleString('tr-TR', { maximumFractionDigits: 0 })} ₺` : `-₺${totalDeductions.toLocaleString('tr-TR', { maximumFractionDigits: 0 })}`}
-                </span>
-              </div>
-
-              <p className="text-xs text-[var(--text-secondary)]">
+              <p className="mt-6 text-xs text-[var(--text-secondary)]">
                 {t('grossToNet.infoNote')}
               </p>
             </>
