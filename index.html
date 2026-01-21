@@ -24,10 +24,11 @@
     <meta property="twitter:description" content="Türkiye yazılım sektöründeki maaş trendlerini keşfedin. Binlerce katılımcı, açık kaynak." />
     <meta property="twitter:image" content="https://getsalary.dev/og-image.png" />
 
-    <!-- Fonts -->
+    <!-- Fonts - async loading to prevent render blocking -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" /></noscript>
 
     <!-- Theme color -->
     <meta name="theme-color" content="#3b82f6" />
