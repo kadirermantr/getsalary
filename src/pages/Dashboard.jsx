@@ -35,10 +35,10 @@ function StatCard({ value, label, subValue, icon, color = 'accent' }) {
       `}
     >
       <div className={`absolute inset-0 bg-gradient-to-br ${colorClasses[color].split(' ')[0]} ${colorClasses[color].split(' ')[1]}`} />
-      <div className="relative p-4">
-        <span className={`text-xl ${colorClasses[color].split(' ')[2]}`}>{icon}</span>
-        <div className="mt-2">
-          <p className="text-2xl lg:text-3xl font-bold text-[var(--text-primary)] tracking-tight">
+      <div className="relative px-4 py-5 lg:px-5 lg:py-6">
+        <span className={`absolute top-4 right-3 lg:top-6 lg:right-5 ${colorClasses[color].split(' ')[2]}`}>{icon}</span>
+        <div className="text-left">
+          <p className="text-2xl lg:text-3xl font-bold text-[var(--text-primary)] tracking-tight whitespace-nowrap">
             {value}
           </p>
           <p className="text-xs lg:text-sm text-[var(--text-secondary)] mt-1">{label}</p>
@@ -90,18 +90,17 @@ export function Dashboard() {
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
                   <StatCard
                     icon={
-                      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg className="w-5 h-5 lg:w-7 lg:h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
                       </svg>
                     }
                     value={<AnimatedCounter value={activeFilterCount > 0 ? currentStats?.filteredCount : currentStats?.participants} />}
-                    label={`${t('dashboard.participants')} (${filters.year})`}
-                    subValue={activeFilterCount > 0 ? `/ ${currentStats?.participants?.toLocaleString('tr-TR')} ${t('charts.total')}` : null}
+                    label={t('dashboard.participants')}
                     color="accent"
                   />
                   <StatCard
                     icon={
-                      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg className="w-5 h-5 lg:w-7 lg:h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
                       </svg>
                     }
@@ -111,7 +110,7 @@ export function Dashboard() {
                   />
                   <StatCard
                     icon={
-                      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg className="w-5 h-5 lg:w-7 lg:h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0 0 12 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 0 1-2.031.352 5.988 5.988 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971Z" />
                       </svg>
                     }
@@ -121,12 +120,12 @@ export function Dashboard() {
                   />
                   <StatCard
                     icon={
-                      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg className="w-5 h-5 lg:w-7 lg:h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75" />
                       </svg>
                     }
                     value={<AnimatedSalary value={currentStats?.minWage} />}
-                    label={`${t('dashboard.minWage')} (${filters.year})`}
+                    label={t('dashboard.minWage')}
                     color="amber"
                   />
                 </div>
