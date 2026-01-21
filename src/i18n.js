@@ -14,7 +14,7 @@ const resources = {
       hero: {
         title: 'Yazılım Sektörü Maaş Analizi',
         subtitle: 'return insights;',
-        description: "Türkiye'deki yazılımcı maaşlarını karşılaştır. 30.000+ veri, pozisyon, deneyim ve şehre göre analiz. Açık kaynak.",
+        description: 'Türkiye yazılım sektöründeki maaş trendlerini keşfet.',
         cta: "Dashboard'a Git",
         codeComment: 'Türkiye yazılım sektörü maaş verileri',
         stats: {
@@ -128,7 +128,7 @@ const resources = {
         surveyTitle: 'Yazılım Sektörü Maaş Anketi',
         shareTitle: 'Yazılım Sektörü Maaş Analizi',
         shareDescription: 'Türkiye yazılım sektöründe {{year}} yılı maaş trendlerini keşfet.',
-        description: "Türkiye'deki yazılımcı maaşlarını karşılaştır. 30.000+ veri, pozisyon, deneyim ve şehre göre analiz. Açık kaynak.",
+        description: 'Türkiye yazılım sektöründeki maaş trendlerini keşfet.',
       },
       home: {
         featuresTitle: 'Neler Analiz Edebilirsin?',
@@ -256,7 +256,7 @@ const resources = {
       hero: {
         title: 'Software Industry Salary Analysis',
         subtitle: 'return insights;',
-        description: "Compare software developer salaries in Turkey. 30,000+ data points by position, experience & city. Open source.",
+        description: "Explore salary trends in Türkiye's software industry.",
         cta: 'Go to Dashboard',
         codeComment: "Türkiye's software industry salary data",
         stats: {
@@ -370,7 +370,7 @@ const resources = {
         surveyTitle: 'Software Industry Salary Survey',
         shareTitle: 'Software Industry Salary Insights',
         shareDescription: "Explore {{year}} salary trends in Türkiye's software industry.",
-        description: "Compare software developer salaries in Turkey. 30,000+ data points by position, experience & city. Open source.",
+        description: "Explore salary trends in Türkiye's software industry.",
       },
       home: {
         featuresTitle: 'What Can You Analyze?',
