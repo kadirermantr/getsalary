@@ -12,7 +12,7 @@ export function LanguageSwitch() {
           className={`px-3 py-1 rounded-md text-sm font-medium transition-colors duration-200 cursor-pointer ${
             currentLanguage === lang
               ? 'bg-[var(--accent)] text-white'
-              : 'hover:bg-[var(--bg-primary)] text-[var(--text-secondary)]'
+              : 'hover:bg-[var(--bg-primary)] text-[var(--text-primary)]'
           }`}
           aria-label={`Switch to ${lang === 'tr' ? 'Turkish' : 'English'}`}
         >
