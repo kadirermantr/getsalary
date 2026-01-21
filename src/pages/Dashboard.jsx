@@ -1,17 +1,25 @@
+import { lazy, Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 import { usePageTitle } from '../hooks/usePageTitle';
 import { useData } from '../context/DataContext';
 import { useFilters } from '../context/FilterContext';
 import { PageHeaderWithShare } from '../components/layout/PageContainer';
 import { FilterSidebar, MobileFilterDrawer } from '../components/filters/FilterSidebar';
-import { SalaryByPosition } from '../components/charts/SalaryByPosition';
-import { SalaryByExperience } from '../components/charts/SalaryByExperience';
-import { MinWageMultiplier } from '../components/charts/MinWageMultiplier';
-import { SalaryByCity } from '../components/charts/SalaryByCity';
-import { RemoteVsOffice } from '../components/charts/RemoteVsOffice';
-import { SalaryByCompanyType } from '../components/charts/SalaryByCompanyType';
-import { YearComparison } from '../components/charts/YearComparison';
 import { AnimatedCounter, AnimatedSalary, AnimatedMultiplier } from '../components/ui/AnimatedCounter';
+
+// Lazy load charts for better performance
+const SalaryByPosition = lazy(() => import('../components/charts/SalaryByPosition').then(m => ({ default: m.SalaryByPosition })));
+const SalaryByExperience = lazy(() => import('../components/charts/SalaryByExperience').then(m => ({ default: m.SalaryByExperience })));
+const MinWageMultiplier = lazy(() => import('../components/charts/MinWageMultiplier').then(m => ({ default: m.MinWageMultiplier })));
+const SalaryByCity = lazy(() => import('../components/charts/SalaryByCity').then(m => ({ default: m.SalaryByCity })));
+const RemoteVsOffice = lazy(() => import('../components/charts/RemoteVsOffice').then(m => ({ default: m.RemoteVsOffice })));
+const SalaryByCompanyType = lazy(() => import('../components/charts/SalaryByCompanyType').then(m => ({ default: m.SalaryByCompanyType })));
+const YearComparison = lazy(() => import('../components/charts/YearComparison').then(m => ({ default: m.YearComparison })));
+
+// Chart loading placeholder
+function ChartSkeleton() {
+  return <div className="h-80 bg-[var(--bg-secondary)] rounded-2xl animate-pulse" />;
+}
 
 function StatCard({ value, label, subValue, icon, color = 'accent' }) {
   const colorClasses = {
@@ -132,38 +140,40 @@ export function Dashboard() {
                 </div>
 
                 {/* Charts - Bento Grid (4 columns) */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                  {/* Row 1: Position (full) - En önemli */}
-                  <div className="md:col-span-2 lg:col-span-4">
-                    <SalaryByPosition year={filters.year} />
-                  </div>
+                <Suspense fallback={<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">{[...Array(7)].map((_, i) => <ChartSkeleton key={i} />)}</div>}>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {/* Row 1: Position (full) - En önemli */}
+                    <div className="md:col-span-2 lg:col-span-4">
+                      <SalaryByPosition year={filters.year} />
+                    </div>
 
-                  {/* Row 2: Experience + Location - Kişisel faktörler */}
-                  <div className="md:col-span-2">
-                    <SalaryByExperience year={filters.year} />
-                  </div>
-                  <div className="md:col-span-2">
-                    <SalaryByCity year={filters.year} />
-                  </div>
+                    {/* Row 2: Experience + Location - Kişisel faktörler */}
+                    <div className="md:col-span-2">
+                      <SalaryByExperience year={filters.year} />
+                    </div>
+                    <div className="md:col-span-2">
+                      <SalaryByCity year={filters.year} />
+                    </div>
 
-                  {/* Row 3: Work Mode + Company Type - İş ortamı faktörleri */}
-                  <div className="md:col-span-2">
-                    <RemoteVsOffice year={filters.year} />
-                  </div>
-                  <div className="md:col-span-2">
-                    <SalaryByCompanyType year={filters.year} />
-                  </div>
+                    {/* Row 3: Work Mode + Company Type - İş ortamı faktörleri */}
+                    <div className="md:col-span-2">
+                      <RemoteVsOffice year={filters.year} />
+                    </div>
+                    <div className="md:col-span-2">
+                      <SalaryByCompanyType year={filters.year} />
+                    </div>
 
-                  {/* Row 4: Min Wage Trend + Year Comparison */}
-                  <div className="md:col-span-2 lg:col-span-4">
-                    <MinWageMultiplier />
-                  </div>
+                    {/* Row 4: Min Wage Trend + Year Comparison */}
+                    <div className="md:col-span-2 lg:col-span-4">
+                      <MinWageMultiplier />
+                    </div>
 
-                  {/* Row 5: Year Comparison (full) */}
-                  <div className="md:col-span-2 lg:col-span-4">
-                    <YearComparison />
+                    {/* Row 5: Year Comparison (full) */}
+                    <div className="md:col-span-2 lg:col-span-4">
+                      <YearComparison />
+                    </div>
                   </div>
-                </div>
+                </Suspense>
               </div>
             )}
           </main>
