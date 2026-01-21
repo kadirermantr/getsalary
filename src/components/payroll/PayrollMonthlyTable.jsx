@@ -53,14 +53,16 @@ export function PayrollMonthlyTable({ monthlyData, annualTotals }) {
                 }`}
               >
                 <td className="py-3 px-2 text-[var(--text-primary)] font-medium whitespace-nowrap">
-                  <div className="flex items-center gap-1.5">
+                  <div className="flex items-center gap-2.5">
                     {months[index]}
                     {row.dilimDegisti && (
-                      <span
-                        className="text-[10px] bg-rose-500/20 text-rose-400 px-1.5 py-0.5 rounded"
-                        title={t('grossToNet.taxBracketNote')}
-                      >
-                        {t('grossToNet.taxBracketNote')}
+                      <span className="relative group">
+                        <span className="text-xs bg-rose-500/20 text-rose-400 px-1.5 py-0.5 rounded cursor-pointer">
+                          %{row.oncekiDilimOrani} → %{row.mevcutDilimOrani}
+                        </span>
+                        <span className="absolute left-0 bottom-full mb-1.5 px-2 py-1 text-[10px] text-white bg-gray-800 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
+                          {t('grossToNet.taxBracketNote')}
+                        </span>
                       </span>
                     )}
                   </div>
