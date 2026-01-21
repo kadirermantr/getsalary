@@ -6,12 +6,12 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  ResponsiveContainer,
   Cell,
 } from 'recharts';
 import { CHART_COLOR_ARRAY } from '../../data/config';
 import { formatSalary } from '../../utils/calculations';
 import { Card, ChartIcons } from '../ui/Card';
+import { ChartWrapper } from './ChartWrapper';
 
 // Sample technology salary data (will be replaced with real data)
 const sampleTechData = {
@@ -77,32 +77,30 @@ export function SalaryByTech({ year }) {
 
   return (
     <Card title={t('charts.salaryByTech')} icon={ChartIcons.tech}>
-      <div className="h-72">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data} layout="vertical" margin={{ left: 10, right: 20 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="var(--bg-secondary)" />
-            <XAxis
-              type="number"
-              tickFormatter={(value) => `${(value / 1000).toFixed(0)}K`}
-              stroke="var(--text-secondary)"
-              fontSize={12}
-            />
-            <YAxis
-              type="category"
-              dataKey="tech"
-              stroke="var(--text-secondary)"
-              fontSize={12}
-              width={80}
-            />
-            <Tooltip content={<CustomTooltip />} cursor={{ fill: 'transparent' }} />
-            <Bar dataKey="median" radius={[0, 4, 4, 0]}>
-              {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={CHART_COLOR_ARRAY[index % CHART_COLOR_ARRAY.length]} />
-              ))}
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartWrapper height="h-72">
+        <BarChart data={data} layout="vertical" margin={{ left: 10, right: 20 }}>
+          <CartesianGrid strokeDasharray="3 3" stroke="var(--bg-secondary)" />
+          <XAxis
+            type="number"
+            tickFormatter={(value) => `${(value / 1000).toFixed(0)}K`}
+            stroke="var(--text-secondary)"
+            fontSize={12}
+          />
+          <YAxis
+            type="category"
+            dataKey="tech"
+            stroke="var(--text-secondary)"
+            fontSize={12}
+            width={80}
+          />
+          <Tooltip content={<CustomTooltip />} cursor={{ fill: 'transparent' }} />
+          <Bar dataKey="median" radius={[0, 4, 4, 0]}>
+            {data.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={CHART_COLOR_ARRAY[index % CHART_COLOR_ARRAY.length]} />
+            ))}
+          </Bar>
+        </BarChart>
+      </ChartWrapper>
     </Card>
   );
 }

@@ -6,7 +6,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  ResponsiveContainer,
   Cell,
 } from 'recharts';
 import { useData } from '../../context/DataContext';
@@ -14,6 +13,7 @@ import { useFilters } from '../../context/FilterContext';
 import { CHART_COLOR_ARRAY } from '../../data/config';
 import { formatSalary } from '../../utils/calculations';
 import { Card, ChartIcons } from '../ui/Card';
+import { ChartWrapper } from './ChartWrapper';
 
 export function SalaryByCompanyType({ year }) {
   const { t } = useTranslation();
@@ -83,29 +83,27 @@ export function SalaryByCompanyType({ year }) {
 
   return (
     <Card title={t('charts.salaryByCompanyType')} icon={ChartIcons.company}>
-      <div className="h-72">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="var(--bg-secondary)" />
-            <XAxis
-              dataKey="label"
-              stroke="var(--text-secondary)"
-              fontSize={12}
-            />
-            <YAxis
-              tickFormatter={(value) => `${(value / 1000).toFixed(0)}K`}
-              stroke="var(--text-secondary)"
-              fontSize={12}
-            />
-            <Tooltip content={<CustomTooltip />} cursor={{ fill: 'transparent' }} />
-            <Bar dataKey="median" radius={[4, 4, 0, 0]}>
-              {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={CHART_COLOR_ARRAY[index + 3]} />
-              ))}
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartWrapper height="h-72">
+        <BarChart data={data} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+          <CartesianGrid strokeDasharray="3 3" stroke="var(--bg-secondary)" />
+          <XAxis
+            dataKey="label"
+            stroke="var(--text-secondary)"
+            fontSize={12}
+          />
+          <YAxis
+            tickFormatter={(value) => `${(value / 1000).toFixed(0)}K`}
+            stroke="var(--text-secondary)"
+            fontSize={12}
+          />
+          <Tooltip content={<CustomTooltip />} cursor={{ fill: 'transparent' }} />
+          <Bar dataKey="median" radius={[4, 4, 0, 0]}>
+            {data.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={CHART_COLOR_ARRAY[index + 3]} />
+            ))}
+          </Bar>
+        </BarChart>
+      </ChartWrapper>
     </Card>
   );
 }
