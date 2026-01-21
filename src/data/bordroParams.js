@@ -259,12 +259,18 @@ export function calculateGrossToNet(brutMaas, yearParams) {
     const netMaas = brutMaas - sgkKesintisi - issizlikKesintisi - aylikGelirVergisi - damgaVergisi;
 
     // Vergi dilimi değişimi kontrolü
-    const oncekiDilim =
+    const oncekiDilimIndex =
       ay === 0
         ? null
         : bulDilim(kumulatifGelirVergisiMatrahi - aylikGVM, params.gelirVergisiDilimleri);
-    const mevcutDilim = bulDilim(kumulatifGelirVergisiMatrahi, params.gelirVergisiDilimleri);
-    const dilimDegisti = oncekiDilim !== null && oncekiDilim !== mevcutDilim;
+    const mevcutDilimIndex = bulDilim(kumulatifGelirVergisiMatrahi, params.gelirVergisiDilimleri);
+    const dilimDegisti = oncekiDilimIndex !== null && oncekiDilimIndex !== mevcutDilimIndex;
+
+    // Dilim oranlarını yüzde olarak hesapla
+    const oncekiDilimOrani = oncekiDilimIndex !== null
+      ? Math.round(params.gelirVergisiDilimleri[oncekiDilimIndex].oran * 100)
+      : null;
+    const mevcutDilimOrani = Math.round(params.gelirVergisiDilimleri[mevcutDilimIndex].oran * 100);
 
     aylikDetaylar.push({
       ay: ay + 1,
@@ -276,7 +282,9 @@ export function calculateGrossToNet(brutMaas, yearParams) {
       damgaVergisi,
       net: netMaas,
       dilimDegisti,
-      vergiDilimi: mevcutDilim,
+      vergiDilimi: mevcutDilimIndex,
+      oncekiDilimOrani,
+      mevcutDilimOrani,
     });
   }
 
