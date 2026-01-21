@@ -8,13 +8,13 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  ResponsiveContainer,
 } from 'recharts';
 import { useData } from '../../context/DataContext';
 import { useFilters } from '../../context/FilterContext';
 import { CHART_COLOR_ARRAY, YEARS } from '../../data/config';
 import { formatSalary, formatPercentage } from '../../utils/calculations';
 import { Card, ChartIcons } from '../ui/Card';
+import { ChartWrapper } from './ChartWrapper';
 
 export function InflationComparison() {
   const { t, i18n } = useTranslation();
@@ -96,39 +96,37 @@ export function InflationComparison() {
 
   return (
     <Card title={t('charts.inflationComparison')} icon={ChartIcons.inflation}>
-      <div className="h-72">
-        <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={data} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="var(--bg-secondary)" />
-            <XAxis
-              dataKey="year"
-              stroke="var(--text-secondary)"
-              fontSize={12}
-            />
-            <YAxis
-              tickFormatter={(value) => `${value}%`}
-              stroke="var(--text-secondary)"
-              fontSize={12}
-            />
-            <Tooltip content={<CustomTooltip />} cursor={{ fill: 'transparent' }} />
-            <Legend />
-            <Bar
-              dataKey="salaryGrowth"
-              name={t('charts.salaryGrowth')}
-              fill={CHART_COLOR_ARRAY[1]}
-              radius={[4, 4, 0, 0]}
-            />
-            <Line
-              type="monotone"
-              dataKey="inflation"
-              name={t('charts.inflation')}
-              stroke={CHART_COLOR_ARRAY[3]}
-              strokeWidth={3}
-              dot={{ fill: CHART_COLOR_ARRAY[3], strokeWidth: 2, r: 5 }}
-            />
-          </ComposedChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartWrapper height="h-72">
+        <ComposedChart data={data} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+          <CartesianGrid strokeDasharray="3 3" stroke="var(--bg-secondary)" />
+          <XAxis
+            dataKey="year"
+            stroke="var(--text-secondary)"
+            fontSize={12}
+          />
+          <YAxis
+            tickFormatter={(value) => `${value}%`}
+            stroke="var(--text-secondary)"
+            fontSize={12}
+          />
+          <Tooltip content={<CustomTooltip />} cursor={{ fill: 'transparent' }} />
+          <Legend />
+          <Bar
+            dataKey="salaryGrowth"
+            name={t('charts.salaryGrowth')}
+            fill={CHART_COLOR_ARRAY[1]}
+            radius={[4, 4, 0, 0]}
+          />
+          <Line
+            type="monotone"
+            dataKey="inflation"
+            name={t('charts.inflation')}
+            stroke={CHART_COLOR_ARRAY[3]}
+            strokeWidth={3}
+            dot={{ fill: CHART_COLOR_ARRAY[3], strokeWidth: 2, r: 5 }}
+          />
+        </ComposedChart>
+      </ChartWrapper>
       <p className="text-xs text-[var(--text-secondary)] mt-2 text-center">
         {t('charts.inflationDesc')}
       </p>

@@ -6,7 +6,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  ResponsiveContainer,
 } from 'recharts';
 import { useData } from '../../context/DataContext';
 import { useFilters } from '../../context/FilterContext';
@@ -14,6 +13,7 @@ import { CHART_COLOR_ARRAY } from '../../data/config';
 import { formatSalary } from '../../utils/calculations';
 import { Card, ChartIcons } from '../ui/Card';
 import { ChartTooltip } from '../ui/ChartTooltip';
+import { ChartWrapper } from './ChartWrapper';
 
 export function SalaryByPosition({ year }) {
   const { t } = useTranslation();
@@ -55,34 +55,32 @@ export function SalaryByPosition({ year }) {
 
   return (
     <Card title={t('charts.salaryByPosition')} icon={ChartIcons.position}>
-      <div className="h-96">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data} layout="vertical" margin={{ left: 10, right: 20, top: 10, bottom: 10 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="var(--bg-secondary)" />
-            <XAxis
-              type="number"
-              tickFormatter={(value) => `${(value / 1000).toFixed(0)}K`}
-              stroke="var(--text-secondary)"
-              fontSize={11}
-            />
-            <YAxis
-              type="category"
-              dataKey="position"
-              stroke="var(--text-secondary)"
-              fontSize={11}
-              width={95}
-              tickLine={false}
-            />
-            <Tooltip content={<ChartTooltip showPercentile />} cursor={{ fill: 'transparent' }} />
-            <Bar
-              dataKey="median"
-              name={t('charts.median')}
-              fill={CHART_COLOR_ARRAY[0]}
-              radius={[0, 4, 4, 0]}
-            />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartWrapper height="h-96">
+        <BarChart data={data} layout="vertical" margin={{ left: 10, right: 20, top: 10, bottom: 10 }}>
+          <CartesianGrid strokeDasharray="3 3" stroke="var(--bg-secondary)" />
+          <XAxis
+            type="number"
+            tickFormatter={(value) => `${(value / 1000).toFixed(0)}K`}
+            stroke="var(--text-secondary)"
+            fontSize={11}
+          />
+          <YAxis
+            type="category"
+            dataKey="position"
+            stroke="var(--text-secondary)"
+            fontSize={11}
+            width={95}
+            tickLine={false}
+          />
+          <Tooltip content={<ChartTooltip showPercentile />} cursor={{ fill: 'transparent' }} />
+          <Bar
+            dataKey="median"
+            name={t('charts.median')}
+            fill={CHART_COLOR_ARRAY[0]}
+            radius={[0, 4, 4, 0]}
+          />
+        </BarChart>
+      </ChartWrapper>
     </Card>
   );
 }

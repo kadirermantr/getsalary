@@ -8,7 +8,6 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  ResponsiveContainer,
   Cell,
 } from 'recharts';
 import { useData } from '../../context/DataContext';
@@ -16,6 +15,7 @@ import { useFilters } from '../../context/FilterContext';
 import { YEARS, CHART_COLOR_ARRAY } from '../../data/config';
 import { formatSalary, calculateGrowthRate, formatPercentage } from '../../utils/calculations';
 import { Card, ChartIcons } from '../ui/Card';
+import { ChartWrapper } from './ChartWrapper';
 
 export function YearComparison() {
   const { t, i18n } = useTranslation();
@@ -147,26 +147,24 @@ export function YearComparison() {
       </div>
 
       {/* Chart */}
-      <div className="h-72">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={chartData} margin={{ top: 10, right: 10, bottom: 10, left: 10 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="var(--bg-secondary)" />
-            <XAxis dataKey="position" stroke="var(--text-secondary)" fontSize={11} />
-            <YAxis
-              tickFormatter={(value) => `${(value / 1000).toFixed(0)}K`}
-              stroke="var(--text-secondary)"
-              fontSize={11}
-            />
-            <Tooltip content={<CustomTooltip />} cursor={{ fill: 'transparent' }} />
-            <Legend
-              wrapperStyle={{ fontSize: '12px' }}
-              formatter={(value) => <span style={{ color: 'var(--text-secondary)' }}>{value}</span>}
-            />
-            <Bar dataKey={year1} name={String(year1)} fill={CHART_COLOR_ARRAY[4]} radius={[4, 4, 0, 0]} />
-            <Bar dataKey={year2} name={String(year2)} fill={CHART_COLOR_ARRAY[0]} radius={[4, 4, 0, 0]} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartWrapper height="h-72">
+        <BarChart data={chartData} margin={{ top: 10, right: 10, bottom: 10, left: 10 }}>
+          <CartesianGrid strokeDasharray="3 3" stroke="var(--bg-secondary)" />
+          <XAxis dataKey="position" stroke="var(--text-secondary)" fontSize={11} />
+          <YAxis
+            tickFormatter={(value) => `${(value / 1000).toFixed(0)}K`}
+            stroke="var(--text-secondary)"
+            fontSize={11}
+          />
+          <Tooltip content={<CustomTooltip />} cursor={{ fill: 'transparent' }} />
+          <Legend
+            wrapperStyle={{ fontSize: '12px' }}
+            formatter={(value) => <span style={{ color: 'var(--text-secondary)' }}>{value}</span>}
+          />
+          <Bar dataKey={year1} name={String(year1)} fill={CHART_COLOR_ARRAY[4]} radius={[4, 4, 0, 0]} />
+          <Bar dataKey={year2} name={String(year2)} fill={CHART_COLOR_ARRAY[0]} radius={[4, 4, 0, 0]} />
+        </BarChart>
+      </ChartWrapper>
     </Card>
   );
 }

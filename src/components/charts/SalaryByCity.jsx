@@ -6,13 +6,13 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  ResponsiveContainer,
 } from 'recharts';
 import { useData } from '../../context/DataContext';
 import { useFilters } from '../../context/FilterContext';
 import { CHART_COLOR_ARRAY } from '../../data/config';
 import { formatSalary } from '../../utils/calculations';
 import { Card, ChartIcons } from '../ui/Card';
+import { ChartWrapper } from './ChartWrapper';
 
 export function SalaryByCity({ year }) {
   const { t } = useTranslation();
@@ -82,30 +82,28 @@ export function SalaryByCity({ year }) {
 
   return (
     <Card title={t('charts.salaryByCity')} icon={ChartIcons.city}>
-      <div className="h-80">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="var(--bg-secondary)" />
-            <XAxis
-              dataKey="label"
-              stroke="var(--text-secondary)"
-              fontSize={12}
-            />
-            <YAxis
-              tickFormatter={(value) => `${(value / 1000).toFixed(0)}K`}
-              stroke="var(--text-secondary)"
-              fontSize={12}
-            />
-            <Tooltip content={<CustomTooltip />} cursor={{ fill: 'transparent' }} />
-            <Bar
-              dataKey="median"
-              name={t('charts.median')}
-              fill={CHART_COLOR_ARRAY[2]}
-              radius={[4, 4, 0, 0]}
-            />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ChartWrapper height="h-80">
+        <BarChart data={data} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+          <CartesianGrid strokeDasharray="3 3" stroke="var(--bg-secondary)" />
+          <XAxis
+            dataKey="label"
+            stroke="var(--text-secondary)"
+            fontSize={12}
+          />
+          <YAxis
+            tickFormatter={(value) => `${(value / 1000).toFixed(0)}K`}
+            stroke="var(--text-secondary)"
+            fontSize={12}
+          />
+          <Tooltip content={<CustomTooltip />} cursor={{ fill: 'transparent' }} />
+          <Bar
+            dataKey="median"
+            name={t('charts.median')}
+            fill={CHART_COLOR_ARRAY[2]}
+            radius={[4, 4, 0, 0]}
+          />
+        </BarChart>
+      </ChartWrapper>
     </Card>
   );
 }
