@@ -6,13 +6,14 @@ export function AnimatedCounter({
   formatter = (val) => val.toLocaleString(),
   className = '',
 }) {
+  const safeValue = Number.isFinite(value) ? value : 0;
   const [displayValue, setDisplayValue] = useState(0);
   const previousValue = useRef(0);
   const animationRef = useRef(null);
 
   useEffect(() => {
     const startValue = previousValue.current;
-    const endValue = value;
+    const endValue = safeValue;
     const startTime = performance.now();
 
     const animate = (currentTime) => {
@@ -39,7 +40,7 @@ export function AnimatedCounter({
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [value, duration]);
+  }, [safeValue, duration]);
 
   return <span className={className}>{formatter(displayValue)}</span>;
 }
@@ -47,10 +48,11 @@ export function AnimatedCounter({
 export function AnimatedSalary({ value, className = '', locale = 'tr' }) {
   const isTurkish = locale === 'tr' || locale === 'tr-TR';
   const localeCode = isTurkish ? 'tr-TR' : 'en-US';
+  const safeValue = Number.isFinite(value) ? value : 0;
 
   return (
     <AnimatedCounter
-      value={value}
+      value={safeValue}
       formatter={(val) => {
         const formattedNumber = val.toLocaleString(localeCode);
         return isTurkish ? `${formattedNumber} ₺` : `₺${formattedNumber}`;
@@ -61,13 +63,14 @@ export function AnimatedSalary({ value, className = '', locale = 'tr' }) {
 }
 
 export function AnimatedMultiplier({ value, className = '' }) {
+  const safeValue = Number.isFinite(value) ? value : 0;
   const [displayValue, setDisplayValue] = useState(0);
   const previousValue = useRef(0);
   const animationRef = useRef(null);
 
   useEffect(() => {
     const startValue = previousValue.current;
-    const endValue = value;
+    const endValue = safeValue;
     const startTime = performance.now();
     const duration = 2000;
 
@@ -92,7 +95,7 @@ export function AnimatedMultiplier({ value, className = '' }) {
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [value]);
+  }, [safeValue]);
 
   return <span className={className}>{displayValue.toFixed(1)}x</span>;
 }

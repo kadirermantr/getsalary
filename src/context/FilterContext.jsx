@@ -122,7 +122,9 @@ export function FilterProvider({ children }) {
 
   const resetFilters = useCallback(() => {
     setFilters(initialFilters);
-  }, []);
+    setUserInteracted(true);
+    setSearchParams({}, { replace: true });
+  }, [setSearchParams]);
 
   const activeFilterCount = Object.entries(filters).filter(
     ([key, value]) => key !== 'year' && value !== 'all'
