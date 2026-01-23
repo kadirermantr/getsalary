@@ -16,7 +16,8 @@ import { Card, ChartIcons } from '../ui/Card';
 import { ChartWrapper } from './ChartWrapper';
 
 export function RemoteVsOffice({ year }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const locale = i18n.language;
   const { getYearStats, loading } = useData();
   const { filters } = useFilters();
 
@@ -81,7 +82,7 @@ export function RemoteVsOffice({ year }) {
       <div className="bg-[var(--bg-primary)] border border-[var(--bg-secondary)] rounded-lg p-3 shadow-lg">
         <p className="font-semibold text-[var(--text-primary)] mb-2">{item.label}</p>
         <p className="text-sm text-[var(--text-secondary)]">
-          {t('charts.median')}: {formatSalary(item?.median)}
+          {t('charts.median')}: {formatSalary(item?.median, locale)}
         </p>
         <p className="text-sm text-[var(--text-secondary)]">
           n = {item?.count}

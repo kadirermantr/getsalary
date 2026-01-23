@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import confetti from 'canvas-confetti';
 import { useData } from '../../context/DataContext';
 import { useFilters } from '../../context/FilterContext';
+import { formatSalary } from '../../utils/calculations';
 import { Card, ChartIcons } from '../ui/Card';
 
 export function SalaryCalculator({ onSalaryChange }) {
@@ -149,15 +150,15 @@ export function SalaryCalculator({ onSalaryChange }) {
             <div className="grid grid-cols-3 gap-2 pt-2 border-t border-[var(--border)]">
               <div className="text-center">
                 <p className="text-xs text-[var(--text-secondary)]">25%</p>
-                <p className="font-medium text-sm text-[var(--text-primary)]">{stats.p25?.toLocaleString('tr-TR')} ₺</p>
+                <p className="font-medium text-sm text-[var(--text-primary)]">{formatSalary(stats.p25, i18n.language)}</p>
               </div>
               <div className="text-center">
                 <p className="text-xs text-[var(--text-secondary)]">{t('charts.median')}</p>
-                <p className="font-medium text-sm text-[var(--accent)]">{stats.median?.toLocaleString('tr-TR')} ₺</p>
+                <p className="font-medium text-sm text-[var(--accent)]">{formatSalary(stats.median, i18n.language)}</p>
               </div>
               <div className="text-center">
                 <p className="text-xs text-[var(--text-secondary)]">75%</p>
-                <p className="font-medium text-sm text-[var(--text-primary)]">{stats.p75?.toLocaleString('tr-TR')} ₺</p>
+                <p className="font-medium text-sm text-[var(--text-primary)]">{formatSalary(stats.p75, i18n.language)}</p>
               </div>
             </div>
           </div>

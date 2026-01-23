@@ -58,7 +58,8 @@ const sampleTechData = {
 };
 
 export function SalaryByTech({ year }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const locale = i18n.language;
 
   const data = sampleTechData[year] || sampleTechData[2025];
 
@@ -69,7 +70,7 @@ export function SalaryByTech({ year }) {
       <div className="bg-[var(--bg-primary)] border border-[var(--bg-secondary)] rounded-lg p-3 shadow-lg">
         <p className="font-semibold text-[var(--text-primary)] mb-2">{label}</p>
         <p className="text-sm text-[var(--text-secondary)]">
-          {t('charts.median')}: {formatSalary(payload[0].value)}
+          {t('charts.median')}: {formatSalary(payload[0].value, locale)}
         </p>
       </div>
     );

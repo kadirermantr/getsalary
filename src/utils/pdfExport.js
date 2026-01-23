@@ -68,8 +68,17 @@ export async function exportToPDF(elementId, filename = 'report.pdf', options = 
  * @param {object} stats - Statistics object
  * @param {object} filters - Current filters
  * @param {function} t - Translation function
+ * @param {string} locale - Language locale (tr or en)
  */
-export function generateReport(stats, filters, t) {
+export function generateReport(stats, filters, t, locale = 'tr') {
+  const isTurkish = locale === 'tr';
+  const localeCode = isTurkish ? 'tr-TR' : 'en-US';
+  const currencySymbol = '₺';
+  const formatSalary = (value) => {
+    if (!value) return '—';
+    const formatted = value.toLocaleString(localeCode);
+    return isTurkish ? `${formatted} ${currencySymbol}` : `${currencySymbol}${formatted}`;
+  };
   const pdf = new jsPDF({
     orientation: 'portrait',
     unit: 'mm',
@@ -121,7 +130,7 @@ export function generateReport(stats, filters, t) {
 
   pdf.setFontSize(24);
   pdf.setTextColor(30, 41, 59);
-  pdf.text(`${stats.medianSalary?.toLocaleString('tr-TR')} TL`, 20, y);
+  pdf.text(formatSalary(stats.medianSalary), 20, y);
   y += 15;
 
   // Additional stats
@@ -129,10 +138,10 @@ export function generateReport(stats, filters, t) {
   pdf.setTextColor(100, 116, 139);
 
   const statsData = [
-    [`${t('dashboard.participants')}:`, stats.filteredCount?.toLocaleString('tr-TR')],
+    [`${t('dashboard.participants')}:`, stats.filteredCount?.toLocaleString(localeCode)],
     [`${t('dashboard.minWageMultiplier')}:`, `${stats.multiplier?.toFixed(2)}x`],
-    ['25%:', `${stats.p25?.toLocaleString('tr-TR')} TL`],
-    ['75%:', `${stats.p75?.toLocaleString('tr-TR')} TL`],
+    ['25%:', formatSalary(stats.p25)],
+    ['75%:', formatSalary(stats.p75)],
   ];
 
   statsData.forEach(([label, value]) => {
@@ -146,7 +155,7 @@ export function generateReport(stats, filters, t) {
   // Footer
   pdf.setFontSize(9);
   pdf.setTextColor(148, 163, 184);
-  const date = new Date().toLocaleDateString('tr-TR');
+  const date = new Date().toLocaleDateString(localeCode);
   pdf.text(`${t('export.generatedAt')}: ${date}`, 20, 280);
   pdf.text('getsalary.dev', pageWidth - 20, 280, { align: 'right' });
 

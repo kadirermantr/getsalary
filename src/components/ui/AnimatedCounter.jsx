@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 export function AnimatedCounter({
   value,
   duration = 2000,
-  formatter = (val) => val.toLocaleString('tr-TR'),
+  formatter = (val) => val.toLocaleString(),
   className = '',
 }) {
   const [displayValue, setDisplayValue] = useState(0);
@@ -44,11 +44,17 @@ export function AnimatedCounter({
   return <span className={className}>{formatter(displayValue)}</span>;
 }
 
-export function AnimatedSalary({ value, className = '' }) {
+export function AnimatedSalary({ value, className = '', locale = 'tr' }) {
+  const isTurkish = locale === 'tr' || locale === 'tr-TR';
+  const localeCode = isTurkish ? 'tr-TR' : 'en-US';
+
   return (
     <AnimatedCounter
       value={value}
-      formatter={(val) => `${val.toLocaleString('tr-TR')} ₺`}
+      formatter={(val) => {
+        const formattedNumber = val.toLocaleString(localeCode);
+        return isTurkish ? `${formattedNumber} ₺` : `₺${formattedNumber}`;
+      }}
       className={className}
     />
   );

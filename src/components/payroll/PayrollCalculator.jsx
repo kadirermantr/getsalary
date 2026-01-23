@@ -13,6 +13,7 @@ import { PayrollMonthlyTable } from './PayrollMonthlyTable';
 export function PayrollCalculator({ selectedYear, setSelectedYear }) {
   const { t, i18n } = useTranslation();
   const isTurkish = i18n.language === 'tr';
+  const localeCode = isTurkish ? 'tr-TR' : 'en-US';
   const [grossInput, setGrossInput] = useState('');
   const [netInput, setNetInput] = useState('');
   const [activeField, setActiveField] = useState(null); // 'gross' or 'net'
@@ -21,7 +22,7 @@ export function PayrollCalculator({ selectedYear, setSelectedYear }) {
   const params = BORDRO_PARAMS[selectedYear];
 
   const formatNumber = (num) => {
-    return Math.round(num).toLocaleString('tr-TR');
+    return Math.round(num).toLocaleString(localeCode);
   };
 
   const formatInput = (value) => {
@@ -188,7 +189,7 @@ export function PayrollCalculator({ selectedYear, setSelectedYear }) {
                   <div key={item.label} className="text-center p-3 rounded-lg bg-[var(--bg-tertiary)]/50 border border-[var(--border)]">
                     <div className="text-[10px] text-[var(--text-secondary)] uppercase tracking-wide">{item.label}</div>
                     <div className="text-base font-semibold text-[var(--text-secondary)]">
-                      -{item.value.toLocaleString('tr-TR', { maximumFractionDigits: 0 })}
+                      -{item.value.toLocaleString(localeCode, { maximumFractionDigits: 0 })}
                     </div>
                   </div>
                 ))}
@@ -196,7 +197,7 @@ export function PayrollCalculator({ selectedYear, setSelectedYear }) {
                 <div className="col-span-2 sm:col-span-1 text-center p-3 rounded-lg bg-[var(--bg-tertiary)]/50 border border-[var(--border)]">
                   <div className="text-[10px] text-[var(--text-secondary)] uppercase tracking-wide">{t('grossToNet.totalDeductions')}</div>
                   <div className="text-base font-semibold text-[var(--text-secondary)]">
-                    -{totalDeductions.toLocaleString('tr-TR', { maximumFractionDigits: 0 })}
+                    -{totalDeductions.toLocaleString(localeCode, { maximumFractionDigits: 0 })}
                   </div>
                 </div>
               </div>

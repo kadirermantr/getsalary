@@ -2,7 +2,8 @@ import { useTranslation } from 'react-i18next';
 import { formatSalary } from '../../utils/calculations';
 
 export function ChartTooltip({ active, payload, label, showPercentile = false }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const locale = i18n.language;
 
   if (!active || !payload || !payload.length) return null;
 
@@ -19,7 +20,7 @@ export function ChartTooltip({ active, payload, label, showPercentile = false })
           <div key={index} className="flex justify-between items-center gap-4">
             <span className="text-sm text-[var(--text-secondary)]">{entry.name}:</span>
             <span className="text-sm font-medium" style={{ color: entry.color || 'var(--text-primary)' }}>
-              {formatSalary(entry.value)}
+              {formatSalary(entry.value, locale)}
             </span>
           </div>
         ))}
@@ -28,7 +29,7 @@ export function ChartTooltip({ active, payload, label, showPercentile = false })
           <div className="flex justify-between items-center gap-4 pt-1 border-t border-[var(--bg-secondary)] mt-2">
             <span className="text-xs text-[var(--text-secondary)]">{t('charts.participants')}:</span>
             <span className="text-xs font-medium text-[var(--text-primary)]">
-              {data.count.toLocaleString('tr-TR')}
+              {data.count.toLocaleString(locale === 'tr' ? 'tr-TR' : 'en-US')}
             </span>
           </div>
         )}
@@ -37,7 +38,7 @@ export function ChartTooltip({ active, payload, label, showPercentile = false })
           <div className="flex justify-between items-center gap-4">
             <span className="text-xs text-[var(--text-secondary)]">25-75%:</span>
             <span className="text-xs text-[var(--text-primary)]">
-              {formatSalary(data.p25)} - {formatSalary(data.p75)}
+              {formatSalary(data.p25, locale)} - {formatSalary(data.p75, locale)}
             </span>
           </div>
         )}
@@ -47,6 +48,9 @@ export function ChartTooltip({ active, payload, label, showPercentile = false })
 }
 
 export function ComparisonTooltip({ active, payload, label }) {
+  const { i18n } = useTranslation();
+  const locale = i18n.language;
+
   if (!active || !payload || !payload.length) return null;
 
   return (
@@ -63,7 +67,7 @@ export function ComparisonTooltip({ active, payload, label }) {
             <span className="text-sm font-medium text-[var(--text-primary)]">
               {typeof entry.value === 'number'
                 ? entry.value > 1000
-                  ? formatSalary(entry.value)
+                  ? formatSalary(entry.value, locale)
                   : `${entry.value.toFixed(1)}${entry.unit || ''}`
                 : entry.value}
             </span>

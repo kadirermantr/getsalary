@@ -6,7 +6,7 @@ import { formatSalary } from '../../utils/calculations';
 import { Card, ChartIcons } from '../ui/Card';
 
 export function SalaryPredictor() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { getYearStats, loading } = useData();
   const { filters, activeFilterCount } = useFilters();
 
@@ -70,15 +70,15 @@ export function SalaryPredictor() {
                 </p>
                 <div className="flex items-center justify-center gap-2">
                   <span className="text-lg text-[var(--text-secondary)]">
-                    {formatSalary(prediction.min)}
+                    {formatSalary(prediction.min, i18n.language)}
                   </span>
                   <span className="text-[var(--text-secondary)]">-</span>
                   <span className="text-2xl font-bold text-[var(--accent)]">
-                    {formatSalary(prediction.median)}
+                    {formatSalary(prediction.median, i18n.language)}
                   </span>
                   <span className="text-[var(--text-secondary)]">-</span>
                   <span className="text-lg text-[var(--text-secondary)]">
-                    {formatSalary(prediction.max)}
+                    {formatSalary(prediction.max, i18n.language)}
                   </span>
                 </div>
               </div>

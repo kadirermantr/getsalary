@@ -7,8 +7,9 @@ export function PayrollMonthlyTable({ monthlyData, annualTotals }) {
   const lang = i18n.language;
   const months = AYLAR[lang] || AYLAR.tr;
 
+  const localeCode = lang === 'tr' ? 'tr-TR' : 'en-US';
   const formatMoney = (value) =>
-    value.toLocaleString('tr-TR', {
+    value.toLocaleString(localeCode, {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     });

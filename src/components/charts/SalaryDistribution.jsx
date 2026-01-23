@@ -157,7 +157,7 @@ export function SalaryDistribution({ year, userSalary }) {
     <Card
       title={t('charts.salaryDistribution')}
       icon={ChartIcons.trend}
-      subtitle={`n = ${histogramData.total.toLocaleString('tr-TR')}`}
+      subtitle={`n = ${histogramData.total.toLocaleString(locale === 'tr' ? 'tr-TR' : 'en-US')}`}
     >
       <ChartWrapper height="h-80">
         <BarChart
@@ -177,7 +177,7 @@ export function SalaryDistribution({ year, userSalary }) {
           <YAxis
             stroke="var(--text-secondary)"
             fontSize={12}
-            tickFormatter={(value) => value.toLocaleString('tr-TR')}
+            tickFormatter={(value) => value.toLocaleString(locale === 'tr' ? 'tr-TR' : 'en-US')}
           />
           <Tooltip content={renderTooltip} cursor={{ fill: 'rgba(129, 140, 248, 0.1)' }} />
 

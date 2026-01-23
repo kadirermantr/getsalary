@@ -89,7 +89,7 @@ export function YearComparison() {
         <p className="font-semibold text-[var(--text-primary)] mb-2">{label}</p>
         {payload.map((entry, index) => (
           <p key={index} className="text-sm" style={{ color: entry.color }}>
-            {entry.name}: {formatSalary(entry.value)}
+            {entry.name}: {formatSalary(entry.value, i18n.language)}
           </p>
         ))}
         {item && (

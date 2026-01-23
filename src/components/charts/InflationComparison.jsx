@@ -88,7 +88,7 @@ export function InflationComparison() {
           {t('charts.realGrowth')}: {formatPercentage(item?.realGrowth, 1, i18n.language)}
         </p>
         <p className="text-sm text-[var(--text-secondary)] mt-1">
-          {t('charts.median')}: {formatSalary(item?.medianSalary)}
+          {t('charts.median')}: {formatSalary(item?.medianSalary, i18n.language)}
         </p>
       </div>
     );
