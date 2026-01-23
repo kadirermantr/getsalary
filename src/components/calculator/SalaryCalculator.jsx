@@ -9,6 +9,7 @@ import { Card, ChartIcons } from '../ui/Card';
 export function SalaryCalculator({ onSalaryChange }) {
   const { t, i18n } = useTranslation();
   const isTurkish = i18n.language === 'tr';
+  const formatPercent = (num) => isTurkish ? `%${num}` : `${num}%`;
   const { getYearStats } = useData();
   const { filters } = useFilters();
   const [salary, setSalary] = useState('');
@@ -149,7 +150,7 @@ export function SalaryCalculator({ onSalaryChange }) {
             {/* Context - always visible */}
             <div className="grid grid-cols-3 gap-2 pt-2 border-t border-[var(--border)]">
               <div className="text-center">
-                <p className="text-xs text-[var(--text-secondary)]">25%</p>
+                <p className="text-xs text-[var(--text-secondary)]">{formatPercent(25)}</p>
                 <p className="font-medium text-sm text-[var(--text-primary)]">{formatSalary(stats.p25, i18n.language)}</p>
               </div>
               <div className="text-center">
@@ -157,7 +158,7 @@ export function SalaryCalculator({ onSalaryChange }) {
                 <p className="font-medium text-sm text-[var(--accent)]">{formatSalary(stats.median, i18n.language)}</p>
               </div>
               <div className="text-center">
-                <p className="text-xs text-[var(--text-secondary)]">75%</p>
+                <p className="text-xs text-[var(--text-secondary)]">{formatPercent(75)}</p>
                 <p className="font-medium text-sm text-[var(--text-primary)]">{formatSalary(stats.p75, i18n.language)}</p>
               </div>
             </div>
@@ -193,11 +194,11 @@ export function SalaryCalculator({ onSalaryChange }) {
 
                   {/* Labels */}
                   <div className="flex justify-between text-xs text-[var(--text-secondary)]">
-                    <span>0%</span>
-                    <span>25%</span>
-                    <span>50%</span>
-                    <span>75%</span>
-                    <span>100%</span>
+                    <span>{formatPercent(0)}</span>
+                    <span>{formatPercent(25)}</span>
+                    <span>{formatPercent(50)}</span>
+                    <span>{formatPercent(75)}</span>
+                    <span>{formatPercent(100)}</span>
                   </div>
                 </div>
               ) : (

@@ -74,6 +74,7 @@ export function generateReport(stats, filters, t, locale = 'tr') {
   const isTurkish = locale === 'tr';
   const localeCode = isTurkish ? 'tr-TR' : 'en-US';
   const currencySymbol = '₺';
+  const formatPercent = (num) => isTurkish ? `%${num}` : `${num}%`;
   const formatSalary = (value) => {
     if (!value) return '—';
     const formatted = value.toLocaleString(localeCode);
@@ -140,8 +141,8 @@ export function generateReport(stats, filters, t, locale = 'tr') {
   const statsData = [
     [`${t('dashboard.participants')}:`, stats.filteredCount?.toLocaleString(localeCode)],
     [`${t('dashboard.minWageMultiplier')}:`, `${stats.multiplier?.toFixed(2)}x`],
-    ['25%:', formatSalary(stats.p25)],
-    ['75%:', formatSalary(stats.p75)],
+    [`${formatPercent(25)}:`, formatSalary(stats.p25)],
+    [`${formatPercent(75)}:`, formatSalary(stats.p75)],
   ];
 
   statsData.forEach(([label, value]) => {

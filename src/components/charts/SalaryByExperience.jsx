@@ -18,6 +18,8 @@ import { ChartWrapper } from './ChartWrapper';
 export function SalaryByExperience({ year }) {
   const { t, i18n } = useTranslation();
   const locale = i18n.language;
+  const isTurkish = locale === 'tr';
+  const percentileRange = isTurkish ? '%25-75' : '25-75%';
   const { getYearStats, loading } = useData();
   const { filters } = useFilters();
 
@@ -81,7 +83,7 @@ export function SalaryByExperience({ year }) {
           {t('charts.median')}: {formatSalary(item?.median, locale)}
         </p>
         <p className="text-sm text-[var(--text-secondary)]">
-          25-75%: {formatSalary(item?.p25, locale)} - {formatSalary(item?.p75, locale)}
+          {percentileRange}: {formatSalary(item?.p25, locale)} - {formatSalary(item?.p75, locale)}
         </p>
         <p className="text-sm text-[var(--text-secondary)]">
           n = {item?.count}
