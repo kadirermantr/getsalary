@@ -188,20 +188,27 @@ export function getExperienceLevel(years, levelMap) {
 /**
  * Format salary for display
  * @param {number} value - Salary value
- * @param {string} locale - Locale string
+ * @param {string} locale - Locale string (tr or en)
  * @returns {string} Formatted salary string
  */
-export function formatSalary(value, locale = 'tr-TR') {
+export function formatSalary(value, locale = 'tr') {
   if (!value || isNaN(value)) return '—';
 
+  const isTurkish = locale === 'tr' || locale === 'tr-TR';
+  const localeCode = isTurkish ? 'tr-TR' : 'en-US';
+
   // Format number with thousands separator
-  const formattedNumber = new Intl.NumberFormat(locale, {
+  const formattedNumber = new Intl.NumberFormat(localeCode, {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   }).format(value);
 
   // Turkish format: number + space + symbol (107.500 ₺)
-  return `${formattedNumber} ₺`;
+  // English format: symbol + number (₺107,500)
+  if (isTurkish) {
+    return `${formattedNumber} ₺`;
+  }
+  return `₺${formattedNumber}`;
 }
 
 /**

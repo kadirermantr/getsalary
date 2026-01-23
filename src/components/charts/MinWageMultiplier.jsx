@@ -12,11 +12,13 @@ import {
 import { useData } from '../../context/DataContext';
 import { useFilters } from '../../context/FilterContext';
 import { CHART_COLOR_ARRAY, YEARS } from '../../data/config';
+import { formatSalary } from '../../utils/calculations';
 import { Card, ChartIcons } from '../ui/Card';
 import { ChartWrapper } from './ChartWrapper';
 
 export function MinWageMultiplier() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const locale = i18n.language;
   const { getYearStats, loading } = useData();
   const { filters } = useFilters();
 
@@ -61,10 +63,10 @@ export function MinWageMultiplier() {
           {t('charts.multiplier')}: {item?.multiplier}x
         </p>
         <p className="text-sm text-[var(--text-secondary)]">
-          {t('charts.median')}: {item?.medianSalary?.toLocaleString('tr-TR')} ₺
+          {t('charts.median')}: {formatSalary(item?.medianSalary, locale)}
         </p>
         <p className="text-sm text-[var(--text-secondary)]">
-          {t('charts.minWage')}: {item?.minWage?.toLocaleString('tr-TR')} ₺
+          {t('charts.minWage')}: {formatSalary(item?.minWage, locale)}
         </p>
       </div>
     );
