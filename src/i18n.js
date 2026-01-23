@@ -93,7 +93,7 @@ const resources = {
         yourSalary: 'Senin maaşın',
       },
       calculator: {
-        placeholder: 'Örn: 45.000',
+        placeholder: '0',
         top10: 'Harika! Sektörün en üst %10\'luk diliminde yer alıyorsun.',
         top25: 'Çok iyi! Ortalamanın üzerinde kazanıyorsun.',
         aboveMedian: 'Medyanın üzerinde, iyi bir seviyedesin.',
@@ -337,7 +337,7 @@ const resources = {
         yourSalary: 'Your salary',
       },
       calculator: {
-        placeholder: 'E.g: 45,000',
+        placeholder: '0',
         top10: "Amazing! You're in the top 10% of the industry.",
         top25: "Great! You're earning above average.",
         aboveMedian: "Above median, you're at a good level.",
