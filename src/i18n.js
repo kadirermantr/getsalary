@@ -66,6 +66,7 @@ const resources = {
       charts: {
         salaryByPosition: 'Pozisyon',
         salaryByExperience: 'Deneyim',
+        salaryDistribution: 'Maaş Dağılımı',
         minWageMultiplier: 'Asgari Ücret Trendi',
         salaryByCity: 'Şehir',
         remoteVsOffice: 'Çalışma Modeli',
@@ -89,6 +90,7 @@ const resources = {
         enterSalaryPlaceholder: 'Maaşını girerek sektördeki yerini öğren.',
         total: 'toplam',
         inflationDesc: 'Yıllık maaş artışı vs TÜFE enflasyonu karşılaştırması',
+        yourSalary: 'Senin maaşın',
       },
       calculator: {
         placeholder: 'Örn: 45.000',
@@ -308,6 +310,7 @@ const resources = {
       charts: {
         salaryByPosition: 'Position',
         salaryByExperience: 'Experience',
+        salaryDistribution: 'Salary Distribution',
         minWageMultiplier: 'Min Wage Trend',
         salaryByCity: 'Location',
         remoteVsOffice: 'Work Model',
@@ -331,6 +334,7 @@ const resources = {
         enterSalaryPlaceholder: 'Enter your salary to see where you stand.',
         total: 'total',
         inflationDesc: 'Annual salary growth vs CPI inflation comparison',
+        yourSalary: 'Your salary',
       },
       calculator: {
         placeholder: 'E.g: 45,000',

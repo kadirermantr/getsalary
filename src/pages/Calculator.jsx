@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { usePageTitle } from '../hooks/usePageTitle';
 import { useFilters } from '../context/FilterContext';
@@ -5,11 +6,13 @@ import { PageHeaderWithShare } from '../components/layout/PageContainer';
 import { FilterSidebar, MobileFilterDrawer } from '../components/filters/FilterSidebar';
 import { SalaryCalculator } from '../components/calculator/SalaryCalculator';
 import { SalaryPredictor } from '../components/calculator/SalaryPredictor';
+import { SalaryDistribution } from '../components/charts/SalaryDistribution';
 
 export function Calculator() {
   const { t } = useTranslation();
   usePageTitle('salary');
   const { filters } = useFilters();
+  const [userSalary, setUserSalary] = useState(null);
 
   return (
     <div className="min-h-screen bg-[var(--bg-primary)]">
@@ -33,7 +36,8 @@ export function Calculator() {
           <main className="flex-1 min-w-0">
             {/* Calculator Tools */}
             <div className="space-y-6">
-              <SalaryCalculator />
+              <SalaryDistribution year={filters.year} userSalary={userSalary} />
+              <SalaryCalculator onSalaryChange={setUserSalary} />
               <SalaryPredictor />
             </div>
           </main>

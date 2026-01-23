@@ -5,7 +5,7 @@ import { useData } from '../../context/DataContext';
 import { useFilters } from '../../context/FilterContext';
 import { Card, ChartIcons } from '../ui/Card';
 
-export function SalaryCalculator() {
+export function SalaryCalculator({ onSalaryChange }) {
   const { t, i18n } = useTranslation();
   const isTurkish = i18n.language === 'tr';
   const { getYearStats } = useData();
@@ -48,6 +48,11 @@ export function SalaryCalculator() {
     const formatted = formatInput(e.target.value);
     if (formatted.replace(/\./g, '').length <= 6) {
       setSalary(formatted);
+      // Notify parent of salary change
+      if (onSalaryChange) {
+        const numericValue = parseInt(formatted.replace(/\D/g, ''), 10);
+        onSalaryChange(isNaN(numericValue) ? null : numericValue);
+      }
     }
   };
 

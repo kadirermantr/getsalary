@@ -45,9 +45,9 @@ export function SalaryPredictor() {
 
   return (
     <Card title={t('prediction.title')} icon={ChartIcons.lightBulb}>
-      <div className="space-y-4">
+      <div>
         {/* Result */}
-        <div className="bg-[var(--bg-primary)] rounded-lg p-4 min-h-[160px] flex items-center justify-center">
+        <div className="bg-[var(--bg-primary)] rounded-lg p-4 h-[180px] flex items-center justify-center">
           {!prediction ? (
             <p className="text-center text-[var(--text-secondary)] text-sm">
               {t('prediction.selectHint')}
