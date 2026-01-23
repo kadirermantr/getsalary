@@ -50,8 +50,8 @@ const resources = {
         senior: 'Senior (5+ yıl)',
       },
       workMode: {
-        remote: 'Remote',
-        hybrid: 'Hybrid',
+        remote: 'Uzaktan',
+        hybrid: 'Hibrit',
         office: 'Ofis',
       },
       companyType: {

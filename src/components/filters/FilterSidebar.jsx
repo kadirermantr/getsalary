@@ -138,9 +138,10 @@ function FilterContent({ onClose }) {
       .map((c) => ({ value: c, label: c })),
   ];
 
+  const workModeKeyMap = { remote: 'remote', hybrid: 'hybrid', ofis: 'office', office: 'office' };
   const workModes = [
     { value: 'all', label: t('filters.all') },
-    ...getUniqueValues('workMode').map((w) => ({ value: w, label: w })),
+    ...getUniqueValues('workMode').map((w) => ({ value: w, label: t(`workMode.${workModeKeyMap[w.toLowerCase()]}`) })),
   ];
 
   const FilterSection = ({ title, options, value, onChange }) => (

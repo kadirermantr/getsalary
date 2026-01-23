@@ -135,7 +135,7 @@ export function SalaryDistribution({ year, userSalary }) {
 
   if (loading) {
     return (
-      <Card title={t('charts.salaryDistribution')} icon={ChartIcons.trend}>
+      <Card title={t('charts.salaryDistribution')} icon={ChartIcons.histogram}>
         <div className="h-64 flex items-center justify-center">
           <p className="text-[var(--text-secondary)]">{t('common.loading')}</p>
         </div>
@@ -145,7 +145,7 @@ export function SalaryDistribution({ year, userSalary }) {
 
   if (!histogramData.bins.length) {
     return (
-      <Card title={t('charts.salaryDistribution')} icon={ChartIcons.trend}>
+      <Card title={t('charts.salaryDistribution')} icon={ChartIcons.histogram}>
         <div className="h-64 flex items-center justify-center">
           <p className="text-[var(--text-secondary)]">{t('common.noData')}</p>
         </div>
@@ -156,7 +156,7 @@ export function SalaryDistribution({ year, userSalary }) {
   return (
     <Card
       title={t('charts.salaryDistribution')}
-      icon={ChartIcons.trend}
+      icon={ChartIcons.histogram}
       subtitle={`n = ${histogramData.total.toLocaleString(locale === 'tr' ? 'tr-TR' : 'en-US')}`}
     >
       <ChartWrapper height="h-80">

@@ -20,14 +20,24 @@ const knownValues = {
   position: ['Backend Developer', 'Frontend Developer', 'Fullstack Developer', 'Mobile Developer', 'DevOps Engineer', 'Data/AI Engineer', 'QA Engineer', 'Security Engineer', 'Embedded Developer', 'Game Developer', 'Software Engineer', 'Software Architect', 'System/DB Admin', 'SAP/ERP Developer', 'Engineering Manager', 'Product/Project Manager', 'Team/Tech Lead', 'Agile Coach', 'Business Analyst', 'UI/UX Designer', 'Consultant/Support', 'Diğer'],
   experience: ['Junior', 'Mid-Level', 'Senior'],
   city: ['İstanbul', 'Ankara', 'İzmir', 'Bursa', 'Antalya', 'Yurtdışı', 'Diğer'],
-  workMode: ['Remote', 'Hybrid', 'Ofis'],
+  workMode: ['Remote', 'Hybrid', 'Office'],
   companyType: ['Startup', 'Corporate', 'Agency', 'Freelance'],
 };
+
+// URL mapping for workMode (data value <-> URL value)
+const workModeToUrl = { 'Ofis': 'office' };
+const workModeFromUrlMap = { 'office': 'Ofis' };
 
 // Convert URL-friendly value back to actual value
 const fromUrlValue = (urlValue, key) => {
   if (!urlValue || urlValue === 'all') return 'all';
   if (key === 'year') return parseInt(urlValue, 10) || LATEST_YEAR;
+
+  // Handle workMode URL mapping
+  if (key === 'workMode') {
+    const normalizedUrl = urlValue.toLowerCase();
+    if (workModeFromUrlMap[normalizedUrl]) return workModeFromUrlMap[normalizedUrl];
+  }
 
   const values = knownValues[key];
   if (!values) return urlValue;
@@ -83,6 +93,7 @@ export function FilterProvider({ children }) {
 
   // Convert value to URL-friendly format
   const toUrlValue = (value) => {
+    if (workModeToUrl[value]) return workModeToUrl[value];
     return value.toString().toLowerCase().replace(/\//g, '-');
   };
 
