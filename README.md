@@ -1,64 +1,49 @@
 # getSalary()
 
-**Yazılım Sektörü Maaş Analizi**
+## Features
 
-Türkiye yazılım sektörü maaş verileri ve analizleri.
-
----
-
-## Özellikler
-
-- **8 İnteraktif Grafik** - Pozisyon, deneyim, şehir, teknoloji bazlı analizler
-- **Asgari Ücret Karşılaştırması** - Maaş/Asgari ücret çarpanı trendi
-- **Enflasyon Analizi** - Reel vs nominal maaş değişimi
-- **Maaş Tahmini** - Pozisyon, deneyim ve şehre göre tahmini maaş aralığı
-- **Yıl Karşılaştırma** - Yıllar arası maaş değişim analizi
-- **Çoklu Dil** - Türkçe ve İngilizce desteği
-- **PWA** - Mobilde uygulama gibi çalışır
-- **Erişilebilir** - WCAG AA uyumlu
-- **Açık Kaynak** - MIT lisanslı
+- **Interactive Charts** — Position, experience, city, tech stack, company type analysis
+- **Salary Calculator** — See your percentile ranking in the industry
+- **Salary Predictor** — Estimate salary range based on filters
+- **Payroll Calculator** — Gross-to-net and net-to-gross conversion
+- **Salary Distribution** — Histogram with median marker
+- **Min Wage Trend** — Salary to minimum wage ratio over years
+- **Inflation Comparison** — Real vs nominal salary growth
+- **Year Comparison** — Compare any two years side by side
+- **TR/EN Support** — Full Turkish and English localization
+- **PWA Ready** — Installable on mobile devices
 
 ## Tech Stack
 
-- **Framework:** React 18 + Vite
-- **Styling:** Tailwind CSS v4
-- **Charts:** Recharts
-- **Animations:** Framer Motion
-- **i18n:** react-i18next
-- **PWA:** vite-plugin-pwa
-- **Hosting:** Vercel
+- **Framework:** [React](https://react.dev)
+- **Build:** [Vite](https://vite.dev)
+- **Routing:** [React Router](https://reactrouter.com)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com)
+- **Animation:** [Framer Motion](https://motion.dev)
+- **Charts:** [Recharts](https://recharts.org)
+- **i18n:** [react-i18next](https://react.i18next.com)
+- **Toasts:** [Sonner](https://sonner.emilkowal.ski)
+- **PWA:** [Vite PWA](https://vite-pwa-org.netlify.app)
 
-## Kurulum
+## Quick Start
 
 ```bash
-# Repoyu klonla
 git clone https://github.com/kadirermantr/getsalary.git
 cd getsalary
-
-# Bağımlılıkları yükle
 npm install
-
-# Development server başlat
 npm run dev
-
-# Production build
-npm run build
 ```
 
-## Veri Kaynakları
+Open [http://localhost:5173](http://localhost:5173)
 
-| Yıl | Katılımcı | Kaynak |
-|-----|-----------|--------|
-| 2021 | ~2,500 | [GitHub](https://github.com/oncekiyazilimci/2021-yazilimci-maaslari) |
-| 2022 | 5,038 | [GitHub](https://github.com/oncekiyazilimci/2022-yazilimci-maaslari) |
-| 2023 | 8,718 | [GitHub](https://github.com/oncekiyazilimci/2023-yazilim-sektoru-maaslari) |
-| 2024 | 5,989 | [GitHub](https://github.com/oncekiyazilimci/2024-yazilim-sektoru-maaslari) |
-| 2025 | 9,056 | [GitHub](https://github.com/oncekiyazilimci/2025-yazilim-sektoru-maaslari) |
+## Data Sources
 
-## Katkıda Bulunma
+Survey data from [oncekiyazilimci](https://github.com/oncekiyazilimci):
 
-Detaylar için [CONTRIBUTING.md](CONTRIBUTING.md) dosyasına bakın.
-
-## Lisans
-
-MIT License - detaylar için [LICENSE](LICENSE) dosyasına bakın.
+| Year | Participants |
+|------|--------------|
+| 2025 | 9,056 |
+| 2024 | 5,989 |
+| 2023 | 8,718 |
+| 2022 | 5,038 |
+| 2021 | ~2,500 |
