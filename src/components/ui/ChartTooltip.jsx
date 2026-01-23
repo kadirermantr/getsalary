@@ -4,6 +4,8 @@ import { formatSalary } from '../../utils/calculations';
 export function ChartTooltip({ active, payload, label, showPercentile = false }) {
   const { t, i18n } = useTranslation();
   const locale = i18n.language;
+  const isTurkish = locale === 'tr';
+  const percentileRange = isTurkish ? '%25-75' : '25-75%';
 
   if (!active || !payload || !payload.length) return null;
 
@@ -36,7 +38,7 @@ export function ChartTooltip({ active, payload, label, showPercentile = false })
 
         {showPercentile && data?.p25 && data?.p75 && (
           <div className="flex justify-between items-center gap-4">
-            <span className="text-xs text-[var(--text-secondary)]">25-75%:</span>
+            <span className="text-xs text-[var(--text-secondary)]">{percentileRange}:</span>
             <span className="text-xs text-[var(--text-primary)]">
               {formatSalary(data.p25, locale)} - {formatSalary(data.p75, locale)}
             </span>

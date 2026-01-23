@@ -138,9 +138,10 @@ function FilterContent({ onClose }) {
       .map((c) => ({ value: c, label: c })),
   ];
 
+  const workModeKeyMap = { remote: 'remote', hybrid: 'hybrid', ofis: 'office', office: 'office' };
   const workModes = [
     { value: 'all', label: t('filters.all') },
-    ...getUniqueValues('workMode').map((w) => ({ value: w, label: w })),
+    ...getUniqueValues('workMode').map((w) => ({ value: w, label: t(`workMode.${workModeKeyMap[w.toLowerCase()]}`) })),
   ];
 
   const FilterSection = ({ title, options, value, onChange }) => (
@@ -254,7 +255,7 @@ function FilterContent({ onClose }) {
       {activeFilterCount > 0 && (
         <button
           onClick={resetFilters}
-          className="w-full mt-4 flex items-center justify-center gap-2 px-4 py-2 text-sm text-[var(--accent)] hover:bg-[var(--accent)]/10 rounded-lg transition-colors border border-[var(--accent)]/30"
+          className="w-full mt-4 flex items-center justify-center gap-2 px-4 py-2 text-sm text-[var(--accent)] hover:bg-[var(--accent)]/10 rounded-lg transition-colors border border-[var(--accent)]/30 cursor-pointer"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

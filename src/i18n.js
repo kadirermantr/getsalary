@@ -50,8 +50,8 @@ const resources = {
         senior: 'Senior (5+ yıl)',
       },
       workMode: {
-        remote: 'Remote',
-        hybrid: 'Hybrid',
+        remote: 'Uzaktan',
+        hybrid: 'Hibrit',
         office: 'Ofis',
       },
       companyType: {
@@ -226,8 +226,8 @@ const resources = {
         annual: 'Yıllık Toplam',
         taxBracketNote: 'vergi dilimi değişimi',
         exemptionNote: 'Gösterilen kesintiler asgari ücret istisnası düşüldükten sonraki tutarlardır.',
-        infoNote: 'Bu hesaplamaya yol, yemek, özel sigorta gibi ek ödemeler dahil değildir. Gerçek bordronuz farklı olabilir.',
-        emptyStateHint: 'Hesaplamak için brüt veya net maaş girin.',
+        infoNote: 'Bu hesaplamaya yol, yemek, özel sigorta gibi ek ödemeler dahil değildir. Gerçek bordron farklı olabilir.',
+        emptyStateHint: 'Hesaplamak için brüt veya net maaşını gir.',
         enterGrossHint: 'Brüt maaşını girerek net maaşını hesapla.',
         enterNetHint: 'Net maaşını girerek brüt maaşını hesapla.',
         enterGrossPlaceholder: 'Brüt maaşını gir',

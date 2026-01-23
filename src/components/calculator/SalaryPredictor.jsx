@@ -7,6 +7,8 @@ import { Card, ChartIcons } from '../ui/Card';
 
 export function SalaryPredictor() {
   const { t, i18n } = useTranslation();
+  const isTurkish = i18n.language === 'tr';
+  const formatPercent = (num) => isTurkish ? `%${num}` : `${num}%`;
   const { getYearStats, loading } = useData();
   const { filters, activeFilterCount } = useFilters();
 
@@ -100,9 +102,9 @@ export function SalaryPredictor() {
 
               {/* Labels */}
               <div className="flex justify-between text-xs text-[var(--text-secondary)]">
-                <span>25%</span>
+                <span>{formatPercent(25)}</span>
                 <span>{t('charts.median')}</span>
-                <span>75%</span>
+                <span>{formatPercent(75)}</span>
               </div>
 
               {/* Sample Size */}
