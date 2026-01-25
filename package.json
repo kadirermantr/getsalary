@@ -30,7 +30,7 @@
     "react-i18next": "^16.5.3",
     "react-intersection-observer": "^10.0.2",
     "react-router-dom": "^7.12.0",
-    "recharts": "^3.6.0",
+    "recharts": "^3.7.0",
     "sonner": "^2.0.7",
     "tailwindcss": "^4.1.18"
   },
