@@ -23,7 +23,7 @@
     "canvas-confetti": "^1.9.4",
     "framer-motion": "^12.27.0",
     "html2canvas": "^1.4.1",
-    "i18next": "^25.7.4",
+    "i18next": "^25.8.0",
     "jspdf": "^4.0.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
