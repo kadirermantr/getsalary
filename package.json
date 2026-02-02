@@ -24,7 +24,7 @@
     "framer-motion": "^12.27.0",
     "html2canvas": "^1.4.1",
     "i18next": "^25.7.4",
-    "jspdf": "^4.0.0",
+    "jspdf": "^4.1.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-i18next": "^16.5.3",
