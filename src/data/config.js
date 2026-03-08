@@ -98,3 +98,11 @@ export const CHART_COLORS = {
 };
 
 export const CHART_COLOR_ARRAY = Object.values(CHART_COLORS);
+
+// Survey banner configuration
+export const SURVEY_BANNER = {
+  enabled: true,
+  year: 2026,
+  formUrl: 'https://forms.gle/rhNXttLjSM4ToASq8',
+};
+

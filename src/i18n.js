@@ -236,6 +236,10 @@ const resources = {
         settings: 'Ayarlar',
         calculationType: 'Hesaplama Tipi',
       },
+      surveyBanner: {
+        text: '{{year}} Maaş Anketi Başladı!',
+        cta: 'Ankete Katıl',
+      },
       pageTitles: {
         home: 'Yazılım Sektörü Maaş Analizi',
         dashboard: 'Dashboard',
@@ -479,6 +483,10 @@ const resources = {
         year: 'Year',
         settings: 'Settings',
         calculationType: 'Calculation Type',
+      },
+      surveyBanner: {
+        text: '{{year}} Salary Survey is Live!',
+        cta: 'Take the Survey',
       },
       pageTitles: {
         home: 'Software Industry Salary Insights',
