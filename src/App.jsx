@@ -8,6 +8,7 @@ import { LanguageProvider } from './context/LanguageContext';
 import { DataProvider } from './context/DataContext';
 import { FilterProvider } from './context/FilterContext';
 import { Header } from './components/layout/Header';
+import { SurveyBanner } from './components/social/SurveyBanner';
 import { Home } from './pages/Home';
 import { Dashboard } from './pages/Dashboard';
 import { Calculator } from './pages/Calculator';
@@ -48,6 +49,7 @@ function AppLayout() {
     <LanguageProvider>
       <ScrollToTop />
       <div className="min-h-screen flex flex-col bg-[var(--bg-primary)]">
+        <SurveyBanner />
         <Header />
         <main className="flex-1">
           <AppRoutes />
