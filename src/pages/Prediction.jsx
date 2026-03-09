@@ -2,7 +2,7 @@ import { useMemo, useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { usePageTitle } from '../hooks/usePageTitle';
 import { usePrediction } from '../hooks/usePrediction';
-import { PageHeaderWithShare } from '../components/layout/PageContainer';
+import { PageContainer, PageHeaderWithShare } from '../components/layout/PageContainer';
 import { ChartWrapper } from '../components/charts/ChartWrapper';
 import { Card, ChartIcons } from '../components/ui/Card';
 import { PredictionChart } from '../components/prediction/PredictionChart';
@@ -112,8 +112,7 @@ export function Prediction() {
   ], [experienceOptions, t]);
 
   return (
-    <div className="min-h-screen bg-[var(--bg-primary)]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <PageContainer>
         {/* Page Header */}
         <PageHeaderWithShare
           title={t('prediction.title')}
@@ -240,7 +239,6 @@ export function Prediction() {
             </Card>
           </div>
         </div>
-      </div>
-    </div>
+    </PageContainer>
   );
 }

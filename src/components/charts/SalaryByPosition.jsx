@@ -11,6 +11,7 @@ import { useData } from '../../context/DataContext';
 import { useFilters } from '../../context/FilterContext';
 import { CHART_COLOR_ARRAY } from '../../data/config';
 import { formatSalary } from '../../utils/calculations';
+import { formatSalaryTick } from '../../utils/chartFormatters';
 import { Card, ChartIcons } from '../ui/Card';
 import { ChartTooltip } from '../ui/ChartTooltip';
 import { ChartWrapper } from './ChartWrapper';
@@ -60,7 +61,7 @@ export function SalaryByPosition({ year }) {
           <CartesianGrid strokeDasharray="3 3" stroke="var(--bg-secondary)" />
           <XAxis
             type="number"
-            tickFormatter={(value) => `${(value / 1000).toFixed(0)}K`}
+            tickFormatter={formatSalaryTick}
             stroke="var(--text-secondary)"
             fontSize={11}
           />

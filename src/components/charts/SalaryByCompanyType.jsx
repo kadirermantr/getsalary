@@ -12,6 +12,7 @@ import { useData } from '../../context/DataContext';
 import { useFilters } from '../../context/FilterContext';
 import { CHART_COLOR_ARRAY } from '../../data/config';
 import { formatSalary } from '../../utils/calculations';
+import { formatSalaryTick } from '../../utils/chartFormatters';
 import { Card, ChartIcons } from '../ui/Card';
 import { ChartWrapper } from './ChartWrapper';
 
@@ -93,7 +94,7 @@ export function SalaryByCompanyType({ year }) {
             fontSize={12}
           />
           <YAxis
-            tickFormatter={(value) => `${(value / 1000).toFixed(0)}K`}
+            tickFormatter={formatSalaryTick}
             stroke="var(--text-secondary)"
             fontSize={12}
           />

@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { formatSalary } from '../../utils/calculations';
+import { formatSalary, formatPercent } from '../../utils/calculations';
 
 export function BacktestTable({ backtesting }) {
   const { t, i18n } = useTranslation();
@@ -24,7 +24,7 @@ export function BacktestTable({ backtesting }) {
               <td className="py-2 text-right font-mono text-blue-400">{formatSalary(row.actual, i18n.language)}</td>
               <td className="py-2 text-right font-mono text-amber-400">{formatSalary(row.predicted, i18n.language)}</td>
               <td className={`py-2 text-right font-mono ${row.mape < 15 ? 'text-emerald-400' : 'text-amber-400'}`}>
-                {i18n.language === 'tr' ? `%${row.mape}` : `${row.mape}%`}
+                {formatPercent(row.mape, i18n.language)}
               </td>
             </tr>
           ))}
@@ -33,7 +33,7 @@ export function BacktestTable({ backtesting }) {
               {t('prediction.avgMape')}
             </td>
             <td className={`py-2 text-right font-mono font-semibold ${backtesting.avgMape < 15 ? 'text-emerald-400' : 'text-amber-400'}`}>
-              {i18n.language === 'tr' ? `%${backtesting.avgMape}` : `${backtesting.avgMape}%`}
+              {formatPercent(backtesting.avgMape, i18n.language)}
             </td>
           </tr>
         </tbody>

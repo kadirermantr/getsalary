@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { usePageTitle } from '../hooks/usePageTitle';
 import { useFilters } from '../context/FilterContext';
-import { PageHeaderWithShare } from '../components/layout/PageContainer';
+import { PageContainer, PageHeaderWithShare } from '../components/layout/PageContainer';
 import { FilterSidebar, MobileFilterDrawer } from '../components/filters/FilterSidebar';
 import { SalaryCalculator } from '../components/calculator/SalaryCalculator';
 import { SalaryPredictor } from '../components/calculator/SalaryPredictor';
@@ -15,8 +15,7 @@ export function Calculator() {
   const [userSalary, setUserSalary] = useState(null);
 
   return (
-    <div className="min-h-screen bg-[var(--bg-primary)]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <PageContainer>
         {/* Header */}
         <PageHeaderWithShare
           title={t('nav.calculator')}
@@ -42,10 +41,9 @@ export function Calculator() {
             </div>
           </main>
         </div>
-      </div>
 
       {/* Mobile Filter Drawer */}
       <MobileFilterDrawer />
-    </div>
+    </PageContainer>
   );
 }
