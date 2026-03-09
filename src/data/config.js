@@ -104,5 +104,6 @@ export const SURVEY_BANNER = {
   enabled: true,
   year: 2026,
   formUrl: 'https://forms.gle/rhNXttLjSM4ToASq8',
+  expiresAt: '2026-03-14T00:00:00+03:00',
 };
 

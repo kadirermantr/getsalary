@@ -4,7 +4,8 @@ import { SURVEY_BANNER } from '../../data/config';
 
 export function SurveyBanner() {
   const { t } = useTranslation();
-  const { enabled, year, formUrl } = SURVEY_BANNER;
+  const { enabled, year, formUrl, expiresAt } = SURVEY_BANNER;
+  const isExpired = expiresAt && new Date() >= new Date(expiresAt);
   const storageKey = `survey${year}Dismissed`;
 
   const [dismissed, setDismissed] = useState(() => {
@@ -14,12 +15,12 @@ export function SurveyBanner() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    if (!enabled || dismissed) return;
+    if (!enabled || dismissed || isExpired) return;
     const timer = setTimeout(() => setVisible(true), 1000);
     return () => clearTimeout(timer);
   }, [enabled, dismissed]);
 
-  if (!enabled || dismissed) return null;
+  if (!enabled || dismissed || isExpired) return null;
 
   const handleDismiss = () => {
     setVisible(false);
