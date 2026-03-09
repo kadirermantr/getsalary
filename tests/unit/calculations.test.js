@@ -218,17 +218,19 @@ describe('formatNumber', () => {
 
 describe('formatPercentage', () => {
   it('should format positive percentage with plus sign', () => {
-    expect(formatPercentage(25)).toBe('+25.0%');
-    expect(formatPercentage(100.5)).toBe('+100.5%');
+    expect(formatPercentage(25)).toBe('+%25.0');
+    expect(formatPercentage(100.5)).toBe('+%100.5');
+    expect(formatPercentage(25, 1, 'en')).toBe('+25.0%');
   });
 
   it('should format negative percentage', () => {
-    expect(formatPercentage(-15)).toBe('-15.0%');
+    expect(formatPercentage(-15)).toBe('-%15.0');
+    expect(formatPercentage(-15, 1, 'en')).toBe('-15.0%');
   });
 
   it('should respect decimal places', () => {
-    expect(formatPercentage(25.678, 2)).toBe('+25.68%');
-    expect(formatPercentage(25.678, 0)).toBe('+26%');
+    expect(formatPercentage(25.678, 2)).toBe('+%25.68');
+    expect(formatPercentage(25.678, 0)).toBe('+%26');
   });
 
   it('should return dash for invalid values', () => {

@@ -31,15 +31,15 @@ function ProfileFilterPopover({ positionOptions, experienceOptions, profile, upd
     <div className="relative" ref={ref}>
       <button
         onClick={() => setOpen(!open)}
-        className={`p-1.5 rounded-lg border transition-colors cursor-pointer ${
+        className={`p-1.5 rounded-lg transition-colors cursor-pointer ${
           hasFilter
-            ? 'border-[var(--accent)]/50 bg-[var(--accent)]/10 text-[var(--accent)]'
-            : 'border-[var(--border)] text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--text-muted)]'
+            ? 'bg-[var(--accent)] text-white'
+            : 'bg-[var(--bg-secondary)] hover:bg-[var(--accent)] hover:text-white'
         }`}
         aria-label="Filter"
       >
-        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 0 1-.659 1.591l-5.432 5.432a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 0 0-.659-1.591L3.659 7.409A2.25 2.25 0 0 1 3 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0 1 12 3Z" />
+        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+          <path fillRule="evenodd" d="M3.792 2.938A49.069 49.069 0 0 1 12 2.25a49.069 49.069 0 0 1 8.208.688A1.843 1.843 0 0 1 21.731 4.9v1.149a2.25 2.25 0 0 1-.659 1.59l-5.432 5.433a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21.75v-7.318a2.25 2.25 0 0 0-.659-1.591L3.659 7.409A2.25 2.25 0 0 1 3 5.818v-.918c0-.86.596-1.608 1.443-1.792a49.077 49.077 0 0 1 .35-.17Z" clipRule="evenodd" />
         </svg>
       </button>
 

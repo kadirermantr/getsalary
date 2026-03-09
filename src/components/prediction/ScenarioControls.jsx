@@ -1,12 +1,14 @@
 import { useTranslation } from 'react-i18next';
 
-function Slider({ label, value, min, max, step, onChange }) {
+const pct = (v, lang) => lang === 'tr' ? `%${v}` : `${v}%`;
+
+function Slider({ label, value, min, max, step, onChange, lang }) {
   return (
     <div>
       <div className="flex justify-between items-center mb-1.5">
         <span className="text-sm text-[var(--text-secondary)]">{label}</span>
         <span className="text-sm font-semibold font-mono text-[var(--text-primary)]">
-          %{Math.round(value * 100)}
+          {pct(Math.round(value * 100), lang)}
         </span>
       </div>
       <input
@@ -22,15 +24,16 @@ function Slider({ label, value, min, max, step, onChange }) {
           [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-md"
       />
       <div className="flex justify-between text-xs text-[var(--text-secondary)] mt-0.5 opacity-60">
-        <span>%{Math.round(min * 100)}</span>
-        <span>%{Math.round(max * 100)}</span>
+        <span>{pct(Math.round(min * 100), lang)}</span>
+        <span>{pct(Math.round(max * 100), lang)}</span>
       </div>
     </div>
   );
 }
 
 export function ScenarioControls({ scenario, onUpdate, onPreset, activePreset }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language;
 
   const presets = [
     { key: 'optimistic', label: t('prediction.optimistic'), base: 'border-emerald-500/30', active: 'bg-emerald-500/30 text-emerald-300 border-emerald-400/50 shadow-emerald-500/10 shadow-md', inactive: 'bg-emerald-500/10 text-emerald-400' },
@@ -62,6 +65,7 @@ export function ScenarioControls({ scenario, onUpdate, onPreset, activePreset })
           max={0.80}
           step={0.01}
           onChange={(v) => onUpdate('inflation', v)}
+          lang={lang}
         />
         <Slider
           label={t('prediction.exchangeRate')}
@@ -70,6 +74,7 @@ export function ScenarioControls({ scenario, onUpdate, onPreset, activePreset })
           max={0.50}
           step={0.01}
           onChange={(v) => onUpdate('exchangeRate', v)}
+          lang={lang}
         />
         <Slider
           label={t('prediction.sectorGrowth')}
@@ -78,6 +83,7 @@ export function ScenarioControls({ scenario, onUpdate, onPreset, activePreset })
           max={0.30}
           step={0.01}
           onChange={(v) => onUpdate('sectorGrowth', v)}
+          lang={lang}
         />
       </div>
     </div>

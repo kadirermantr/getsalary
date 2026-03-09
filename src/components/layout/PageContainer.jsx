@@ -36,6 +36,7 @@ export function PageHeaderWithShare({ title, description, shareTitle, shareDescr
           <h1 className="text-2xl font-bold text-[var(--text-primary)]">{title}</h1>
           <div className="md:hidden flex items-center gap-2 flex-shrink-0">
             {extra}
+            {extra && <div className="w-px h-5 bg-[var(--text-muted)]/40" />}
             <ShareButtons compact title={shareTitle} description={shareDescription} />
           </div>
         </div>
@@ -45,6 +46,7 @@ export function PageHeaderWithShare({ title, description, shareTitle, shareDescr
       </div>
       <div className="hidden md:flex items-center gap-3 flex-shrink-0">
         {extra}
+        {extra && <div className="w-px h-5 bg-[var(--text-muted)]/40" />}
         <ShareButtons compact title={shareTitle} description={shareDescription} />
       </div>
     </div>

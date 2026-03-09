@@ -24,7 +24,7 @@ export function BacktestTable({ backtesting }) {
               <td className="py-2 text-right font-mono text-blue-400">{formatSalary(row.actual, i18n.language)}</td>
               <td className="py-2 text-right font-mono text-amber-400">{formatSalary(row.predicted, i18n.language)}</td>
               <td className={`py-2 text-right font-mono ${row.mape < 15 ? 'text-emerald-400' : 'text-amber-400'}`}>
-                %{row.mape}
+                {i18n.language === 'tr' ? `%${row.mape}` : `${row.mape}%`}
               </td>
             </tr>
           ))}
@@ -33,7 +33,7 @@ export function BacktestTable({ backtesting }) {
               {t('prediction.avgMape')}
             </td>
             <td className={`py-2 text-right font-mono font-semibold ${backtesting.avgMape < 15 ? 'text-emerald-400' : 'text-amber-400'}`}>
-              %{backtesting.avgMape}
+              {i18n.language === 'tr' ? `%${backtesting.avgMape}` : `${backtesting.avgMape}%`}
             </td>
           </tr>
         </tbody>
