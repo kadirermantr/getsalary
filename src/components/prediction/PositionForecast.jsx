@@ -37,7 +37,7 @@ function CustomTooltip({ active, payload }) {
   return (
     <div className="bg-[var(--bg-secondary)] border border-[var(--border)] rounded-lg px-3 py-2 shadow-lg text-sm">
       <p className="font-semibold text-[var(--text-primary)]">{data.name}</p>
-      <p className="text-amber-400">{formatSalary(data.predicted, i18n.language)}</p>
+      <p className="text-blue-400">{formatSalary(data.predicted, i18n.language)}</p>
       <p className="text-xs text-[var(--text-secondary)]">R²: {data.rSquared}</p>
     </div>
   );
@@ -65,7 +65,9 @@ export function PositionForecast({ predictions, year, selectedPosition }) {
       name,
       predicted: Math.round(predicted),
       rSquared,
-      fill: selectedPosition ? (name === selectedPosition ? '#f59e0b' : '#6366f1') : '#f59e0b',
+      fill: selectedPosition
+        ? (name === selectedPosition ? 'url(#selectedGradient)' : 'url(#defaultGradient)')
+        : 'url(#defaultGradient)',
     }));
 
   const axisWidth = useMemo(() => {
@@ -82,6 +84,16 @@ export function PositionForecast({ predictions, year, selectedPosition }) {
     <div ref={containerRef} className="max-h-96 overflow-y-auto">
       {containerWidth > 0 && (
         <BarChart data={data} width={containerWidth} height={chartHeight} layout="vertical" margin={{ top: 5, right: 10, bottom: 5, left: 0 }}>
+          <defs>
+            <linearGradient id="defaultGradient" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="#3b82f6" />
+              <stop offset="100%" stopColor="#6366f1" />
+            </linearGradient>
+            <linearGradient id="selectedGradient" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="#f59e0b" />
+              <stop offset="100%" stopColor="#f97316" />
+            </linearGradient>
+          </defs>
           <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" opacity={0.5} horizontal={false} />
           <XAxis
             type="number"

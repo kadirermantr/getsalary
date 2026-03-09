@@ -31,8 +31,10 @@ export function SurveyBanner() {
 
   return (
     <div
-      className={`fixed bottom-5 right-5 z-50 max-w-xs transition-all duration-300 ease-out ${
-        visible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+      className={`fixed z-50 transition-all duration-300 ease-out
+        bottom-5 right-5 max-w-xs
+        max-sm:bottom-auto max-sm:top-[4.5rem] max-sm:left-4 max-sm:right-4 max-sm:max-w-none ${
+        visible ? 'translate-y-0 opacity-100' : 'max-sm:-translate-y-4 sm:translate-y-4 opacity-0'
       }`}
     >
       <div className="bg-[var(--bg-secondary)] border border-[var(--border)] outline outline-1 outline-white/20 text-[var(--text-primary)] rounded-xl shadow-lg px-4 py-3 flex items-center gap-3">

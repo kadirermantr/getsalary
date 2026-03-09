@@ -43,7 +43,7 @@ export function PredictionSummary({ predictions, mape, lastTrainingYear, lastYea
       {growth !== null && (
         <StatCard
           label={`${lastTrainingYear} → ${nextYear} ${t('prediction.estimatedGrowth')}`}
-          value={`%${growth}`}
+          value={i18n.language === 'tr' ? `%${growth}` : `${growth}%`}
           color="blue"
           icon={
             <svg className="w-5 h-5 lg:w-7 lg:h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -55,7 +55,7 @@ export function PredictionSummary({ predictions, mape, lastTrainingYear, lastYea
 
       <StatCard
         label={t('prediction.avgError')}
-        value={`%${mape}`}
+        value={i18n.language === 'tr' ? `%${mape}` : `${mape}%`}
         color={mape < 15 ? 'emerald' : 'amber'}
         icon={
           <svg className="w-5 h-5 lg:w-7 lg:h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
