@@ -206,7 +206,7 @@ export function formatSalary(value, locale = 'tr') {
   // Turkish format: number + space + symbol (107.500 ₺)
   // English format: symbol + number (₺107,500)
   if (isTurkish) {
-    return `${formattedNumber} ₺`;
+    return `${formattedNumber}\u202F₺`;
   }
   return `₺${formattedNumber}`;
 }

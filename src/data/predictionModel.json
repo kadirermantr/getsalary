@@ -1,0 +1,279 @@
+{
+  "metadata": {
+    "trainedAt": "2026-03-08T23:29:04.362Z",
+    "dataYears": [
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "participants": [
+      2376,
+      4434,
+      7634,
+      5333,
+      8179
+    ],
+    "modelType": "polynomial-2"
+  },
+  "overall": {
+    "equation": [
+      5278.419772,
+      -21333886.396064,
+      21556398931.194843
+    ],
+    "rSquared": 0.9956,
+    "predictions": {
+      "2026": 148049,
+      "2027": 207598,
+      "2028": 277704
+    },
+    "backtesting": {
+      "results": [
+        {
+          "testYear": 2024,
+          "actual": 64500,
+          "predicted": 57106,
+          "mape": 11.46
+        },
+        {
+          "testYear": 2025,
+          "actual": 97500,
+          "predicted": 111133,
+          "mape": 13.98
+        }
+      ],
+      "avgMape": 12.72
+    }
+  },
+  "byPosition": {
+    "Backend Developer": {
+      "equation": [
+        5849.059438,
+        -23641494.484525,
+        23889330371.222637
+      ],
+      "rSquared": 0.9983,
+      "prediction2026": 156443
+    },
+    "Frontend Developer": {
+      "equation": [
+        4493.789469,
+        -18163972.189612,
+        18354776930.86491
+      ],
+      "rSquared": 0.995,
+      "prediction2026": 119057
+    },
+    "Game Developer": {
+      "equation": [
+        2781.870601,
+        -11240548.450055,
+        11354767142.6543
+      ],
+      "rSquared": 0.9887,
+      "prediction2026": 93474
+    },
+    "Fullstack Developer": {
+      "equation": [
+        4636.449911,
+        -18738776.338454,
+        18933768642.055145
+      ],
+      "rSquared": 0.9949,
+      "prediction2026": 132455
+    },
+    "DevOps Engineer": {
+      "equation": [
+        5849.058953,
+        -23643492.523823,
+        23893373187.97281
+      ],
+      "rSquared": 0.9991,
+      "prediction2026": 149242
+    },
+    "Mobile Developer": {
+      "equation": [
+        6134.379085,
+        -24796097.775684,
+        25057413729.504665
+      ],
+      "rSquared": 0.9967,
+      "prediction2026": 158241
+    },
+    "Team/Tech Lead": {
+      "equation": [
+        7632.310275,
+        -30845227.370031,
+        31164497867.87515
+      ],
+      "rSquared": 0.996,
+      "prediction2026": 228027
+    },
+    "QA Engineer": {
+      "equation": [
+        4814.774066,
+        -19462925.870367,
+        19668920111.882595
+      ],
+      "rSquared": 0.9974,
+      "prediction2026": 119853
+    },
+    "Engineering Manager": {
+      "equation": [
+        8416.941677,
+        -34010546.022808,
+        34356825965.660732
+      ],
+      "rSquared": 0.9917,
+      "prediction2026": 278218
+    },
+    "Software Architect": {
+      "equation": [
+        9772.209578,
+        -39496459.950964,
+        39908348943.04785
+      ],
+      "rSquared": 0.9982,
+      "prediction2026": 275204
+    },
+    "Embedded Developer": {
+      "equation": [
+        4779.110102,
+        -19314579.471698,
+        19514779325.967606
+      ],
+      "rSquared": 0.9942,
+      "prediction2026": 139853
+    },
+    "Diğer": {
+      "equation": [
+        4088.255289,
+        -16522354.003679,
+        16693449691.012957
+      ],
+      "rSquared": 0.9815,
+      "prediction2026": 123846
+    },
+    "Data/AI Engineer": {
+      "equation": [
+        4957.434565,
+        -20037430.246841,
+        20247305353.32239
+      ],
+      "rSquared": 0.9925,
+      "prediction2026": 134354
+    },
+    "Software Engineer": {
+      "equation": [
+        4316.136058,
+        -17444531.650758,
+        17626404221.791637
+      ],
+      "rSquared": 0.9903,
+      "prediction2026": 123187
+    },
+    "System/DB Admin": {
+      "equation": [
+        1252.17548,
+        -5039354.168443,
+        5070089165.172873
+      ],
+      "rSquared": 0.9881,
+      "prediction2026": 132260
+    },
+    "Product/Project Manager": {
+      "equation": [
+        3506.079245,
+        -14161502.705906,
+        14300031681.414328
+      ],
+      "rSquared": 0.971,
+      "prediction2026": 146530
+    },
+    "SAP/ERP Developer": {
+      "equation": [
+        2629.559826,
+        -10619578.618396,
+        10721885068.697062
+      ],
+      "rSquared": 0.9989,
+      "prediction2026": 109896
+    },
+    "Business Analyst": {
+      "equation": [
+        4824.724402,
+        -19500234.388756,
+        19703676659.18401
+      ],
+      "rSquared": 1,
+      "prediction2026": 132247
+    },
+    "Consultant/Support": {
+      "equation": [
+        507.803184,
+        -2044087.289724,
+        2057014832.789462
+      ],
+      "rSquared": 1,
+      "prediction2026": 61526
+    }
+  },
+  "byExperience": {
+    "Junior": {
+      "equation": [
+        2353.890295,
+        -9512140.134136,
+        9609713987.191458
+      ],
+      "rSquared": 0.9922,
+      "prediction2026": 75076
+    },
+    "Mid-Level": {
+      "equation": [
+        3637.830355,
+        -14700961.615046,
+        14852147746.866436
+      ],
+      "rSquared": 0.9968,
+      "prediction2026": 114465
+    },
+    "Senior": {
+      "equation": [
+        6705.020144,
+        -27098111.499554,
+        27379036669.745865
+      ],
+      "rSquared": 0.9975,
+      "prediction2026": 198036
+    }
+  },
+  "adjustmentFactors": {
+    "inflationSensitivity": 0.65,
+    "exchangeRateSensitivity": 0.25,
+    "sectorGrowthSensitivity": 0.1
+  },
+  "historicalMedians": [
+    {
+      "year": 2021,
+      "median": 9500
+    },
+    {
+      "year": 2022,
+      "median": 14500
+    },
+    {
+      "year": 2023,
+      "median": 30500
+    },
+    {
+      "year": 2024,
+      "median": 64500
+    },
+    {
+      "year": 2025,
+      "median": 97500
+    }
+  ]
+}

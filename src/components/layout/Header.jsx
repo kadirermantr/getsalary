@@ -13,6 +13,7 @@ export function Header() {
     { path: '/dashboard', label: t('nav.dashboard') },
     { path: '/salary', label: t('nav.calculator') },
     { path: '/payroll', label: t('nav.payroll') },
+    { path: '/prediction', label: t('nav.prediction') },
     { path: '/about', label: t('nav.about') },
   ];
 

@@ -1,0 +1,46 @@
+{
+  "data": [
+    {
+      "year": 2021,
+      "cpiInflation": 36.08,
+      "usdTryAvg": 8.90,
+      "gdpGrowth": 11.4,
+      "cbrtRate": 14.0,
+      "techLayoffs": 0
+    },
+    {
+      "year": 2022,
+      "cpiInflation": 64.27,
+      "usdTryAvg": 16.59,
+      "gdpGrowth": 5.5,
+      "cbrtRate": 9.0,
+      "techLayoffs": 165000
+    },
+    {
+      "year": 2023,
+      "cpiInflation": 64.77,
+      "usdTryAvg": 23.81,
+      "gdpGrowth": 4.5,
+      "cbrtRate": 42.5,
+      "techLayoffs": 264000
+    },
+    {
+      "year": 2024,
+      "cpiInflation": 44.38,
+      "usdTryAvg": 32.88,
+      "gdpGrowth": 3.2,
+      "cbrtRate": 50.0,
+      "techLayoffs": 152900
+    },
+    {
+      "year": 2025,
+      "cpiInflation": 30.89,
+      "usdTryAvg": 37.0,
+      "gdpGrowth": 3.4,
+      "cbrtRate": 8.0,
+      "techLayoffs": 124200
+    }
+  ],
+  "source": "TÜİK, TCMB, Trading Economics, layoffs.fyi",
+  "lastUpdated": "2026-03-09"
+}
