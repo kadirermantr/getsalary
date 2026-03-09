@@ -104,6 +104,19 @@ export function FAQ() {
         </div>
       ),
     },
+    // Tahmin
+    {
+      question: 'Tahmin modeli nasıl çalışıyor?',
+      answer: 'Model, 2021-2025 yılları arasındaki anket verilerine polinom regresyon uygulayarak maaş trendini öğreniyor. Genel medyanın yanı sıra pozisyon ve deneyim seviyesi bazında ayrı denklemler oluşturuluyor. Tüm katsayılar önceden hesaplanıp JSON olarak saklanıyor, tahminler tarayıcıda anlık olarak yapılıyor.',
+    },
+    {
+      question: 'Senaryo parametreleri ne işe yarıyor?',
+      answer: 'Enflasyon, döviz kuru ve sektör büyümesi parametreleri, temel tahmini makroekonomik koşullara göre ayarlamana olanak sağlıyor. İyimser, normal ve kötümser ön tanımlı senaryolar mevcut; ayrıca kaydırıcılarla kendi değerlerini belirleyebilirsin.',
+    },
+    {
+      question: 'Tahminler ne kadar güvenilir?',
+      answer: 'Model, backtesting ile doğrulanıyor: geçmiş yıllar sırayla çıkarılıp tahmin yapılıyor ve gerçek değerle karşılaştırılıyor. Ortalama hata oranı (MAPE) ve R² değeri şeffaf olarak gösteriliyor. Güven aralığı, tahminlerin olası üst ve alt sınırlarını yansıtıyor.',
+    },
     // Bordro
     {
       question: 'Bordro sayfası ne işe yarıyor?',
@@ -181,6 +194,19 @@ export function FAQ() {
           </div>
         </div>
       ),
+    },
+    // Prediction
+    {
+      question: 'How does the prediction model work?',
+      answer: 'The model applies polynomial regression to survey data from 2021-2025 to learn salary trends. Separate equations are generated for the overall median, each position, and each experience level. All coefficients are pre-computed and stored as JSON; predictions are calculated instantly in the browser.',
+    },
+    {
+      question: 'What do the scenario parameters do?',
+      answer: 'The inflation, exchange rate, and sector growth parameters let you adjust the base prediction according to macroeconomic conditions. Pre-defined optimistic, normal, and pessimistic presets are available, and you can also set custom values using the sliders.',
+    },
+    {
+      question: 'How reliable are the predictions?',
+      answer: 'The model is validated through backtesting: past years are sequentially held out, predicted, and compared against actual values. The average error rate (MAPE) and R² score are displayed transparently. The confidence interval reflects the plausible upper and lower bounds of each prediction.',
     },
     // Payroll
     {
