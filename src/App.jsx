@@ -15,6 +15,7 @@ import { Calculator } from './pages/Calculator';
 import { Payroll } from './pages/Payroll';
 import { About } from './pages/About';
 import { Prediction } from './pages/Prediction';
+import { FAQ } from './pages/FAQ';
 import { NotFound } from './pages/NotFound';
 import ErrorBoundary from './components/error/ErrorBoundary';
 import { JsonLd } from './components/seo/JsonLd';
@@ -41,6 +42,7 @@ function AppRoutes() {
       <Route path="payroll" element={<Payroll />} />
       <Route path="prediction" element={<Prediction />} />
       <Route path="about" element={<About />} />
+      <Route path="faq" element={<FAQ />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
