@@ -1,15 +1,82 @@
-import { useMemo } from 'react';
+import { useMemo, useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { usePageTitle } from '../hooks/usePageTitle';
 import { usePrediction } from '../hooks/usePrediction';
+import { PageHeaderWithShare } from '../components/layout/PageContainer';
 import { ChartWrapper } from '../components/charts/ChartWrapper';
-import { Card } from '../components/ui/Card';
+import { Card, ChartIcons } from '../components/ui/Card';
 import { PredictionChart } from '../components/prediction/PredictionChart';
 import { PredictionSummary } from '../components/prediction/PredictionSummary';
 import { ScenarioControls } from '../components/prediction/ScenarioControls';
 import { PositionForecast } from '../components/prediction/PositionForecast';
 import { BacktestTable } from '../components/prediction/BacktestTable';
 import { CustomSelect } from '../components/ui/CustomSelect';
+
+function ProfileFilterPopover({ positionOptions, experienceOptions, profile, updateProfile, t }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const handleClick = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
+    };
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, [open]);
+
+  const hasFilter = profile.position !== 'all' || profile.experience !== 'all';
+
+  return (
+    <div className="relative" ref={ref}>
+      <button
+        onClick={() => setOpen(!open)}
+        className={`p-1.5 rounded-lg border transition-colors cursor-pointer ${
+          hasFilter
+            ? 'border-[var(--accent)]/50 bg-[var(--accent)]/10 text-[var(--accent)]'
+            : 'border-[var(--border)] text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--text-muted)]'
+        }`}
+        aria-label="Filter"
+      >
+        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 0 1-.659 1.591l-5.432 5.432a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 0 0-.659-1.591L3.659 7.409A2.25 2.25 0 0 1 3 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0 1 12 3Z" />
+        </svg>
+      </button>
+
+      {open && (
+        <div className="absolute top-full left-0 mt-2 z-50 bg-[var(--bg-secondary)] border border-[var(--border)] rounded-xl shadow-xl p-3 space-y-3 w-64">
+          <div>
+            <label className="text-xs text-[var(--text-muted)] mb-1 block">{t('prediction.position')}</label>
+            <CustomSelect
+              options={positionOptions}
+              value={profile.position}
+              onChange={(value) => updateProfile('position', value)}
+              placeholder={t('prediction.allPositions')}
+              searchable
+            />
+          </div>
+          <div>
+            <label className="text-xs text-[var(--text-muted)] mb-1 block">{t('prediction.experience')}</label>
+            <CustomSelect
+              options={experienceOptions}
+              value={profile.experience}
+              onChange={(value) => updateProfile('experience', value)}
+              placeholder={t('prediction.allLevels')}
+            />
+          </div>
+          {hasFilter && (
+            <button
+              onClick={() => { updateProfile('position', 'all'); updateProfile('experience', 'all'); }}
+              className="w-full text-xs text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer py-1"
+            >
+              {t('prediction.clearFilters')}
+            </button>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export function Prediction() {
   const { t } = useTranslation();
@@ -47,38 +114,22 @@ export function Prediction() {
   return (
     <div className="min-h-screen bg-[var(--bg-primary)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Page Header + Profile Filters */}
-        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
-          <div>
-            <h1 className="text-2xl font-bold text-[var(--text-primary)]">
-              {t('prediction.title')}
-            </h1>
-            <p className="text-[var(--text-secondary)] mt-2">
-              {t('prediction.pageDescription')}
-            </p>
-          </div>
-
-          {/* Profile selectors — inline with header */}
-          <div className="flex gap-2 flex-shrink-0">
-            <div className="w-52">
-              <CustomSelect
-                options={positionSelectOptions}
-                value={profile.position}
-                onChange={(value) => updateProfile('position', value)}
-                placeholder={t('prediction.allPositions')}
-                searchable
-              />
-            </div>
-            <div className="w-44">
-              <CustomSelect
-                options={experienceSelectOptions}
-                value={profile.experience}
-                onChange={(value) => updateProfile('experience', value)}
-                placeholder={t('prediction.allLevels')}
-              />
-            </div>
-          </div>
-        </div>
+        {/* Page Header */}
+        <PageHeaderWithShare
+          title={t('prediction.title')}
+          description={t('prediction.pageDescription')}
+          shareTitle={`getSalary - ${t('prediction.title')}`}
+          shareDescription={t('prediction.pageDescription')}
+          extra={
+            <ProfileFilterPopover
+              positionOptions={positionSelectOptions}
+              experienceOptions={experienceSelectOptions}
+              profile={profile}
+              updateProfile={updateProfile}
+              t={t}
+            />
+          }
+        />
 
         {/* Summary Cards */}
         <div className="mb-6">
@@ -96,7 +147,7 @@ export function Prediction() {
           <div className="lg:col-span-2">
             <Card title={t('prediction.chartTitle')} icon={
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605" />
               </svg>
             }>
               <ChartWrapper height="h-80">
@@ -142,28 +193,18 @@ export function Prediction() {
         {/* Bottom Grid: Position Forecast + Backtest + Experience */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Position Forecast */}
-          <Card title={`${nextYear} — ${t('prediction.byPosition')}`} icon={
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-            </svg>
-          }>
-            <ChartWrapper height="h-96">
-              <PositionForecast
-                predictions={positionPredictions}
-                year={nextYear}
-                selectedPosition={profile.position !== 'all' ? profile.position : null}
-              />
-            </ChartWrapper>
+          <Card title={`${t('prediction.byPosition')} (${nextYear})`} icon={ChartIcons.position}>
+            <PositionForecast
+              predictions={positionPredictions}
+              year={nextYear}
+              selectedPosition={profile.position !== 'all' ? profile.position : null}
+            />
           </Card>
 
           {/* Right Column: Experience + Backtest */}
           <div className="space-y-6">
             {/* Experience Forecast */}
-            <Card title={`${nextYear} — ${t('prediction.byExperience')}`} icon={
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15.59 14.37a6 6 0 0 1-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 0 0 6.16-12.12A14.98 14.98 0 0 0 9.631 8.41m5.96 5.96a14.926 14.926 0 0 1-5.841 2.58m-.119-8.54a6 6 0 0 0-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 0 0-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 0 1-2.448-2.448 14.9 14.9 0 0 1 .06-.312m-2.24 2.39a4.493 4.493 0 0 0-1.757 4.306 4.493 4.493 0 0 0 4.306-1.758M16.5 9a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
-              </svg>
-            }>
+            <Card title={`${t('prediction.byExperience')} (${nextYear})`} icon={ChartIcons.experience}>
               <div className="space-y-3">
                 {Object.entries(experiencePredictions).map(([level, { predicted }]) => {
                   const max = Math.max(...Object.values(experiencePredictions).map((v) => v.predicted));

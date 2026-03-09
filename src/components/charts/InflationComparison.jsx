@@ -15,20 +15,22 @@ import { CHART_COLOR_ARRAY, YEARS } from '../../data/config';
 import { formatSalary, formatPercentage } from '../../utils/calculations';
 import { Card, ChartIcons } from '../ui/Card';
 import { ChartWrapper } from './ChartWrapper';
+import macroData from '../../data/macroeconomic.json';
+
+// Build USD/TRY lookup from macroeconomic data
+const usdTryByYear = Object.fromEntries(
+  macroData.data.map((d) => [d.year, d.usdTryAvg]),
+);
 
 export function InflationComparison() {
   const { t, i18n } = useTranslation();
   const { getYearStats, loading } = useData();
   const { filters } = useFilters();
 
-  // Annual inflation rates (TÜFE - approximate year-end values)
-  const inflationRates = {
-    2021: 36.1,
-    2022: 64.3,
-    2023: 64.8,
-    2024: 44.4,
-    2025: 30.0, // Estimated
-  };
+  // Annual inflation rates (TÜFE)
+  const inflationRates = Object.fromEntries(
+    macroData.data.map((d) => [d.year, d.cpiInflation]),
+  );
 
   if (loading) {
     return (
@@ -52,21 +54,25 @@ export function InflationComparison() {
     );
   }
 
-  // Calculate year-over-year salary growth
-  const data = allYearsStats.slice(1).map((yearStats, index) => {
-    const prevStats = allYearsStats[index];
-    const salaryGrowth = prevStats.medianSalary
+  // Build data with USD median for all years
+  const data = allYearsStats.map((yearStats, index) => {
+    const prevStats = index > 0 ? allYearsStats[index - 1] : null;
+    const salaryGrowth = prevStats?.medianSalary
       ? ((yearStats.medianSalary - prevStats.medianSalary) / prevStats.medianSalary) * 100
-      : 0;
+      : null;
     const inflation = inflationRates[yearStats.year] || 0;
-    const realGrowth = salaryGrowth - inflation;
+    const realGrowth = salaryGrowth !== null ? salaryGrowth - inflation : null;
+
+    const usdRate = usdTryByYear[yearStats.year];
+    const medianUsd = usdRate ? Math.round(yearStats.medianSalary / usdRate) : null;
 
     return {
       year: yearStats.year,
-      salaryGrowth: Math.round(salaryGrowth * 10) / 10,
-      inflation: inflation,
-      realGrowth: Math.round(realGrowth * 10) / 10,
+      salaryGrowth: salaryGrowth !== null ? Math.round(salaryGrowth * 10) / 10 : null,
+      inflation,
+      realGrowth: realGrowth !== null ? Math.round(realGrowth * 10) / 10 : null,
       medianSalary: yearStats.medianSalary,
+      medianUsd,
     };
   });
 
@@ -78,18 +84,29 @@ export function InflationComparison() {
     return (
       <div className="bg-[var(--bg-primary)] border border-[var(--bg-secondary)] rounded-lg p-3 shadow-lg">
         <p className="font-semibold text-[var(--text-primary)] mb-2">{label}</p>
-        <p className="text-sm" style={{ color: CHART_COLOR_ARRAY[1] }}>
-          {t('charts.salaryGrowth')}: {formatPercentage(item?.salaryGrowth, 1, i18n.language)}
-        </p>
+        {item?.salaryGrowth !== null && (
+          <p className="text-sm" style={{ color: CHART_COLOR_ARRAY[1] }}>
+            {t('charts.salaryGrowth')}: {formatPercentage(item?.salaryGrowth, 1, i18n.language)}
+          </p>
+        )}
         <p className="text-sm" style={{ color: CHART_COLOR_ARRAY[3] }}>
           {t('charts.inflation')}: {formatPercentage(item?.inflation, 1, i18n.language)}
         </p>
-        <p className="text-sm font-semibold" style={{ color: item?.realGrowth >= 0 ? CHART_COLOR_ARRAY[1] : CHART_COLOR_ARRAY[3] }}>
-          {t('charts.realGrowth')}: {formatPercentage(item?.realGrowth, 1, i18n.language)}
-        </p>
-        <p className="text-sm text-[var(--text-secondary)] mt-1">
-          {t('charts.median')}: {formatSalary(item?.medianSalary, i18n.language)}
-        </p>
+        {item?.realGrowth !== null && (
+          <p className="text-sm font-semibold" style={{ color: item?.realGrowth >= 0 ? CHART_COLOR_ARRAY[1] : CHART_COLOR_ARRAY[3] }}>
+            {t('charts.realGrowth')}: {formatPercentage(item?.realGrowth, 1, i18n.language)}
+          </p>
+        )}
+        <div className="border-t border-[var(--border)] mt-1.5 pt-1.5">
+          <p className="text-sm text-[var(--text-secondary)]">
+            {t('charts.median')}: {formatSalary(item?.medianSalary, i18n.language)}
+          </p>
+          {item?.medianUsd && (
+            <p className="text-sm font-semibold" style={{ color: CHART_COLOR_ARRAY[6] }}>
+              USD: ${item.medianUsd.toLocaleString('en-US')}
+            </p>
+          )}
+        </div>
       </div>
     );
   };
@@ -97,7 +114,7 @@ export function InflationComparison() {
   return (
     <Card title={t('charts.inflationComparison')} icon={ChartIcons.inflation}>
       <ChartWrapper height="h-72">
-        <ComposedChart data={data} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+        <ComposedChart data={data} margin={{ top: 20, right: 10, bottom: 30, left: 10 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="var(--bg-secondary)" />
           <XAxis
             dataKey="year"
@@ -105,25 +122,45 @@ export function InflationComparison() {
             fontSize={12}
           />
           <YAxis
+            yAxisId="percent"
             tickFormatter={(value) => `${value}%`}
             stroke="var(--text-secondary)"
             fontSize={12}
           />
+          <YAxis
+            yAxisId="usd"
+            orientation="right"
+            tickFormatter={(value) => `$${value}`}
+            stroke={CHART_COLOR_ARRAY[6]}
+            fontSize={11}
+          />
           <Tooltip content={<CustomTooltip />} cursor={{ fill: 'transparent' }} />
-          <Legend />
+          <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '12px' }} />
           <Bar
+            yAxisId="percent"
             dataKey="salaryGrowth"
             name={t('charts.salaryGrowth')}
             fill={CHART_COLOR_ARRAY[1]}
             radius={[4, 4, 0, 0]}
           />
           <Line
+            yAxisId="percent"
             type="monotone"
             dataKey="inflation"
             name={t('charts.inflation')}
             stroke={CHART_COLOR_ARRAY[3]}
             strokeWidth={3}
             dot={{ fill: CHART_COLOR_ARRAY[3], strokeWidth: 2, r: 5 }}
+          />
+          <Line
+            yAxisId="usd"
+            type="monotone"
+            dataKey="medianUsd"
+            name={t('charts.medianUsd')}
+            stroke={CHART_COLOR_ARRAY[6]}
+            strokeWidth={2}
+            strokeDasharray="5 3"
+            dot={{ fill: CHART_COLOR_ARRAY[6], strokeWidth: 2, r: 4 }}
           />
         </ComposedChart>
       </ChartWrapper>

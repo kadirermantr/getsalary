@@ -11,6 +11,7 @@ import { SalaryByCity } from '../components/charts/SalaryByCity';
 import { RemoteVsOffice } from '../components/charts/RemoteVsOffice';
 import { SalaryByCompanyType } from '../components/charts/SalaryByCompanyType';
 import { YearComparison } from '../components/charts/YearComparison';
+import { InflationComparison } from '../components/charts/InflationComparison';
 import { AnimatedCounter, AnimatedSalary, AnimatedMultiplier } from '../components/ui/AnimatedCounter';
 import { StatCard } from '../components/ui/StatCard';
 
@@ -122,9 +123,12 @@ export function Dashboard() {
                     <MinWageMultiplier />
                   </div>
 
-                  {/* Row 5: Year Comparison (full) */}
+                  {/* Row 5: Year Comparison + Inflation */}
                   <div className="md:col-span-2 lg:col-span-4">
                     <YearComparison />
+                  </div>
+                  <div className="md:col-span-2 lg:col-span-4">
+                    <InflationComparison />
                   </div>
                 </div>
               </div>
