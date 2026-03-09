@@ -1,7 +1,7 @@
-export function Card({ children, className = '', title, icon, titleCenter, ...props }) {
+export function Card({ children, className = '', title, icon, titleCenter, titleExtra, ...props }) {
   return (
     <div
-      className={`bg-[var(--bg-secondary)] rounded-xl border border-[var(--bg-primary)] ${className}`}
+      className={`bg-[var(--bg-secondary)] rounded-xl border border-[var(--bg-primary)] transition-all duration-300 hover:border-[var(--accent)]/20 ${className}`}
       {...props}
     >
       {(title || icon) && (
@@ -10,6 +10,7 @@ export function Card({ children, className = '', title, icon, titleCenter, ...pr
           {title && (
             <h3 className="font-semibold text-[var(--text-primary)]">{title}</h3>
           )}
+          {titleExtra}
         </div>
       )}
       <div className="p-4">{children}</div>
