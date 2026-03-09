@@ -13,6 +13,7 @@ import { useData } from '../../context/DataContext';
 import { useFilters } from '../../context/FilterContext';
 import { CHART_COLOR_ARRAY, YEARS } from '../../data/config';
 import { formatSalary, formatPercentage } from '../../utils/calculations';
+import { formatPercentTick, formatCurrencyTick } from '../../utils/chartFormatters';
 import { Card, ChartIcons } from '../ui/Card';
 import { ChartWrapper } from './ChartWrapper';
 import macroData from '../../data/macroeconomic.json';
@@ -123,14 +124,14 @@ export function InflationComparison() {
           />
           <YAxis
             yAxisId="percent"
-            tickFormatter={(value) => `${value}%`}
+            tickFormatter={formatPercentTick}
             stroke="var(--text-secondary)"
             fontSize={12}
           />
           <YAxis
             yAxisId="usd"
             orientation="right"
-            tickFormatter={(value) => `$${value}`}
+            tickFormatter={formatCurrencyTick}
             stroke={CHART_COLOR_ARRAY[2]}
             fontSize={11}
           />

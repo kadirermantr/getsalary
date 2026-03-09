@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next';
-
-const pct = (v, lang) => lang === 'tr' ? `%${v}` : `${v}%`;
+import { formatPercent } from '../../utils/calculations';
 
 function Slider({ label, value, min, max, step, onChange, lang }) {
   return (
@@ -8,7 +7,7 @@ function Slider({ label, value, min, max, step, onChange, lang }) {
       <div className="flex justify-between items-center mb-1.5">
         <span className="text-sm text-[var(--text-secondary)]">{label}</span>
         <span className="text-sm font-semibold font-mono text-[var(--text-primary)]">
-          {pct(Math.round(value * 100), lang)}
+          {formatPercent(Math.round(value * 100), lang)}
         </span>
       </div>
       <input
@@ -24,8 +23,8 @@ function Slider({ label, value, min, max, step, onChange, lang }) {
           [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-md"
       />
       <div className="flex justify-between text-xs text-[var(--text-secondary)] mt-0.5 opacity-60">
-        <span>{pct(Math.round(min * 100), lang)}</span>
-        <span>{pct(Math.round(max * 100), lang)}</span>
+        <span>{formatPercent(Math.round(min * 100), lang)}</span>
+        <span>{formatPercent(Math.round(max * 100), lang)}</span>
       </div>
     </div>
   );

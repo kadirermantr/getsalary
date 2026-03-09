@@ -13,6 +13,7 @@ import { useData } from '../../context/DataContext';
 import { useFilters } from '../../context/FilterContext';
 import { CHART_COLOR_ARRAY, YEARS } from '../../data/config';
 import { formatSalary } from '../../utils/calculations';
+import { formatMultiplierTick } from '../../utils/chartFormatters';
 import { Card, ChartIcons } from '../ui/Card';
 import { ChartWrapper } from './ChartWrapper';
 
@@ -84,7 +85,7 @@ export function MinWageMultiplier() {
           />
           <YAxis
             domain={[0, 'auto']}
-            tickFormatter={(value) => `${value}x`}
+            tickFormatter={formatMultiplierTick}
             stroke="var(--text-secondary)"
             fontSize={12}
           />

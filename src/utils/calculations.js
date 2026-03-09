@@ -230,6 +230,10 @@ export function formatNumber(value, locale = 'tr-TR') {
  * @param {string} locale - Locale string (tr or en)
  * @returns {string} Formatted percentage string
  */
+export function formatPercent(value, locale = 'tr') {
+  return locale === 'tr' ? `%${value}` : `${value}%`;
+}
+
 export function formatPercentage(value, decimals = 1, locale = 'tr') {
   if (value === null || value === undefined || isNaN(value)) return '—';
   const absNum = Math.abs(value).toFixed(decimals);

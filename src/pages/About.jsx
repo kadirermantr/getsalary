@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { usePageTitle } from '../hooks/usePageTitle';
-import { PageHeader } from '../components/layout/PageContainer';
+import { PageContainer, PageHeader } from '../components/layout/PageContainer';
 
 export function About() {
   const { t } = useTranslation();
@@ -20,8 +20,7 @@ export function About() {
   ];
 
   return (
-    <div className="min-h-screen bg-[var(--bg-primary)]">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+    <PageContainer size="narrow">
         {/* Header */}
         <PageHeader
           title={t('about.title')}
@@ -85,7 +84,6 @@ export function About() {
           </Link>
         </section>
 
-      </div>
-    </div>
+    </PageContainer>
   );
 }

@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { usePageTitle } from '../hooks/usePageTitle';
 import { useData } from '../context/DataContext';
 import { useFilters } from '../context/FilterContext';
-import { PageHeaderWithShare } from '../components/layout/PageContainer';
+import { PageContainer, PageHeaderWithShare } from '../components/layout/PageContainer';
 import { FilterSidebar, MobileFilterDrawer } from '../components/filters/FilterSidebar';
 import { SalaryByPosition } from '../components/charts/SalaryByPosition';
 import { SalaryByExperience } from '../components/charts/SalaryByExperience';
@@ -24,8 +24,7 @@ export function Dashboard() {
   const currentStats = getYearStats(filters.year, filters);
 
   return (
-    <div className="min-h-screen bg-[var(--bg-primary)]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <PageContainer>
         {/* Header */}
         <PageHeaderWithShare
           title={t('nav.dashboard')}
@@ -135,10 +134,9 @@ export function Dashboard() {
             )}
           </main>
         </div>
-      </div>
 
       {/* Mobile Filter Drawer */}
       <MobileFilterDrawer />
-    </div>
+    </PageContainer>
   );
 }

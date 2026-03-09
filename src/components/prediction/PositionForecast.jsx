@@ -2,6 +2,7 @@ import { useMemo, useRef, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Cell } from 'recharts';
 import { formatSalary } from '../../utils/calculations';
+import { formatSalaryTick } from '../../utils/chartFormatters';
 
 const CHAR_WIDTH = 6.5;
 const AXIS_PADDING = 16;
@@ -100,7 +101,7 @@ export function PositionForecast({ predictions, year, selectedPosition }) {
             stroke="var(--text-secondary)"
             fontSize={11}
             tickLine={false}
-            tickFormatter={(v) => `${Math.round(v / 1000)}K`}
+            tickFormatter={formatSalaryTick}
           />
           <YAxis
             type="category"
