@@ -51,12 +51,12 @@ function AppLayout() {
     <LanguageProvider>
       <ScrollToTop />
       <div className="min-h-screen flex flex-col bg-[var(--bg-primary)]">
-        <SurveyBanner />
         <Header />
         <main className="flex-1">
           <AppRoutes />
         </main>
       </div>
+      <SurveyBanner />
     </LanguageProvider>
   );
 }
