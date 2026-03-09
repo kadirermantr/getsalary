@@ -28,12 +28,15 @@ export function PageHeader({ title, description, children, className = '' }) {
   );
 }
 
-export function PageHeaderWithShare({ title, description, shareTitle, shareDescription, className = '' }) {
+export function PageHeaderWithShare({ title, description, shareTitle, shareDescription, className = '', extra }) {
   return (
     <div className={`flex flex-col md:flex-row md:items-start md:justify-between gap-4 md:mb-6 ${className}`}>
       <div>
         <div className="flex items-center justify-between gap-4">
-          <h1 className="text-2xl font-bold text-[var(--text-primary)]">{title}</h1>
+          <div className="flex items-center gap-3">
+            <h1 className="text-2xl font-bold text-[var(--text-primary)]">{title}</h1>
+            {extra}
+          </div>
           <div className="md:hidden flex-shrink-0">
             <ShareButtons compact title={shareTitle} description={shareDescription} />
           </div>

@@ -1,11 +1,12 @@
-import { useMemo } from 'react';
+import { useMemo, useRef, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Cell } from 'recharts';
 import { formatSalary } from '../../utils/calculations';
 
-const CHAR_WIDTH = 6.5; // Approximate width per character at fontSize 11
-const AXIS_PADDING = 16; // Extra padding for tick marks
+const CHAR_WIDTH = 6.5;
+const AXIS_PADDING = 16;
 const MAX_LABEL_CHARS = 28;
+const BAR_HEIGHT = 36;
 
 function truncateLabel(text, maxChars) {
   if (text.length <= maxChars) return text;
@@ -42,11 +43,24 @@ function CustomTooltip({ active, payload }) {
   );
 }
 
-export function PositionForecast({ predictions, year, width, height, selectedPosition }) {
+export function PositionForecast({ predictions, year, selectedPosition }) {
   const { t } = useTranslation();
+  const containerRef = useRef(null);
+  const [containerWidth, setContainerWidth] = useState(0);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const update = () => {
+      const w = containerRef.current.getBoundingClientRect().width;
+      if (w > 0) setContainerWidth(Math.floor(w));
+    };
+    const timer = setTimeout(update, 50);
+    const observer = new ResizeObserver(update);
+    observer.observe(containerRef.current);
+    return () => { clearTimeout(timer); observer.disconnect(); };
+  }, []);
 
   const data = Object.entries(predictions)
-    .slice(0, 10)
     .map(([name, { predicted, rSquared }]) => ({
       name,
       predicted: Math.round(predicted),
@@ -54,7 +68,6 @@ export function PositionForecast({ predictions, year, width, height, selectedPos
       fill: selectedPosition ? (name === selectedPosition ? '#f59e0b' : '#6366f1') : '#f59e0b',
     }));
 
-  // Calculate YAxis width dynamically based on longest label
   const axisWidth = useMemo(() => {
     const maxLen = Math.min(
       Math.max(...data.map((d) => d.name.length)),
@@ -63,33 +76,39 @@ export function PositionForecast({ predictions, year, width, height, selectedPos
     return Math.round(maxLen * CHAR_WIDTH) + AXIS_PADDING;
   }, [data]);
 
+  const chartHeight = data.length * BAR_HEIGHT + 40;
+
   return (
-    <BarChart data={data} width={width} height={height} layout="vertical" margin={{ top: 5, right: 10, bottom: 5, left: 0 }}>
-      <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" opacity={0.5} horizontal={false} />
-      <XAxis
-        type="number"
-        stroke="var(--text-secondary)"
-        fontSize={11}
-        tickLine={false}
-        tickFormatter={(v) => `${Math.round(v / 1000)}K`}
-      />
-      <YAxis
-        type="category"
-        dataKey="name"
-        tickLine={false}
-        width={axisWidth}
-        tick={<CustomYTick />}
-      />
-      <Tooltip content={<CustomTooltip />} cursor={false} />
-      <Bar
-        dataKey="predicted"
-        radius={[0, 4, 4, 0]}
-        name={`${year} ${t('prediction.predicted')}`}
-      >
-        {data.map((entry, index) => (
-          <Cell key={index} fill={entry.fill} />
-        ))}
-      </Bar>
-    </BarChart>
+    <div ref={containerRef} className="max-h-96 overflow-y-auto">
+      {containerWidth > 0 && (
+        <BarChart data={data} width={containerWidth} height={chartHeight} layout="vertical" margin={{ top: 5, right: 10, bottom: 5, left: 0 }}>
+          <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" opacity={0.5} horizontal={false} />
+          <XAxis
+            type="number"
+            stroke="var(--text-secondary)"
+            fontSize={11}
+            tickLine={false}
+            tickFormatter={(v) => `${Math.round(v / 1000)}K`}
+          />
+          <YAxis
+            type="category"
+            dataKey="name"
+            tickLine={false}
+            width={axisWidth}
+            tick={<CustomYTick />}
+          />
+          <Tooltip content={<CustomTooltip />} cursor={false} />
+          <Bar
+            dataKey="predicted"
+            radius={[0, 4, 4, 0]}
+            name={`${year} ${t('prediction.predicted')}`}
+          >
+            {data.map((entry, index) => (
+              <Cell key={index} fill={entry.fill} />
+            ))}
+          </Bar>
+        </BarChart>
+      )}
+    </div>
   );
 }

@@ -89,7 +89,7 @@ export function MinWageMultiplier() {
             fontSize={12}
           />
           <Tooltip content={<CustomTooltip />} cursor={{ fill: 'transparent' }} />
-          <Legend />
+          <Legend wrapperStyle={{ fontSize: '12px' }} />
           <ReferenceLine
             y={1}
             stroke="var(--text-secondary)"
