@@ -1,7 +1,7 @@
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { usePageTitle } from '../hooks/usePageTitle';
 import { PageHeader } from '../components/layout/PageContainer';
-import { FAQ } from '../components/ui/FAQ';
 
 export function About() {
   const { t } = useTranslation();
@@ -67,14 +67,22 @@ export function About() {
           </div>
         </section>
 
-        {/* FAQ */}
+        {/* FAQ Link */}
         <section className="mb-12">
-          <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-4">
-            {t('about.faq')}
-          </h2>
-          <div className="bg-[var(--bg-secondary)] rounded-xl border border-[var(--border)]">
-            <FAQ />
-          </div>
+          <Link
+            to="/faq"
+            className="flex items-center justify-between w-full px-6 py-4 bg-[var(--bg-secondary)] rounded-xl border border-[var(--border)] hover:border-[var(--accent)] transition-colors group"
+          >
+            <div>
+              <h2 className="text-lg font-semibold text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors">
+                {t('about.faq')}
+              </h2>
+              <p className="text-sm text-[var(--text-secondary)] mt-1">{t('about.faqDesc')}</p>
+            </div>
+            <svg className="w-5 h-5 text-[var(--text-muted)] group-hover:text-[var(--accent)] transition-colors flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+            </svg>
+          </Link>
         </section>
 
       </div>

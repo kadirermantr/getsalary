@@ -31,11 +31,11 @@ export function SurveyBanner() {
 
   return (
     <div
-      className={`fixed bottom-4 right-4 z-50 max-w-xs transition-all duration-300 ease-out ${
+      className={`fixed bottom-5 right-5 z-50 max-w-xs transition-all duration-300 ease-out ${
         visible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
       }`}
     >
-      <div className="bg-[var(--bg-secondary)] border border-[var(--border)] text-[var(--text-primary)] rounded-xl shadow-lg px-4 py-3 flex items-center gap-3">
+      <div className="bg-[var(--bg-secondary)] border border-[var(--border)] outline outline-1 outline-white/20 text-[var(--text-primary)] rounded-xl shadow-lg px-4 py-3 flex items-center gap-3">
         <span className="relative flex h-2 w-2 shrink-0">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
           <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400" />

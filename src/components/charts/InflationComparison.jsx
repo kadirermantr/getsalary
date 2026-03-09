@@ -85,7 +85,7 @@ export function InflationComparison() {
       <div className="bg-[var(--bg-primary)] border border-[var(--bg-secondary)] rounded-lg p-3 shadow-lg">
         <p className="font-semibold text-[var(--text-primary)] mb-2">{label}</p>
         {item?.salaryGrowth !== null && (
-          <p className="text-sm" style={{ color: CHART_COLOR_ARRAY[1] }}>
+          <p className="text-sm" style={{ color: CHART_COLOR_ARRAY[0] }}>
             {t('charts.salaryGrowth')}: {formatPercentage(item?.salaryGrowth, 1, i18n.language)}
           </p>
         )}
@@ -93,7 +93,7 @@ export function InflationComparison() {
           {t('charts.inflation')}: {formatPercentage(item?.inflation, 1, i18n.language)}
         </p>
         {item?.realGrowth !== null && (
-          <p className="text-sm font-semibold" style={{ color: item?.realGrowth >= 0 ? CHART_COLOR_ARRAY[1] : CHART_COLOR_ARRAY[3] }}>
+          <p className="text-sm font-semibold" style={{ color: item?.realGrowth >= 0 ? CHART_COLOR_ARRAY[0] : CHART_COLOR_ARRAY[3] }}>
             {t('charts.realGrowth')}: {formatPercentage(item?.realGrowth, 1, i18n.language)}
           </p>
         )}
@@ -102,7 +102,7 @@ export function InflationComparison() {
             {t('charts.median')}: {formatSalary(item?.medianSalary, i18n.language)}
           </p>
           {item?.medianUsd && (
-            <p className="text-sm font-semibold" style={{ color: CHART_COLOR_ARRAY[6] }}>
+            <p className="text-sm font-semibold" style={{ color: CHART_COLOR_ARRAY[2] }}>
               USD: ${item.medianUsd.toLocaleString('en-US')}
             </p>
           )}
@@ -131,7 +131,7 @@ export function InflationComparison() {
             yAxisId="usd"
             orientation="right"
             tickFormatter={(value) => `$${value}`}
-            stroke={CHART_COLOR_ARRAY[6]}
+            stroke={CHART_COLOR_ARRAY[2]}
             fontSize={11}
           />
           <Tooltip content={<CustomTooltip />} cursor={{ fill: 'transparent' }} />
@@ -140,7 +140,7 @@ export function InflationComparison() {
             yAxisId="percent"
             dataKey="salaryGrowth"
             name={t('charts.salaryGrowth')}
-            fill={CHART_COLOR_ARRAY[1]}
+            fill={CHART_COLOR_ARRAY[0]}
             radius={[4, 4, 0, 0]}
           />
           <Line
@@ -157,10 +157,10 @@ export function InflationComparison() {
             type="monotone"
             dataKey="medianUsd"
             name={t('charts.medianUsd')}
-            stroke={CHART_COLOR_ARRAY[6]}
+            stroke={CHART_COLOR_ARRAY[2]}
             strokeWidth={2}
             strokeDasharray="5 3"
-            dot={{ fill: CHART_COLOR_ARRAY[6], strokeWidth: 2, r: 4 }}
+            dot={{ fill: CHART_COLOR_ARRAY[2], strokeWidth: 2, r: 4 }}
           />
         </ComposedChart>
       </ChartWrapper>

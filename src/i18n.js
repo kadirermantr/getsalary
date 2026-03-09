@@ -111,6 +111,10 @@ const resources = {
         selectYear2: 'İkinci Yıl',
         growth: 'Değişim',
       },
+      faq: {
+        title: 'Sık Sorulan Sorular',
+        description: 'Veri, metodoloji ve tahmin modeli hakkında bilmen gerekenler.',
+      },
       prediction: {
         title: 'Maaş Tahmini',
         pageDescription: 'Geçmiş verilere ve makroekonomik göstergelere göre maaşların nereye gideceğini tahmin et.',
@@ -208,6 +212,7 @@ const resources = {
           segmentation: 'Pozisyon, deneyim, şehir ve çalışma moduna göre segmentasyon',
         },
         faq: 'Sık Sorulan Sorular',
+        faqDesc: 'Veri, metodoloji ve tahmin modeli hakkında bilmen gerekenler.',
         techStack: 'Tech Stack',
         developer: 'Geliştirici',
         developerDesc: {
@@ -278,6 +283,7 @@ const resources = {
         payroll: 'Bordro',
         prediction: 'Maaş Tahmini',
         about: 'Hakkında',
+        faq: 'Sık Sorulan Sorular',
         notFound: 'Sayfa Bulunamadı',
       },
     },
@@ -391,6 +397,10 @@ const resources = {
         selectYear2: 'Second Year',
         growth: 'Change',
       },
+      faq: {
+        title: 'Frequently Asked Questions',
+        description: 'What you need to know about data, methodology and prediction model.',
+      },
       prediction: {
         title: 'Salary Prediction',
         pageDescription: 'Explore where salaries are heading based on historical data and macroeconomic indicators.',
@@ -488,6 +498,7 @@ const resources = {
           segmentation: 'Segmentation by position, experience, city, and work mode',
         },
         faq: 'Frequently Asked Questions',
+        faqDesc: 'What you need to know about data, methodology and prediction model.',
         techStack: 'Tech Stack',
         developer: 'Developer',
         developerDesc: {
@@ -558,6 +569,7 @@ const resources = {
         payroll: 'Payroll',
         prediction: 'Salary Prediction',
         about: 'About',
+        faq: 'FAQ',
         notFound: 'Page Not Found',
       },
     },
