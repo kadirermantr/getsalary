@@ -9,9 +9,9 @@ const DEFAULT_SCENARIO = {
 };
 
 const PRESETS = {
-  optimistic: { inflation: 0.20, exchangeRate: 0.05, sectorGrowth: 0.20 },
+  optimistic: { inflation: 0.45, exchangeRate: 0.20, sectorGrowth: 0.20 },
   normal: { inflation: 0.30, exchangeRate: 0.15, sectorGrowth: 0.10 },
-  pessimistic: { inflation: 0.45, exchangeRate: 0.20, sectorGrowth: 0.03 },
+  pessimistic: { inflation: 0.20, exchangeRate: 0.05, sectorGrowth: 0.03 },
 };
 
 export function usePrediction() {
