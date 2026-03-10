@@ -164,18 +164,38 @@ export function Prediction() {
               </svg>
             }
             titleExtra={
-              <div className="relative group ml-auto">
-                <svg
-                  className="w-4 h-4 text-[var(--text-muted)] cursor-pointer"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8h.01M12 12v4m0-12a9 9 0 100 18 9 9 0 000-18z" />
-                </svg>
-                <div className="absolute bottom-full right-0 mb-2 w-64 px-3 py-2 rounded-lg bg-[var(--bg-tertiary)] border border-[var(--border)] shadow-lg text-xs text-[var(--text-secondary)] leading-relaxed opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pointer-events-none z-50">
-                  {t('prediction.disclaimer')}
-                  <div className="absolute top-full right-3 -mt-px border-4 border-transparent border-t-[var(--bg-tertiary)]" />
+              <div className="flex items-center gap-2 ml-auto">
+                {/* Info icon — scenario explanation */}
+                <div className="relative group cursor-pointer">
+                  <svg
+                    className="w-5 h-5 text-blue-400/50"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={1.5}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                  </svg>
+                  <div className="absolute bottom-full right-0 mb-2 w-64 px-3 py-2 rounded-lg bg-[var(--bg-tertiary)] border border-[var(--border)] shadow-lg text-xs text-[var(--text-secondary)] leading-relaxed opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pointer-events-none z-50">
+                    {t('prediction.scenarioInfo')}
+                    <div className="absolute top-full right-3 -mt-px border-4 border-transparent border-t-[var(--bg-tertiary)]" />
+                  </div>
+                </div>
+                {/* Warning icon — disclaimer */}
+                <div className="relative group cursor-pointer">
+                  <svg
+                    className="w-5 h-5 text-amber-400/50"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={1.5}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008Z" />
+                  </svg>
+                  <div className="absolute bottom-full right-0 mb-2 w-64 px-3 py-2 rounded-lg bg-[var(--bg-tertiary)] border border-[var(--border)] shadow-lg text-xs text-[var(--text-secondary)] leading-relaxed opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pointer-events-none z-50">
+                    {t('prediction.disclaimer')}
+                    <div className="absolute top-full right-3 -mt-px border-4 border-transparent border-t-[var(--bg-tertiary)]" />
+                  </div>
                 </div>
               </div>
             }
