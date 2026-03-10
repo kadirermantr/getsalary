@@ -151,6 +151,7 @@ const resources = {
         errorRate: 'Sapma',
         avgMape: 'Ortalama Hata Oranı',
         disclaimer: 'Bu tahminler istatistiksel modellere dayanır ve yatırım tavsiyesi niteliği taşımaz. Gerçek maaşlar birçok faktöre bağlı olarak farklılık gösterebilir.',
+        scenarioInfo: 'Enflasyon ve döviz kuru arttıkça nominal maaş tahmini yükselir. İyimser senaryo düşük enflasyon ve stabil döviz, kötümser senaryo yüksek enflasyon ve döviz artışı varsayar.',
       },
       export: {
         downloadPdf: 'PDF İndir',
@@ -437,6 +438,7 @@ const resources = {
         errorRate: 'Error',
         avgMape: 'Average Error Rate',
         disclaimer: 'These predictions are based on statistical models and do not constitute financial advice. Actual salaries may vary depending on many factors.',
+        scenarioInfo: 'Higher inflation and exchange rate lead to higher nominal salary predictions. The optimistic scenario assumes low inflation and stable currency, while the pessimistic scenario assumes high inflation and currency depreciation.',
       },
       export: {
         downloadPdf: 'Download PDF',
