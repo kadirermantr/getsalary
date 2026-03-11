@@ -33,7 +33,7 @@ export function MinWageMultiplier() {
     );
   }
 
-  const allYearsStats = YEARS.map((year) => getYearStats(year, filters)).filter(Boolean);
+  const allYearsStats = [...YEARS].sort((a, b) => a - b).map((year) => getYearStats(year, filters)).filter(Boolean);
 
   if (!allYearsStats || allYearsStats.length === 0) {
     return (
